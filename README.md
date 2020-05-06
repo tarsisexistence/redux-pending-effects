@@ -16,13 +16,36 @@ It's worth mention that `redux-pending-middleware` allows you to code simultaneo
 
 ## Quick start
 
+### Installation
+
 ```shell script
 npm install redux-pending-middleware
 ```
 
+### Extend reducers
+
+`redux-pending-middleware` provides its own state for storing active effects (pending promise phase).
+
+```javascript
+import { combineReducers } from 'redux';
+import { insertPending } from 'redux-pending-middleware';
+
+import { planetReducer as planet } from './planetReducer';
+import { universeReducer as universe } from './universeReducer';
+
+export const rootReducer = combineReducers(
+  insertPending({
+    planet,
+    universe
+  })
+);
+```
+
+### Configuration
+
 Depending on what you use in the project, import into the project. Now let's dwell on this in more detail.
 
-### [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
+- ### [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
 
 This approach is simplest and clear. Just add the middleware and use your regular toolkit async actions as usual.
 
@@ -37,10 +60,12 @@ const middleware = [reduxPendingToolkitMiddleware, ...defaultMiddlewares];
 export const store = configureStore({ reducer, middleware });
 ```
 
-### [redux-saga](https://github.com/redux-saga/redux-saga)
+- ### [redux-saga](https://github.com/redux-saga/redux-saga)
+
+If your project uses `redux-saga` no additional configuration needed.
 
 This approach is that you need to wrap the saga worker.
-This allows to track the start and end of the effect.
+This allows to track the start and the end of each effect.
 
 ```javascript
 import { trackWorker } from 'redux-pending-middleware';
@@ -72,20 +97,20 @@ const workerWrapper = worker => {
 };
 ```
 
-### [redux-thunk](https://github.com/reduxjs/redux-thunk) / [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
+- ### [redux-thunk](https://github.com/reduxjs/redux-thunk) / [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
 
 Ok, here I need to explain the problem a bit
 
-It’s not entirely true this package supports `redux-thunk`, but the truth is that you can forward promises to payload. 
+It’s not entirely true this package supports `redux-thunk`, but the truth is that you can forward promises to payload.
 That is the way `redux-promise-middleware` does. At the moment, this library completely replaces `redux-promise-middleware`.
 In the plans, through the collaboration, expand the API of `redux-promise-middleware` in order to reuse their code.
 
 For details, you can go to read the documentation of `redux-promise-middleware` about how this works.
 
 In short, everything is quite simple.
-You pass Promise as payload and we will have stateful types inside the reducer. 
+You pass Promise as payload and we will have stateful types inside the reducer.
 Let's say we have action type `GET_PLANETS`, so when we call our action with a type and a promise in the payload, it first triggers a reducer with `GET_PLANETS_PENDING`.
-Then, when our promise resolved, we will have `GET_PLANETS_FULFILLED` type inside the reducer, and a value of resolved promise as a payload. 
+Then, when our promise resolved, we will have `GET_PLANETS_FULFILLED` type inside the reducer, and a value of resolved promise as a payload.
 But, if an error occurs in our promise, then we get the type `GET_PLANETS_REJECTED` with a reason within property payload.
 
 ```javascript
@@ -103,10 +128,10 @@ export const store = configureStore({ reducer, middleware });
  * saga usage example with trackWorker
  */
 function getPlanets() {
-    return { 
-        type: 'GET_PLANETS',
-        payload: fetch('planets')
-    }
+  return {
+    type: 'GET_PLANETS',
+    payload: fetch('planets')
+  };
 }
 ```
 
@@ -154,6 +179,25 @@ function* handleGetPlanets() {
 ```
 
 <br/>
+
+### Selector
+
+Just a regular usage of redux selectors
+
+```javascript
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectIsPending } from 'redux-pending-middleware';
+
+import { YourApplication } from './YourApplication';
+import { AppLoader } from './App.loader';
+
+export const App = () => {
+  const isPending = useSelector(selectIsPending);
+
+  return isPending ? <AppLoader /> : <YourApplication />;
+};
+```
 
 ### Contacts
 
