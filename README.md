@@ -14,6 +14,26 @@ It's worth mention that `redux-pending-middleware` allows you to code simultaneo
 
 <br/>
 
+## Problem it solves
+
+Have you ever been in a situation where you need to add a global loader/spinner to any side effect that you process using third-party libraries such as Redux and some kind of library for asynchronous processing, for example, redux-saga / redux-thunk / promise middlewares?
+
+Why is that bad?
+
+- It is very unpleasant to create separately for this state and add start and end actions for these actions to each request.
+- This is an open place to make mistakes because it's very easy to forget to add or remove these actions.
+- It needs to be supported and somehow live with it.
+
+Well, `redux-pending-middleware` does this from scratch:
+
+- tracks your asynchronous code
+- collects them in a bunch
+- efficiently calculates active pending effects
+- provides a selector for information about the current state of application loading
+- available for debug in redux-devtools
+- independent of a particular asynchronous processing solution. Can be used simultaneously with `redux-saga` and `redux-toolkit`
+- replaces `redux-thunk` in the matters of side effects (not actions chaining) and `redux-promise-middleware` (essentially uses it out of the box)
+
 ## Quick start
 
 ### Installation
