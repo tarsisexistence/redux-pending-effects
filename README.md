@@ -219,17 +219,6 @@ export const App = () => {
 };
 ```
 
-### Contacts
-
-Please reach me out if you have any questions or comments.
-
-- [GitHub](https://github.com/maktarsis)
-- [Twitter](https://twitter.com/maktarsis)
-
-### License
-
-This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
-
 <br/>
 
 ### Contributing
@@ -237,5 +226,32 @@ This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 Contributions are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 If you made a PR, make sure to update tests as appropriate and keep the examples consistent.
+
+<br/>
+
+### Contact
+
+Please reach me out if you have any questions or comments.
+
+- [GitHub](https://github.com/maktarsis)
+- [Twitter](https://twitter.com/maktarsis)
+
+<br/>
+
+### References
+
+I find these packages useful and similar for this one. So, it's important to mention them here.
+
+- [redux-pending](https://www.npmjs.com/package/redux-pending)
+- [redux-pender](https://www.npmjs.com/package/redux-pender)
+- [redux-promise-middleware](https://www.npmjs.com/package/redux-promise-middleware)
+
+The main reason why I didn’t choose them: they do one thing, and it’s impossible to add something second to them.
+
+<br/>
+
+### License
+
+This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 
 <br/>

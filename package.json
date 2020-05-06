@@ -1,7 +1,7 @@
 {
   "name": "redux-pending-middleware",
   "description": "A redux middleware which tracks your asynchronous Redux actions (effects) and informs about the progress through selector function",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "private": false,
   "license": "MIT",
   "author": {
@@ -25,6 +25,21 @@
   "optionalDependencies": {
     "redux-saga": "^1.1.3"
   },
+  "keywords": [
+    "redux",
+    "pending",
+    "middleware",
+    "promise",
+    "side-effects",
+    "redux-promise",
+    "redux-pending",
+    "redux-middleware",
+    "redux-effects",
+    "redux-toolkit",
+    "redux-saga",
+    "redux-thunk",
+    "redux-promise-middleware"
+  ],
   "publishConfig": {
     "access": "public"
   },
