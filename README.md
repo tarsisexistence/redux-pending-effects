@@ -7,9 +7,8 @@ A redux [middleware](https://redux.js.org/advanced/middleware) which tracks your
 List of supported libraries that process redux effects:
 
 - [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
-- [redux-thunk](https://github.com/reduxjs/redux-thunk)
 - [redux-saga](https://github.com/redux-saga/redux-saga)
-- [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
+- [redux-thunk](https://github.com/reduxjs/redux-thunk) / [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
 
 It's worth mention that `redux-pending-middleware` allows you to code simultaneously with all the above libraries simultaneously.
 
@@ -25,7 +24,7 @@ Depending on what you use in the project, import into the project. Now let's dwe
 
 ### [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
 
-This approach is simplest and clear
+This approach is simplest and clear. Just add the middleware and use your regular toolkit async actions as usual.
 
 ```javascript
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
@@ -37,10 +36,6 @@ const middleware = [reduxPendingToolkitMiddleware, ...defaultMiddlewares];
 
 export const store = configureStore({ reducer, middleware });
 ```
-
-### [redux-thunk](https://github.com/reduxjs/redux-thunk)
-
-Under development
 
 ### [redux-saga](https://github.com/redux-saga/redux-saga)
 
@@ -77,10 +72,21 @@ const workerWrapper = worker => {
 };
 ```
 
-### [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
+### [redux-thunk](https://github.com/reduxjs/redux-thunk) / [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
 
-At the moment, `redux-pending-middleware` completely replaces `redux-promise-middleware`.
+Ok, here I need to explain the problem a bit
+
+It’s not entirely true this package supports `redux-thunk`, but the truth is that you can forward promises to payload. 
+That is the way `redux-promise-middleware` does. At the moment, this library completely replaces `redux-promise-middleware`.
 In the plans, through the collaboration, expand the API of `redux-promise-middleware` in order to reuse their code.
+
+For details, you can go to read the documentation of `redux-promise-middleware` about how this works.
+
+In short, everything is quite simple.
+You pass Promise as payload and we will have stateful types inside the reducer. 
+Let's say we have action type `GET_PLANETS`, so when we call our action with a type and a promise in the payload, it first triggers a reducer with `GET_PLANETS_PENDING`.
+Then, when our promise resolved, we will have `GET_PLANETS_FULFILLED` type inside the reducer, and a value of resolved promise as a payload. 
+But, if an error occurs in our promise, then we get the type `GET_PLANETS_REJECTED` with a reason within property payload.
 
 ```javascript
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
@@ -91,6 +97,17 @@ const defaultMiddlewares = getDefaultMiddleware();
 const middleware = [reduxPendingPromiseMiddleware, ...defaultMiddlewares];
 
 export const store = configureStore({ reducer, middleware });
+
+/**
+ * somewhere in the /src
+ * saga usage example with trackWorker
+ */
+function getPlanets() {
+    return { 
+        type: 'GET_PLANETS',
+        payload: fetch('planets')
+    }
+}
 ```
 
 ### Connecting the dots
