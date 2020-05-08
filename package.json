@@ -12,7 +12,7 @@
   "module": "dist/bundle.js",
   "source": "src/publicApi.ts",
   "jsnext:main": "dist/bundle.js",
-  "types": "dist/publicApi.d.ts",
+  "typings": "dist/publicApi.d.ts",
   "scripts": {
     "build": "re-space build",
     "start": "re-space serve",
