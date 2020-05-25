@@ -1,9 +1,15 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "rootDir": "./src",
+    "sourceMap": true,
+    "declaration": true,
+    "jsx": "react",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "declaration": false,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,8 +21,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
-    "typeRoots": ["node_modules/@types"]
+    "types": [
+      "jest",
+      "@re-space/cli"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
-  "include": ["src", "**/*.d.ts"]
+  "include": [
+    "src"
+  ]
 }

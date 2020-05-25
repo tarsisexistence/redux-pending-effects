@@ -1,0 +1,57 @@
+{
+  "name": "redux-pending-middleware",
+  "description": "A redux middleware which tracks your asynchronous Redux actions (effects) and informs about the progress through selector function",
+  "version": "0.5.0",
+  "private": false,
+  "license": "MIT",
+  "author": {
+    "email": "tarsis.maksym@gmail.com",
+    "name": "Maksym Tarsis",
+    "url": "https://github.com/maktarsis"
+  },
+  "module": "dist/bundle.js",
+  "source": "src/publicApi.ts",
+  "typings": "dist/publicApi.d.ts",
+  "scripts": {
+    "build": "re-space build",
+    "start": "re-space serve",
+    "test": "re-space test --passWithNoTests",
+    "lint": "re-space lint"
+  },
+  "peerDependencies": {
+    "redux": "^4.0.5"
+  },
+  "optionalDependencies": {
+    "redux-saga": "^1.1.3"
+  },
+  "keywords": [
+    "redux",
+    "pending",
+    "middleware",
+    "promise",
+    "side-effects",
+    "redux-promise",
+    "redux-pending",
+    "redux-middleware",
+    "redux-effects",
+    "redux-toolkit",
+    "redux-saga",
+    "redux-thunk",
+    "redux-promise-middleware"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "workspace": true,
+  "devDependencies": {
+    "@re-space/cli": "0.14.1",
+    "@typescript-eslint/parser": "3.0.0",
+    "@types/react": "16.9.35",
+    "@types/react-dom": "16.9.8",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "tslib": "2.0.0",
+    "typescript": "3.9.2",
+    "eslint-config-react-app": "5.2.1"
+  }
+}

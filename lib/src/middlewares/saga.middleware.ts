@@ -14,7 +14,7 @@ export const trackWorker = <T = any>(
     const effectId = nanoid();
 
     if (!put) {
-      throw new Error('trackWorker expects installed redux-saga package.');
+      throw new Error('trackWorker expects installed redux-saga lib.');
     }
 
     try {

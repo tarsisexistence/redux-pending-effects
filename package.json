@@ -1,28 +1,59 @@
 {
-  "name": "redux-pending-middleware",
-  "description": "A redux middleware which tracks your asynchronous Redux actions (effects) and informs about the progress through selector function",
-  "version": "0.4.5",
-  "private": false,
+  "name": "@redux-pending-middleware/host",
+  "version": "0.1.0",
+  "private": true,
   "license": "MIT",
   "author": {
-    "email": "tarsis.maksym@gmail.com",
     "name": "Maksym Tarsis",
+    "email": "tarsis.maksym@gmail.com",
     "url": "https://github.com/maktarsis"
   },
-  "module": "dist/bundle.js",
-  "source": "src/publicApi.ts",
-  "typings": "dist/publicApi.d.ts",
+  "workspaces": [
+    "lib"
+  ],
   "scripts": {
-    "build": "re-space build",
-    "start": "re-space serve",
-    "test": "re-space test --passWithNoTests",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "lint": "re-space lint"
   },
-  "peerDependencies": {
-    "redux": "^4.0.5"
+  "dependencies": {
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-scripts": "3.4.1",
+    "redux-pending-middleware": "0.5.0"
   },
-  "optionalDependencies": {
-    "redux-saga": "^1.1.3"
+  "devDependencies": {
+    "@re-space/cli": "0.14.1",
+    "@types/node": "13.13.6",
+    "@types/react": "16.9.35",
+    "@types/react-dom": "16.9.8",
+    "@typescript-eslint/parser": "3.0.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-config-react-app": "5.2.1",
+    "eslint-plugin-compat": "3.7.0",
+    "eslint-plugin-prettier": "3.1.3",
+    "eslint-plugin-sonarjs": "0.5.0",
+    "husky": "4.2.5",
+    "lint-staged": "10.2.6",
+    "prettier": "2.0.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "tslib": "2.0.0",
+    "typescript": "3.9.3",
+    "yarn": "1.22.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "keywords": [
     "redux",
@@ -38,23 +69,5 @@
     "redux-saga",
     "redux-thunk",
     "redux-promise-middleware"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "workspace": true,
-  "devDependencies": {
-    "@re-space/cli": "0.14.1",
-    "@typescript-eslint/parser": "3.0.0",
-    "@types/react": "16.9.35",
-    "@types/react-dom": "16.9.8",
-    "husky": "4.2.5",
-    "lint-staged": "10.2.4",
-    "prettier": "2.0.5",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "tslib": "2.0.0",
-    "typescript": "3.9.2",
-    "eslint-config-react-app": "5.2.1"
-  }
+  ]
 }
