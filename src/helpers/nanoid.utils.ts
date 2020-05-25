@@ -16,7 +16,7 @@ while (i-- - 10) {
   url += i.toString(36).toUpperCase();
 }
 
-export const nanoid = (size = 21) => {
+export const nanoid = (size = 21): string => {
   let id = '';
   // Compact alternative for `for (var i = 0; i < size; i++)`
   while (size--) {
