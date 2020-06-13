@@ -8845,13 +8845,6 @@ recursive-readdir@2.2.2:
   dependencies:
     minimatch "3.0.4"
 
-redux-pending-middleware@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/redux-pending-middleware/-/redux-pending-middleware-0.5.0.tgz#8d7a8bdf11ed8510815b7ce2b3caba0704b90946"
-  integrity sha512-HS2AifVB9tP4UrsWKPiHkAizeoMiVICz5431DsLTXlgdpiGo0WqZ1QH0KdrRDaF6lbV7yEM3axD1/2KSYLeCbQ==
-  optionalDependencies:
-    redux-saga "^1.1.3"
-
 redux-saga@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-1.1.3.tgz#9f3e6aebd3c994bbc0f6901a625f9a42b51d1112"

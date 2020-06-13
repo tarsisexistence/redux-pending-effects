@@ -2,6 +2,7 @@
   "name": "example-app",
   "version": "0.1.0",
   "private": true,
+  "workspaces": ["../lib"],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -12,7 +13,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts": "3.4.1",
-    "redux-pending-middleware": "0.5.0"
+    "redux-pending-effects": "0.1.0"
   },
   "devDependencies": {
     "@types/node": "13.13.6",

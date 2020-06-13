@@ -1,4 +1,4 @@
-declare namespace RPM {
+declare namespace RPE {
   interface State {
     effectsEntity: Record<string, boolean>;
   }

@@ -6,15 +6,15 @@ import {
 } from '../helpers/const';
 
 const pendingReducer: Reducer<
-  RPM.State,
-  RPM.PayloadAction<typeof REDUX_PENDING_MIDDLEWARE_PATCH_EFFECT, string>
+  RPE.State,
+  RPE.PayloadAction<typeof REDUX_PENDING_MIDDLEWARE_PATCH_EFFECT, string>
 > = (
-  state: RPM.State = { effectsEntity: {} },
-  action: RPM.PayloadAction<
+  state: RPE.State = { effectsEntity: {} },
+  action: RPE.PayloadAction<
     typeof REDUX_PENDING_MIDDLEWARE_PATCH_EFFECT,
     string
   >
-): RPM.State => {
+): RPE.State => {
   if (action.type === REDUX_PENDING_MIDDLEWARE_PATCH_EFFECT) {
     const { effectsEntity } = state;
     const { payload: effectId } = action;

@@ -10,7 +10,7 @@ List of supported libraries that process redux effects:
 - [redux-saga](https://github.com/redux-saga/redux-saga)
 - [redux-thunk](https://github.com/reduxjs/redux-thunk) / [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
 
-It's worth mention that `redux-pending-middleware` allows you to code simultaneously with all the above libraries simultaneously.
+It's worth mention that `redux-pending-effects` allows you to code simultaneously with all the above libraries simultaneously.
 
 <br/>
 
@@ -24,7 +24,7 @@ Why is that bad?
 - This is an open place to make mistakes because it's very easy to forget to add or remove these actions.
 - It needs to be supported and somehow live with it.
 
-Well, `redux-pending-middleware` does this from scratch:
+Well, `redux-pending-effects` does this from scratch:
 
 - tracks your asynchronous code
 - collects them in a bunch
@@ -39,16 +39,16 @@ Well, `redux-pending-middleware` does this from scratch:
 ### Installation
 
 ```shell script
-npm install redux-pending-middleware
+npm install redux-pending-effects
 ```
 
 ### Extend reducers
 
-`redux-pending-middleware` provides its own state for storing active effects (pending promise phase).
+`redux-pending-effects` provides its own state for storing active effects (pending promise phase).
 
 ```javascript
 import { combineReducers } from 'redux';
-import { insertPending } from 'redux-pending-middleware';
+import { insertPending } from 'redux-pending-effects';
 
 import { planetReducer as planet } from './planetReducer';
 import { universeReducer as universe } from './universeReducer';
@@ -71,7 +71,7 @@ This approach is simplest and clear. Just add the middleware and use your regula
 
 ```javascript
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { reduxPendingToolkitMiddleware } from 'redux-pending-middleware';
+import { reduxPendingToolkitMiddleware } from 'redux-pending-effects';
 import { rootReducer as reducer } from './root.reducer';
 
 const defaultMiddlewares = getDefaultMiddleware();
@@ -88,7 +88,7 @@ This approach is that you need to wrap the saga worker.
 This allows to track the start and the end of each effect.
 
 ```javascript
-import { trackWorker } from 'redux-pending-middleware';
+import { trackWorker } from 'redux-pending-effects';
 import { call, put, takeEvery } from '@redux-saga/core/effects';
 
 function* getPlanets() {
@@ -135,7 +135,7 @@ But, if an error occurs in our promise, then we get the type `GET_PLANETS_REJECT
 
 ```javascript
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { reduxPendingPromiseMiddleware } from 'redux-pending-middleware';
+import { reduxPendingPromiseMiddleware } from 'redux-pending-effects';
 import { rootReducer as reducer } from './root.reducer';
 
 const defaultMiddlewares = getDefaultMiddleware();
@@ -165,7 +165,7 @@ import {
   reduxPendingPromiseMiddleware,
   reduxPendingToolkitMiddleware,
   trackWorker
-} from 'redux-pending-middleware';
+} from 'redux-pending-effects';
 import createSagaMiddleware from '@redux-saga/core';
 import { call, put, takeEvery } from '@redux-saga/core/effects';
 import { rootReducer as reducer } from './root.reducer';
@@ -207,7 +207,7 @@ Just a regular usage of redux selectors
 ```javascript
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectIsPending } from 'redux-pending-middleware';
+import { selectIsPending } from 'redux-pending-effects';
 
 import { YourApplication } from './YourApplication';
 import { AppLoader } from './App.loader';
