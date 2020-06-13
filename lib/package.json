@@ -1,7 +1,7 @@
 {
   "name": "redux-pending-effects",
   "description": "\uD83E\uDD8B Redux toolkit that tracks your asynchronous redux actions (effects) and informs about the intermediate state using the selector function",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "license": "MIT",
   "author": {
@@ -16,7 +16,8 @@
     "build": "re-space build",
     "start": "re-space serve",
     "test": "re-space test --passWithNoTests",
-    "lint": "re-space lint"
+    "lint": "re-space lint",
+    "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
     "redux": "^4.0.5"
