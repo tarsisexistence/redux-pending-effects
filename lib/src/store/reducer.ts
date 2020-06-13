@@ -1,21 +1,21 @@
 import { Action, AnyAction, Reducer, ReducersMapObject } from 'redux';
 
 import {
-  REDUX_PENDING_MIDDLEWARE,
-  REDUX_PENDING_MIDDLEWARE_PATCH_EFFECT
+  REDUX_PENDING_EFFECTS,
+  REDUX_PENDING_EFFECTS_PATCH_EFFECT
 } from '../helpers/const';
 
 const pendingReducer: Reducer<
   RPE.State,
-  RPE.PayloadAction<typeof REDUX_PENDING_MIDDLEWARE_PATCH_EFFECT, string>
+  RPE.PayloadAction<typeof REDUX_PENDING_EFFECTS_PATCH_EFFECT, string>
 > = (
   state: RPE.State = { effectsEntity: {} },
   action: RPE.PayloadAction<
-    typeof REDUX_PENDING_MIDDLEWARE_PATCH_EFFECT,
+    typeof REDUX_PENDING_EFFECTS_PATCH_EFFECT,
     string
   >
 ): RPE.State => {
-  if (action.type === REDUX_PENDING_MIDDLEWARE_PATCH_EFFECT) {
+  if (action.type === REDUX_PENDING_EFFECTS_PATCH_EFFECT) {
     const { effectsEntity } = state;
     const { payload: effectId } = action;
 
@@ -37,6 +37,6 @@ const pendingReducer: Reducer<
 export function insertPending<S, A extends Action = AnyAction>(
   reducers: ReducersMapObject<S, A>
 ): ReducersMapObject<S, A> {
-  (reducers as any)[REDUX_PENDING_MIDDLEWARE] = pendingReducer;
+  (reducers as any)[REDUX_PENDING_EFFECTS] = pendingReducer;
   return reducers;
 }
