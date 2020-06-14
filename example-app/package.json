@@ -13,7 +13,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts": "3.4.1",
-    "redux-pending-effects": "0.1.0"
+    "redux-pending-effects": "*"
   },
   "devDependencies": {
     "@types/node": "13.13.6",

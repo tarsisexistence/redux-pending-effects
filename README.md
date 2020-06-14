@@ -1,6 +1,6 @@
 # Redux Pending Effects
 
-🦋 Redux toolkit that tracks your asynchronous [redux](http://redux.js.org) [actions](https://redux.js.org/basics/actions) (effects) and informs about the intermediate state using the selector function
+🦋 A redux toolkit that tracks your asynchronous [redux](http://redux.js.org) [actions](https://redux.js.org/basics/actions) (effects) and informs about the pending state using the selector function
 <br/>
 
 List of supported libraries that process redux effects:
