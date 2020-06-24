@@ -34,7 +34,7 @@
     "lint-staged": "10.2.11",
     "prettier": "2.0.5",
     "yarn": "1.22.4",
-    "webpack": "4.42.0"
+    "webpack": "4.43.0"
   },
   "browserslist": {
     "production": [
