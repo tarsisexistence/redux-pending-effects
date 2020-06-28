@@ -1,9 +1,8 @@
 import React from 'react';
-
-import styles from './App.module.css';
+import styles from './App.module.scss';
 
 export const App: React.FC = () => (
   <div className={styles.container}>
-    <p>Component</p>
+    Redux Pending Effects
   </div>
 );
