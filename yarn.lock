@@ -1019,7 +1019,14 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.4.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
+"@babel/runtime@^7.10.3":
+  version "7.10.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.4.tgz#a6724f1a6b8d2f6ea5236dbfe58c7d7ea9c5eb99"
+  integrity sha512-UpTN5yUJr9b4EX2CnGNWIvER7Ab83ibv0pcvvHc4UOdrBI5jb8bj+32cCwPX6xu0mt2daFNjYhoi+X7beH0RSw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.4.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.8.4":
   version "7.10.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
   integrity sha512-6sF3uQw2ivImfVIl62RZ7MXhO2tap69WeWK57vAaimT6AZbE4FbqjdEJIN1UqoD6wI6B+1n9UiagafH1sxjOtg==
@@ -1317,69 +1324,6 @@
     node-gyp "^6.1.0"
     read-package-json-fast "^1.1.3"
 
-"@re-space/cli@0.22.1":
-  version "0.22.1"
-  resolved "https://registry.yarnpkg.com/@re-space/cli/-/cli-0.22.1.tgz#81b97349aa408aaa1a162313114a6381a187d714"
-  integrity sha512-F9kM68K+tqcOA/H6Nk2vtjJfpi1a5TN7jR37fCZLRYufdaGRdQIiVhdZ/ifI83t0R2DFiymKVLPZkGYFpNkZqQ==
-  dependencies:
-    "@ampproject/rollup-plugin-closure-compiler" "0.26.0"
-    "@babel/cli" "7.10.3"
-    "@babel/core" "7.10.3"
-    "@babel/plugin-proposal-class-properties" "7.10.1"
-    "@babel/plugin-transform-runtime" "7.10.3"
-    "@babel/preset-env" "7.10.3"
-    "@babel/preset-react" "7.10.1"
-    "@babel/runtime" "7.10.3"
-    "@rollup/plugin-babel" "5.0.4"
-    "@rollup/plugin-beep" "0.2.0"
-    "@rollup/plugin-commonjs" "13.0.0"
-    "@rollup/plugin-image" "2.0.5"
-    "@rollup/plugin-json" "4.1.0"
-    "@rollup/plugin-node-resolve" "8.1.0"
-    "@rollup/plugin-url" "5.0.1"
-    "@typescript-eslint/eslint-plugin" "3.4.0"
-    "@typescript-eslint/parser" "3.4.0"
-    autoprefixer "9.8.4"
-    babel-jest "24.9.0"
-    colorette "1.2.0"
-    cssnano "4.1.10"
-    enquirer "2.3.5"
-    eslint "7.2.0"
-    eslint-config-prettier "6.11.0"
-    eslint-config-react-app "5.2.1"
-    eslint-import-resolver-typescript "2.0.0"
-    eslint-plugin-flowtype "5.1.3"
-    eslint-plugin-import "2.22.0"
-    eslint-plugin-jsx-a11y "6.3.1"
-    eslint-plugin-prettier "3.1.4"
-    eslint-plugin-react "7.20.0"
-    eslint-plugin-react-hooks "4.0.4"
-    execa "4.0.2"
-    fs-extra "9.0.1"
-    identity-obj-proxy "3.0.0"
-    jest "24.9.0"
-    node-sass "4.14.1"
-    ora "4.0.4"
-    postcss-nested "4.2.1"
-    postcss-simple-vars "5.0.2"
-    react "16.13.1"
-    react-dom "16.13.1"
-    rollup "2.18.1"
-    rollup-plugin-analyzer "3.2.3"
-    rollup-plugin-eslint "7.0.0"
-    rollup-plugin-filesize "9.0.1"
-    rollup-plugin-postcss "3.1.2"
-    rollup-plugin-progress "1.1.2"
-    rollup-plugin-size-snapshot "0.12.0"
-    rollup-plugin-strip-code "0.2.7"
-    rollup-plugin-typescript2 "0.27.1"
-    rollup-plugin-visualizer "4.0.4"
-    sade "1.7.3"
-    shelljs "0.8.4"
-    ts-jest "24.3.0"
-    tslib "2.0.0"
-    typescript "3.9.5"
-
 "@redux-saga/core@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@redux-saga/core/-/core-1.1.3.tgz#3085097b57a4ea8db5528d58673f20ce0950f6a4"
@@ -1638,18 +1582,6 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@typescript-eslint/eslint-plugin@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-3.4.0.tgz#8378062e6be8a1d049259bdbcf27ce5dfbeee62b"
-  integrity sha512-wfkpiqaEVhZIuQRmudDszc01jC/YR7gMSxa6ulhggAe/Hs0KVIuo9wzvFiDbG3JD5pRFQoqnf4m7REDsUvBnMQ==
-  dependencies:
-    "@typescript-eslint/experimental-utils" "3.4.0"
-    debug "^4.1.1"
-    functional-red-black-tree "^1.0.1"
-    regexpp "^3.0.0"
-    semver "^7.3.2"
-    tsutils "^3.17.1"
-
 "@typescript-eslint/eslint-plugin@3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-3.5.0.tgz#e7736e0808b5fb947a5f9dd949ae6736a7226b84"
@@ -1662,16 +1594,6 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
-"@typescript-eslint/experimental-utils@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-3.4.0.tgz#8a44dfc6fb7f1d071937b390fe27608ebda122b8"
-  integrity sha512-rHPOjL43lOH1Opte4+dhC0a/+ks+8gOBwxXnyrZ/K4OTAChpSjP76fbI8Cglj7V5GouwVAGaK+xVwzqTyE/TPw==
-  dependencies:
-    "@types/json-schema" "^7.0.3"
-    "@typescript-eslint/typescript-estree" "3.4.0"
-    eslint-scope "^5.0.0"
-    eslint-utils "^2.0.0"
-
 "@typescript-eslint/experimental-utils@3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-3.5.0.tgz#d09f9ffb890d1b15a7ffa9975fae92eee05597c4"
@@ -1682,16 +1604,6 @@
     "@typescript-eslint/typescript-estree" "3.5.0"
     eslint-scope "^5.0.0"
     eslint-utils "^2.0.0"
-
-"@typescript-eslint/parser@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-3.4.0.tgz#fe52b68c5cb3bba3f5d875bd17adb70420d49d8d"
-  integrity sha512-ZUGI/de44L5x87uX5zM14UYcbn79HSXUR+kzcqU42gH0AgpdB/TjuJy3m4ezI7Q/jk3wTQd755mxSDLhQP79KA==
-  dependencies:
-    "@types/eslint-visitor-keys" "^1.0.0"
-    "@typescript-eslint/experimental-utils" "3.4.0"
-    "@typescript-eslint/typescript-estree" "3.4.0"
-    eslint-visitor-keys "^1.1.0"
 
 "@typescript-eslint/parser@3.5.0":
   version "3.5.0"
@@ -1708,19 +1620,6 @@
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-3.5.0.tgz#4e3d2a2272268d8ec3e3e4a37152a64956682639"
   integrity sha512-Dreqb5idi66VVs1QkbAwVeDmdJG+sDtofJtKwKCZXIaBsINuCN7Jv5eDIHrS0hFMMiOvPH9UuOs4splW0iZe4Q==
-
-"@typescript-eslint/typescript-estree@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-3.4.0.tgz#6a787eb70b48969e4cd1ea67b057083f96dfee29"
-  integrity sha512-zKwLiybtt4uJb4mkG5q2t6+W7BuYx2IISiDNV+IY68VfoGwErDx/RfVI7SWL4gnZ2t1A1ytQQwZ+YOJbHHJ2rw==
-  dependencies:
-    debug "^4.1.1"
-    eslint-visitor-keys "^1.1.0"
-    glob "^7.1.6"
-    is-glob "^4.0.1"
-    lodash "^4.17.15"
-    semver "^7.3.2"
-    tsutils "^3.17.1"
 
 "@typescript-eslint/typescript-estree@3.5.0":
   version "3.5.0"
@@ -2313,6 +2212,15 @@ array.prototype.flat@^1.2.3:
   dependencies:
     define-properties "^1.1.3"
     es-abstract "^1.17.0-next.1"
+
+array.prototype.flatmap@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/array.prototype.flatmap/-/array.prototype.flatmap-1.2.3.tgz#1c13f84a178566042dd63de4414440db9222e443"
+  integrity sha512-OOEk+lkePcg+ODXIpvuU9PAryCikCJyo7GlDG1upleEpQRx6mzL9puEBkozQ5iAx20KV0l3DbyQwqciJtqe5Pg==
+  dependencies:
+    define-properties "^1.1.3"
+    es-abstract "^1.17.0-next.1"
+    function-bind "^1.1.1"
 
 asap@^2.0.0:
   version "2.0.6"
@@ -4030,6 +3938,14 @@ eslint-plugin-flowtype@5.1.3:
     lodash "^4.17.15"
     string-natural-compare "^3.0.1"
 
+eslint-plugin-flowtype@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-5.2.0.tgz#a4bef5dc18f9b2bdb41569a4ab05d73805a3d261"
+  integrity sha512-z7ULdTxuhlRJcEe1MVljePXricuPOrsWfScRXFhNzVD5dmTHWjIF57AxD0e7AbEoLSbjSsaA5S+hCg43WvpXJQ==
+  dependencies:
+    lodash "^4.17.15"
+    string-natural-compare "^3.0.1"
+
 eslint-plugin-import@2.22.0:
   version "2.22.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.22.0.tgz#92f7736fe1fde3e2de77623c838dd992ff5ffb7e"
@@ -4093,6 +4009,11 @@ eslint-plugin-react-hooks@4.0.4:
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.0.4.tgz#aed33b4254a41b045818cacb047b81e6df27fa58"
   integrity sha512-equAdEIsUETLFNCmmCkiCGq6rkSK5MoJhXFPFYeUebcjKgBmWWcgVOqZyQC8Bv1BwVCnTq9tBxgJFgAJTWoJtA==
 
+eslint-plugin-react-hooks@4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.0.5.tgz#4879003aa38e5d05d0312175beb6e4a1f617bfcf"
+  integrity sha512-3YLSjoArsE2rUwL8li4Yxx1SUg3DQWp+78N3bcJQGWVZckcp+yeQGsap/MSq05+thJk57o+Ww4PtZukXGL02TQ==
+
 eslint-plugin-react@7.20.0:
   version "7.20.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.20.0.tgz#f98712f0a5e57dfd3e5542ef0604b8739cd47be3"
@@ -4109,6 +4030,23 @@ eslint-plugin-react@7.20.0:
     resolve "^1.15.1"
     string.prototype.matchall "^4.0.2"
     xregexp "^4.3.0"
+
+eslint-plugin-react@7.20.2:
+  version "7.20.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.20.2.tgz#b0d72abcd94c59c842338aa09c800808219ea77d"
+  integrity sha512-J3BdtsPNbcF/CG9HdyLx7jEtC7tuODODGldkS9P1zU2WMoHPdcsN2enUopgIaec5f9eYhSFI5zQAaWA/dgv2zw==
+  dependencies:
+    array-includes "^3.1.1"
+    array.prototype.flatmap "^1.2.3"
+    doctrine "^2.1.0"
+    has "^1.0.3"
+    jsx-ast-utils "^2.4.1"
+    object.entries "^1.1.2"
+    object.fromentries "^2.0.2"
+    object.values "^1.1.1"
+    prop-types "^15.7.2"
+    resolve "^1.17.0"
+    string.prototype.matchall "^4.0.2"
 
 eslint-plugin-sonarjs@0.5.0:
   version "0.5.0"
@@ -6818,6 +6756,69 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+monoreact@0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/monoreact/-/monoreact-0.23.0.tgz#6db43ab23d5fc23786f6a2ed9392dc2556954e10"
+  integrity sha512-DVVJAtihJhaaAOpQILD7lW9G7wv2efbV5Sj81i9k+C/RCAUhDl+ekbdrSuCUmidrzsB3MhafEUXhvsey0o3Ang==
+  dependencies:
+    "@ampproject/rollup-plugin-closure-compiler" "0.26.0"
+    "@babel/cli" "7.10.3"
+    "@babel/core" "7.10.3"
+    "@babel/plugin-proposal-class-properties" "7.10.1"
+    "@babel/plugin-transform-runtime" "7.10.3"
+    "@babel/preset-env" "7.10.3"
+    "@babel/preset-react" "7.10.1"
+    "@babel/runtime" "7.10.3"
+    "@rollup/plugin-babel" "5.0.4"
+    "@rollup/plugin-beep" "0.2.0"
+    "@rollup/plugin-commonjs" "13.0.0"
+    "@rollup/plugin-image" "2.0.5"
+    "@rollup/plugin-json" "4.1.0"
+    "@rollup/plugin-node-resolve" "8.1.0"
+    "@rollup/plugin-url" "5.0.1"
+    "@typescript-eslint/eslint-plugin" "3.5.0"
+    "@typescript-eslint/parser" "3.5.0"
+    autoprefixer "9.8.4"
+    babel-jest "24.9.0"
+    colorette "1.2.0"
+    cssnano "4.1.10"
+    enquirer "2.3.5"
+    eslint "7.2.0"
+    eslint-config-prettier "6.11.0"
+    eslint-config-react-app "5.2.1"
+    eslint-import-resolver-typescript "2.0.0"
+    eslint-plugin-flowtype "5.2.0"
+    eslint-plugin-import "2.22.0"
+    eslint-plugin-jsx-a11y "6.3.1"
+    eslint-plugin-prettier "3.1.4"
+    eslint-plugin-react "7.20.2"
+    eslint-plugin-react-hooks "4.0.5"
+    execa "4.0.2"
+    fs-extra "9.0.1"
+    identity-obj-proxy "3.0.0"
+    jest "24.9.0"
+    node-sass "4.14.1"
+    ora "4.0.4"
+    postcss-nested "4.2.1"
+    postcss-simple-vars "5.0.2"
+    react "16.13.1"
+    react-dom "16.13.1"
+    rollup "2.18.1"
+    rollup-plugin-analyzer "3.2.3"
+    rollup-plugin-eslint "7.0.0"
+    rollup-plugin-filesize "9.0.2"
+    rollup-plugin-postcss "3.1.2"
+    rollup-plugin-progress "1.1.2"
+    rollup-plugin-size-snapshot "0.12.0"
+    rollup-plugin-strip-code "0.2.7"
+    rollup-plugin-typescript2 "0.27.1"
+    rollup-plugin-visualizer "4.0.4"
+    sade "1.7.3"
+    shelljs "0.8.4"
+    ts-jest "24.3.0"
+    tslib "2.0.0"
+    typescript "3.9.5"
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -7205,7 +7206,7 @@ object.assign@^4.1.0:
     has-symbols "^1.0.0"
     object-keys "^1.0.11"
 
-object.entries@^1.1.1:
+object.entries@^1.1.1, object.entries@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/object.entries/-/object.entries-1.1.2.tgz#bc73f00acb6b6bb16c203434b10f9a7e797d3add"
   integrity sha512-BQdB9qKmb/HyNdMNWVr7O3+z5MUIx3aiegEIJqjMBbBf0YT9RRxTJSim4mzFqtyr7PDAHigq0N9dO0m0tRakQA==
@@ -7421,7 +7422,7 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-pacote@^11.1.6:
+pacote@^11.1.10:
   version "11.1.10"
   resolved "https://registry.yarnpkg.com/pacote/-/pacote-11.1.10.tgz#cbd56a5a60c9cf472bc8ea7ba87112d749655dd4"
   integrity sha512-xJSSSxcHLo1CZJESvIZ2hbC5/5WP2oDHeUeTV2FvVDPOZG7+ixbxnV0n3TkdaUqlbC0RwnwMQ3wkJ/YywYM0Cg==
@@ -8705,19 +8706,19 @@ rollup-plugin-eslint@7.0.0:
     eslint "^6.0.0"
     rollup-pluginutils "^2.7.1"
 
-rollup-plugin-filesize@9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-filesize/-/rollup-plugin-filesize-9.0.1.tgz#bae2408f008df518ee2bdaab4d234dc4272bc1da"
-  integrity sha512-k25SZsoFTaIwNCSbSU7401OyJIO+98Wa8sKtnUxcDiZgw2wGSSJ7+FhEYRpbIu1c2EXnvHJx/DJYGohG4lOmAw==
+rollup-plugin-filesize@9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-filesize/-/rollup-plugin-filesize-9.0.2.tgz#1470bb93d40dd0c2a5381cae58b8b7106f13d185"
+  integrity sha512-UB+pMETOAxo79aINL+Lt7NmUJa6x6vJjtlmBco9NhSHhpnYaKdGGSx1QuuUuo5LlBXhQxrUURYJbF/B95Vt6Hg==
   dependencies:
-    "@babel/runtime" "^7.9.6"
+    "@babel/runtime" "^7.10.3"
     boxen "^4.2.0"
     brotli-size "4.0.0"
     colors "^1.4.0"
     filesize "^6.1.0"
     gzip-size "^5.1.1"
-    pacote "^11.1.6"
-    terser "^4.6.12"
+    pacote "^11.1.10"
+    terser "^4.8.0"
 
 rollup-plugin-postcss@3.1.2:
   version "3.1.2"
@@ -9666,10 +9667,19 @@ terser-webpack-plugin@^1.4.3:
     webpack-sources "^1.4.0"
     worker-farm "^1.7.0"
 
-terser@^4.1.2, terser@^4.6.12, terser@^4.7.0:
+terser@^4.1.2, terser@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-4.7.0.tgz#15852cf1a08e3256a80428e865a2fa893ffba006"
   integrity sha512-Lfb0RiZcjRDXCC3OSHJpEkxJ9Qeqs6mp2v4jf2MHfy8vGERmVDuvjXdd/EnP5Deme5F2yBRBymKmKHCBg2echw==
+  dependencies:
+    commander "^2.20.0"
+    source-map "~0.6.1"
+    source-map-support "~0.5.12"
+
+terser@^4.8.0:
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-4.8.0.tgz#63056343d7c70bb29f3af665865a46fe03a0df17"
+  integrity sha512-EAPipTNeWsb/3wLPeup1tVPaXfIaU68xMnVdPafIL1TV05OhASArYyIfFvnvJCNrR2NIOvDVNNTFRa+Re2MWyw==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"

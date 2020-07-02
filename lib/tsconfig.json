@@ -23,7 +23,7 @@
     "noEmit": true,
     "types": [
       "jest",
-      "@re-space/cli"
+      "monoreact"
     ],
     "typeRoots": [
       "node_modules/@types"

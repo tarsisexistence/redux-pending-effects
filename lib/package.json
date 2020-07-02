@@ -13,10 +13,10 @@
   "source": "src/publicApi.ts",
   "typings": "dist/publicApi.d.ts",
   "scripts": {
-    "build": "re-space build",
-    "start": "re-space serve",
-    "test": "re-space test --passWithNoTests",
-    "lint": "re-space lint",
+    "build": "monoreact build",
+    "start": "monoreact serve",
+    "test": "monoreact test --passWithNoTests",
+    "lint": "monoreact lint",
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {

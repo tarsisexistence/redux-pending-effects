@@ -7,7 +7,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "re-space lint"
+    "lint": "monoreact lint"
   },
   "dependencies": {
     "react": "16.13.1",
