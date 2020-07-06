@@ -1,30 +1,42 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Box, Heading, Anchor } from 'grommet';
 
-import {ROUTES} from '../../utils/routes';
+import { ROUTES } from '../../utils/routes';
+import { NavList } from '../NavList/NavList';
+import { CustomMenu } from '../CustomMenu/CustomMenu';
 
-import styles from  './Header.module.scss';
-
-export const Header = () => {
+export const Header: React.FC = () => {
   return (
-    <header className={styles.header}>
-      <ul>
-        <NavLink to={ROUTES.HOME} activeClassName={'active-link'}>
-          Home
-        </NavLink>
-        <NavLink to={ROUTES.LOGIN} activeClassName={'active-link'}>
-          Login
-        </NavLink>
-        <NavLink to={ROUTES.PATENTS} activeClassName={'active-link'}>
-          NASA Patents
-        </NavLink>
-        <NavLink to={ROUTES.LIBRARY} activeClassName={'active-link'}>
-          NASA Library
-        </NavLink>
-        <NavLink to={ROUTES.DASHBOARD} activeClassName={'active-link'}>
-          Dashboard
-        </NavLink>
-      </ul>
-    </header>
+    <Box
+      tag='header'
+      background='accent-4'
+      pad='small'
+      elevation='xsmall'
+      responsive={true}
+    >
+      <Box
+        tag='nav'
+        justify='between'
+        direction='row'
+        align='center'
+      >
+        <Heading level={1} size='28px' margin='none'>
+          <Link to={ROUTES.HOME}>
+            <Anchor as='strong' label='Redux Pending Effects' color='neutral-1'/>
+          </Link>
+        </Heading>
+        <CustomMenu
+          dropProps={{
+            elevation: 'none',
+            align: { right: "right", top: "top" }
+          }}
+          items={[
+            { label: <NavList/>}
+          ]}
+          iconColorOnHover='neutral-1'
+        />
+      </Box>
+    </Box>
   );
 };
