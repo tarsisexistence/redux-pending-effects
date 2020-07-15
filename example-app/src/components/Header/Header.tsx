@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Heading, Anchor } from 'grommet';
 
-import { ROUTES } from '../../utils/routes';
+import { ROUTES } from '../../constants/routes';
 import { NavList } from '../NavList/NavList';
 import { CustomMenu } from '../CustomMenu/CustomMenu';
 

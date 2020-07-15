@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { ROUTES } from '../../utils/routes';
+import { ROUTES } from '../../constants/routes';
 import { Anchor, Box } from 'grommet';
 
 import styles from './NavList.module.scss';
