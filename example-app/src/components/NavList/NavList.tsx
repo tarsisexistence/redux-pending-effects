@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { ROUTES } from '../../constants/routes';
 import { Anchor, Box } from 'grommet';
 
 import styles from './NavList.module.scss';
+import { routes } from '../../constants';
 
 type NavLinkProps = {
   to: string,
@@ -13,45 +13,43 @@ type NavLinkProps = {
 
 const navLinkProps: NavLinkProps[] = [
   {
-    to: ROUTES.HOME,
+    to: routes.HOME,
     exact: true,
     label: 'Home'
   },
   {
-    to: ROUTES.LOGIN,
+    to: routes.LOGIN,
     label: 'Login'
   },
   {
-    to: ROUTES.PATENTS,
+    to: routes.PATENTS,
     label: 'NASA Patents'
   },
   {
-    to: ROUTES.LIBRARY,
+    to: routes.LIBRARY,
     label: 'NASA Library'
   },
   {
-    to: ROUTES.DASHBOARD,
+    to: routes.DASHBOARD,
     label: 'Dashboard'
   }
 ];
 
-export const NavList: React.FC = () => {
-  return (
-    <Box
-      tag='ul'
-      pad='small'
-      justify='between'
-      direction='column'
-    >
-      {
-        navLinkProps.map(({label, ...rest}) => (
-          <li key={label}>
-            <NavLink {...rest} activeClassName={styles.navListItemActiveLink}>
-              <Anchor as='span' label={label} size='xlarge'/>
-            </NavLink>
-          </li>
-        ))
-      }
-    </Box>
-  );
-};
+export const NavList: React.FC = () => (
+  <Box
+    tag='ul'
+    pad='small'
+    justify='between'
+    direction='column'
+  >
+    {
+      navLinkProps.map(({label, ...rest}) => (
+        <li key={label}>
+          <NavLink {...rest} activeClassName={styles.navListItemActiveLink}>
+            <Anchor as='span' label={label} size='xlarge'/>
+          </NavLink>
+        </li>
+      ))
+    }
+  </Box>
+);

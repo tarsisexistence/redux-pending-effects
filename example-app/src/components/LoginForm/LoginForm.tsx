@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Form, FormField, TextInput } from 'grommet';
 
-import styles from './LoginForm.module.scss';
-
-const { loginFormField } = styles;
+import { loginFormField } from './LoginForm.module.scss';
 
 export const LoginForm: React.FC = () => {
   const [value, setValue] = useState({});

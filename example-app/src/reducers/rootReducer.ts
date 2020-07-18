@@ -8,5 +8,3 @@ export const rootReducer = combineReducers(
     patentsReducer
   })
 );
-
-export type RootState = ReturnType<typeof rootReducer>;

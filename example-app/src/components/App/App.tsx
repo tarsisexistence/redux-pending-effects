@@ -10,14 +10,14 @@ import { LoginPage } from '../../pages/LoginPage';
 import { PatentsPage } from '../../pages/PatentsPage';
 import { LibraryPage } from '../../pages/LibraryPage';
 import { DashboardPage } from '../../pages/DashboardPage';
-import { ROUTES } from '../../constants/routes';
 import { theme } from '../../theme';
 import { Loader } from '../Loader/Loader';
+import { routes } from '../../constants';
 
 export const App: React.FC = () => {
   const isPending = useSelector(selectIsPending);
 
-  return  (
+  return (
     <Grommet theme={theme}>
       <Header/>
       {
@@ -30,11 +30,11 @@ export const App: React.FC = () => {
           }}
         >
           <Switch>
-            <Route path={ROUTES.HOME} exact component={HomePage}/>
-            < Route path={ROUTES.LOGIN} component={LoginPage}/>
-            <Route path={ROUTES.PATENTS} component={PatentsPage}/>
-            <Route path={ROUTES.LIBRARY} component={LibraryPage}/>
-            <Route path={ROUTES.DASHBOARD} component={DashboardPage}/>
+            <Route path={routes.HOME} exact component={HomePage}/>
+            <Route path={routes.LOGIN} component={LoginPage}/>
+            <Route path={routes.PATENTS} component={PatentsPage}/>
+            <Route path={routes.LIBRARY} component={LibraryPage}/>
+            <Route path={routes.DASHBOARD} component={DashboardPage}/>
           </Switch>
         </Box>
       }

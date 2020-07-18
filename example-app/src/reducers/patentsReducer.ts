@@ -1,33 +1,31 @@
 import { AnyAction } from 'redux';
-import { PatentDataShape } from '../services/NasaService';
-import { PATENTS } from '../constants/actions';
 
-export interface PatentsReducerState {
-  patentsData: PatentDataShape[],
-  error: null | string
-}
+import { Actions } from '../actions/types';
+import { patentsActionsNames } from '../constants';
+import { Reducers } from './types';
 
-const defaultState: PatentsReducerState = {
+const defaultState: Reducers.PatentsReducerState = {
   patentsData: [],
-  error: null
+  error: null,
+  shouldPatentsUpdate: true
 };
 
 export const patentsReducer = (
-  state: PatentsReducerState = defaultState,
-  action: AnyAction
+  state = defaultState,
+  action: Actions.PatentsTypes | AnyAction
 ) => {
   switch (action.type) {
-    case PATENTS.PENDING:
-      return defaultState;
-    case PATENTS.FULFILLED:
+    case patentsActionsNames.FULFILLED:
       return {
         patentsData: action.payload,
-        error: null
+        error: null,
+        shouldPatentsUpdate: false
       };
-    case PATENTS.REJECTED:
+    case patentsActionsNames.REJECTED:
       return {
         patentsData: [],
-        error: action.payload.message
+        error: `Error: ${action.payload.status}`,
+        shouldPatentsUpdate: false
       };
     default:
       return state;

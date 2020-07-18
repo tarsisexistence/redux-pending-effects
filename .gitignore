@@ -3,7 +3,6 @@
 **/.docz
 **/dist
 **/.cache
-**/package-lock.json
 
 # reporters
 /report

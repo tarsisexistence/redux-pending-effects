@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import styles from './Loader.module.scss';
-
-const { content, planet, ring, coverRing, spots } = styles;
+import { content, planet, ring, coverRing, spots } from './Loader.module.scss';
 
 export const Loader = () => (
   <div className={content}>
@@ -10,13 +8,12 @@ export const Loader = () => (
       <div className={ring}/>
       <div className={coverRing}/>
       <div className={spots}>
-        <span/>
-        <span/>
-        <span/>
-        <span/>
-        <span/>
-        <span/>
-        <span/>
+        {
+          useMemo(
+          () => Array(7).fill(<span/>),
+          []
+          )
+        }
       </div>
     </div>
     <p>loading</p>

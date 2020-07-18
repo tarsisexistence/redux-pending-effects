@@ -1,10 +1,8 @@
-import { NasaService } from '../services/NasaService';
-import { PATENTS } from '../constants/actions';
-import { GetPatentsType } from './types';
+import { nasaService } from '../services/NasaService';
+import { patentsActionsNames } from '../constants';
+import { Actions } from './types';
 
-const nasaService = new NasaService();
-
-export const getPatents = (): GetPatentsType => ({
-  type: PATENTS.GET,
+export const getPatents = (): Actions.PatentsTypes => ({
+  type: patentsActionsNames.GET,
   payload: nasaService.getPatents()
 });

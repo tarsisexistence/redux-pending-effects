@@ -8,11 +8,11 @@ type MenuState = {
   hover: boolean
 }
 
-interface CustomMenuProps extends MenuProps {
+type CustomMenuProps = MenuProps & Omit<ButtonType, 'icon'> & {
   iconColorOnHover: string
 }
 
-export const CustomMenu: React.FC<CustomMenuProps & Omit<ButtonType, 'icon'>> = ({iconColorOnHover, ...menuProps}) => {
+export const CustomMenu: React.FC<CustomMenuProps> = ({iconColorOnHover, ...menuProps}) => {
   return (
     <Menu plain {...menuProps}>
       {({ drop, hover }: MenuState) => {
