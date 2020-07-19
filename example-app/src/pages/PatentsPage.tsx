@@ -20,9 +20,9 @@ export const PatentsPage: React.FC = () => {
   return error ? <ErrorPage optionalMessage={error}/> : (
     <ul>
       {
-        patentsData.map(({id, ...rest}: Patents.PatentDataShape) => {
-          return <PatentItem key={id} {...rest}/>
-        })
+        patentsData.map(({id, ...rest}: Patents.PatentDataShape) => (
+          <PatentItem key={id} {...rest}/>
+        ))
       }
     </ul>
   )

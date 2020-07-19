@@ -12,17 +12,15 @@ type CustomMenuProps = MenuProps & Omit<ButtonType, 'icon'> & {
   iconColorOnHover: string
 }
 
-export const CustomMenu: React.FC<CustomMenuProps> = ({iconColorOnHover, ...menuProps}) => {
-  return (
-    <Menu plain {...menuProps}>
-      {({ drop, hover }: MenuState) => {
-        const color = hover ? iconColorOnHover : undefined;
-        const menuIcon = drop ? <Close color={color}/> : <HamburgerMenuIcon color={color}/>;
+export const CustomMenu: React.FC<CustomMenuProps> = ({iconColorOnHover, ...menuProps}) => (
+  <Menu plain {...menuProps}>
+    {({ drop, hover }: MenuState) => {
+      const color = hover ? iconColorOnHover : undefined;
+      const menuIcon = drop ? <Close color={color}/> : <HamburgerMenuIcon color={color}/>;
 
-        return (
-          <Box align='end' pad="small">{menuIcon}</Box>
-        );
-      }}
-    </Menu>
-  )
-};
+      return (
+        <Box align='end' pad="small">{menuIcon}</Box>
+      );
+    }}
+  </Menu>
+)
