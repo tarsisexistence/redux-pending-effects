@@ -1,5 +1,5 @@
-namespace Patents {
-  export type PatentDataShape = {
+declare namespace Patents {
+  type PatentDataShape = {
     id?: string,
     title: string,
     description: string,

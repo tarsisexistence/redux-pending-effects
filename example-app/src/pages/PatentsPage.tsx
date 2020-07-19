@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getPatents } from '../actions';
-import { Reducers } from '../reducers/types';
+import { RootState } from '../reducers/rootReducer';
 import { PatentItem } from '../components/PatentItem/PatentItem';
 import { ErrorPage } from './ErrorPage';
 
 export const PatentsPage: React.FC = () => {
   const dispatch = useDispatch();
   const { shouldPatentsUpdate, patentsData, error } =
-    useSelector<Reducers.RootState, Reducers.PatentsReducerState>(state => state.patentsReducer);
+    useSelector<RootState, Reducers.PatentsReducerState>(state => state.patentsReducer);
 
   useEffect(() => {
     if (shouldPatentsUpdate) {

@@ -23,4 +23,4 @@ export const CustomMenu: React.FC<CustomMenuProps> = ({iconColorOnHover, ...menu
       );
     }}
   </Menu>
-)
+);

@@ -8,7 +8,10 @@ enum PatentData {
 class NasaService {
   private apiKey: string = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
 
-  async smartFetch(url: string, options?: object): Promise<any> {
+  async smartFetch(
+    url: string,
+    options?: object
+  ): Promise<{ results: [] } | undefined> {
     const response = await fetch(url, options);
 
     if (response.status >= 400) {
@@ -28,10 +31,10 @@ class NasaService {
 
     const body = await this.smartFetch(patentsUrl);
 
-    return this.transformPatentsData(body.results);
+    return this.transformPatentsData(body && body.results);
   }
 
-  private transformPatentsData = (patentsData: []) : Patents.PatentDataShape[] => (
+  private transformPatentsData = (patentsData: [] = []) : Patents.PatentDataShape[] => (
     patentsData.map(patentData => ({
       id: patentData[PatentData.Id],
       title: patentData[PatentData.Title],

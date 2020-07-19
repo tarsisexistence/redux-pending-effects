@@ -1,8 +1,6 @@
 import { AnyAction } from 'redux';
 
-import { Actions } from '../actions/types';
 import { patentsActionsNames } from '../constants';
-import { Reducers } from './types';
 
 const defaultState: Reducers.PatentsReducerState = {
   patentsData: [],
@@ -12,19 +10,19 @@ const defaultState: Reducers.PatentsReducerState = {
 
 export const patentsReducer = (
   state = defaultState,
-  action: Actions.PatentsTypes | AnyAction
+  action: Actions.IPatents | AnyAction
 ) => {
   switch (action.type) {
     case patentsActionsNames.FULFILLED:
       return {
-        patentsData: action.payload,
+        patentsData: (action as Actions.IGetPatentsFulFilled).payload,
         error: null,
         shouldPatentsUpdate: false
       };
     case patentsActionsNames.REJECTED:
       return {
         patentsData: [],
-        error: `Error: ${action.payload.status}`,
+        error: `Error: ${(action as Actions.IGetPatentsRejected).payload.status}`,
         shouldPatentsUpdate: false
       };
     default:

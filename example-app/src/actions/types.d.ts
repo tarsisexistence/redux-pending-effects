@@ -1,25 +1,25 @@
-import { patentsActionsNames } from '../constants';
-
-export namespace Actions {
+declare namespace Actions {
   interface IGetPatents {
-    type: typeof patentsActionsNames.GET,
+    type: string,
     payload: Promise<Patents.PatentDataShape[] | { status: string }>
   }
 
   interface IGetPatentsPending {
-    type: typeof patentsActionsNames.PENDING,
-    payload:  Promise<Patents.PatentDataShape[] | { status: string }>
+    type: string,
   }
 
   interface IGetPatentsFulFilled {
-    type: typeof patentsActionsNames.FULFILLED,
-    payload: Promise<Patents.PatentDataShape[]>
+    type: string,
+    payload: Patents.PatentDataShape[]
   }
 
   interface IGetPatentsRejected {
-    type: typeof patentsActionsNames.REJECTED,
+    type: string,
     payload: { status: string }
   }
 
-  export type PatentsTypes = IGetPatents | IGetPatentsPending | IGetPatentsFulFilled | IGetPatentsRejected;
+  interface IPatents extends IGetPatents,
+    IGetPatentsPending,
+    IGetPatentsFulFilled,
+    IGetPatentsRejected {}
 }
