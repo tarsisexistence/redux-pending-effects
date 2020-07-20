@@ -6,27 +6,28 @@ declare namespace Actions {
     REJECTED = 'GET_PATENTS_REJECTED'
   }
 
-  interface IGetPatents {
+  interface GetPatents {
     type: ReturnType<typeof PATENTS_ACTION_TYPES.GET>,
     payload: Promise<Patents.PatentDataShape[] | { status: string }>
   }
 
-  interface IGetPatentsPending {
+  interface GetPatentsPending {
     type:  ReturnType<typeof PATENTS_ACTION_TYPES.PENDING>,
   }
 
-  interface IGetPatentsFulFilled {
+  interface GetPatentsFulFilled {
     type:  ReturnType<typeof PATENTS_ACTION_TYPES.FULFILLED>,
     payload: Patents.PatentDataShape[]
   }
 
-  interface IGetPatentsRejected {
+  interface GetPatentsRejected {
     type:  ReturnType<typeof PATENTS_ACTION_TYPES.REJECTED>,
     payload: { status: string }
   }
 
-  interface IPatents extends IGetPatents,
-    IGetPatentsPending,
-    IGetPatentsFulFilled,
-    IGetPatentsRejected {}
+  type PatentsTypes =
+    | GetPatents
+    | GetPatentsPending
+    | GetPatentsFulFilled
+    | GetPatentsRejected
 }

@@ -10,19 +10,19 @@ const defaultState: Reducers.PatentsReducerState = {
 
 export const patentsReducer = (
   state = defaultState,
-  action: Actions.IPatents | AnyAction
+  action: Actions.PatentsTypes | AnyAction
 ) => {
   switch (action.type) {
     case patentsActionsNames.FULFILLED:
       return {
-        patentsData: (action as Actions.IGetPatentsFulFilled).payload,
+        patentsData: (action as Actions.GetPatentsFulFilled).payload,
         error: null,
         shouldPatentsUpdate: false
       };
     case patentsActionsNames.REJECTED:
       return {
         patentsData: [],
-        error: `Error: ${(action as Actions.IGetPatentsRejected).payload.status}`,
+        error: `Error: ${(action as Actions.GetPatentsRejected).payload.status}`,
         shouldPatentsUpdate: false
       };
     default:
