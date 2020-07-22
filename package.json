@@ -34,7 +34,7 @@
     "prettier": "2.0.5",
     "yarn": "1.22.4",
     "webpack": "4.42.0",
-    "monoreact": "0.23.1"
+    "monoreact": "0.23.3"
   },
   "browserslist": {
     "production": [
