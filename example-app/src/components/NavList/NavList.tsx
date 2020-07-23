@@ -8,14 +8,14 @@ import { routes } from '../../constants';
 type NavLinkProps = {
   to: string,
   label: string,
-  exact?: boolean
+  end?: boolean
 }
 
 const navLinkProps: NavLinkProps[] = [
   {
     to: routes.HOME,
-    exact: true,
-    label: 'Home'
+    label: 'Home',
+    end: true
   },
   {
     to: routes.LOGIN,

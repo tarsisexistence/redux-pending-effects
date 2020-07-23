@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectIsPending } from 'redux-pending-effects';
-import { Switch, Route } from 'react-router';
+import { Routes, Route } from 'react-router-dom';
 import { Grommet, Box } from 'grommet';
 
 import { Header } from '../Header/Header';
@@ -18,7 +18,7 @@ export const App: React.FC = () => {
   const isPending = useSelector(selectIsPending);
 
   return (
-    <Grommet theme={theme}>
+    <Grommet theme={ theme }>
       <Header/>
       {
         isPending ? <Loader/> : <Box
@@ -29,13 +29,13 @@ export const App: React.FC = () => {
             "horizontal": "30px"
           }}
         >
-          <Switch>
-            <Route path={routes.HOME} exact component={HomePage}/>
-            <Route path={routes.LOGIN} component={LoginPage}/>
-            <Route path={routes.PATENTS} component={PatentsPage}/>
-            <Route path={routes.LIBRARY} component={LibraryPage}/>
-            <Route path={routes.DASHBOARD} component={DashboardPage}/>
-          </Switch>
+        <Routes>
+          <Route path={ routes.HOME } element={ <HomePage/> }/>
+          <Route path={ routes.LOGIN } element={ <LoginPage/> }/>
+          <Route path={ routes.PATENTS } element={ <PatentsPage/> }/>
+          <Route path={ routes.LIBRARY } element={ <LibraryPage/> }/>
+          <Route path={ routes.DASHBOARD } element={ <DashboardPage/> }/>
+        </Routes>
         </Box>
       }
     </Grommet>
