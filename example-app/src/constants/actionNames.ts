@@ -4,3 +4,10 @@ export const patentsActionsNames = {
   FULFILLED: 'GET_PATENTS_FULFILLED',
   REJECTED: 'GET_PATENTS_REJECTED'
 };
+
+export const libraryActionNames = {
+  GET: 'GET_LIBRARY_CONTENT',
+  PENDING: 'GET_LIBRARY_CONTENT/pending',
+  FULFILLED: 'GET_LIBRARY_CONTENT/fulfilled',
+  REJECTED: 'GET_LIBRARY_CONTENT/rejected'
+};
