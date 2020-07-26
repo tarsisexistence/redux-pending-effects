@@ -1,4 +1,6 @@
 declare namespace Actions {
+  import Global = WebAssembly.Global;
+
   enum PATENTS_ACTION_TYPES {
     GET = 'GET_PATENTS',
     PENDING = 'GET_PATENTS_PENDING',
@@ -8,7 +10,7 @@ declare namespace Actions {
 
   interface GetPatents {
     type: ReturnType<typeof PATENTS_ACTION_TYPES.GET>,
-    payload: Promise<Patents.PatentDataShape[] | { status: string }>
+    payload: Promise<Global.PatentDataShape[] | { statusText: string }>
   }
 
   interface GetPatentsPending {
@@ -17,12 +19,12 @@ declare namespace Actions {
 
   interface GetPatentsFulFilled {
     type:  ReturnType<typeof PATENTS_ACTION_TYPES.FULFILLED>,
-    payload: Patents.PatentDataShape[]
+    payload: Global.PatentDataShape[]
   }
 
   interface GetPatentsRejected {
     type:  ReturnType<typeof PATENTS_ACTION_TYPES.REJECTED>,
-    payload: { status: string }
+    payload: { statusText: string }
   }
 
   type PatentsTypes =

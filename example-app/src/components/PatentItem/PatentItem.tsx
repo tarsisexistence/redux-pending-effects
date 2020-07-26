@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid, Heading, Paragraph } from 'grommet';
 import HtmlParser from 'react-html-parser';
 
-export const PatentItem: React.FC<Patents.PatentDataShape> = ({title, description, imageUrl}) => (
+export const PatentItem: React.FC<Global.PatentDataShape> = ({title, description, imageUrl}) => (
   <Grid
     margin='20px auto 40px'
     rows={['fill', 'fill']}

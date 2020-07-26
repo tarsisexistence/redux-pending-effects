@@ -26,7 +26,7 @@
     "react-router-dom": "6.0.0-beta.0",
     "react-scripts": "3.4.1",
     "redux": "4.0.5",
-    "redux-pending-effects": "*",
+    "redux-pending-effects": "^0.2.0",
     "redux-promise-middleware": "6.1.2",
     "redux-saga": "1.1.3",
     "redux-thunk": "2.3.0",
