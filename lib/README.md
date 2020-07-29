@@ -232,8 +232,8 @@ If you made a PR, make sure to update tests as appropriate and keep the examples
 
 Please reach me out if you have any questions or comments.
 
-- [GitHub](https://github.com/maktarsis)
-- [Twitter](https://twitter.com/maktarsis)
+- [GitHub](https://github.com/retarsis)
+- [Twitter](https://twitter.com/retarsis)
 
 <br/>
 
