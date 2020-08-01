@@ -11,4 +11,10 @@ declare namespace Global {
     title: string,
     link: string,
   }
+
+  type AstronomyPictureDataShape = {
+    title: string,
+    imageUrl: string,
+    description: string
+  }
 }

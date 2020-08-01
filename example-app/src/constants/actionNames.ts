@@ -11,3 +11,10 @@ export const libraryActionNames = {
   FULFILLED: 'GET_LIBRARY_CONTENT/fulfilled',
   REJECTED: 'GET_LIBRARY_CONTENT/rejected'
 };
+
+export const astronomyPictureActionNames = {
+  GET: 'GET_APOD',
+  PENDING: 'GET_APOD_PENDING',
+  FULFILLED: 'GET_APOD_FULFILLED',
+  REJECTED: 'GET_APOD_REJECTED'
+};

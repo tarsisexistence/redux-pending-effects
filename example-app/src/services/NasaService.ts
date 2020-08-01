@@ -8,24 +8,21 @@ enum PatentDataIndexes {
 type LibraryItemResponseShape = {
   data: [
     {
-      nasa_id: string,
-      title: string
+      nasa_id: string;
+      title: string;
     }
-  ],
+  ];
   links: [
     {
-      href: string
+      href: string;
     }
-  ]
-}
+  ];
+};
 
 class NasaService {
   private apiKey: string = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
 
-  async smartFetch<T>(
-    url: string,
-    options?: object
-  ): Promise<T | undefined> {
+  async smartFetch<T>(url: string, options?: object): Promise<T | undefined> {
     const response = await fetch(url, options);
 
     if (response.status >= 400) {
@@ -37,38 +34,41 @@ class NasaService {
     }
 
     return response.json();
-  };
+  }
 
   async getPatents(): Promise<Global.PatentDataShape[]> {
-    const patentsUrl: string =
-      `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${this.apiKey}`;
+    const patentsUrl: string = `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${this.apiKey}`;
 
     const body = await this.smartFetch<{ results: [] }>(patentsUrl);
 
     return this.transformPatentsData(body && body.results);
   }
 
-  private transformPatentsData = (patentsData: [] = []) : Global.PatentDataShape[] => (
+  private transformPatentsData = (
+    patentsData: [] = []
+  ): Global.PatentDataShape[] =>
     patentsData.map(patentData => ({
       id: patentData[PatentDataIndexes.Id],
       title: patentData[PatentDataIndexes.Title],
       description: patentData[PatentDataIndexes.Description],
-      imageUrl: patentData[PatentDataIndexes.ImageUrl],
-    }))
-  );
+      imageUrl: patentData[PatentDataIndexes.ImageUrl]
+    }));
 
   async getLibraryContent(
     searchValue: string
   ): Promise<Global.LibraryContentDataShape[]> {
-    const libraryContentUrl: string =
-      `https://images-api.nasa.gov/search?q=${searchValue}&page=1&media_type=image&year_start=1920&year_end=2020`;
+    const libraryContentUrl: string = `https://images-api.nasa.gov/search?q=${searchValue}&page=1&media_type=image&year_start=1920&year_end=2020`;
 
-    const body = await this.smartFetch<{ collection: { items: [] } }>(libraryContentUrl);
+    const body = await this.smartFetch<{ collection: { items: [] } }>(
+      libraryContentUrl
+    );
 
     return this.transformLibraryContentData(body && body.collection.items);
-  };
+  }
 
-  private transformLibraryContentData = (libraryContentData: [] = []) : Global.LibraryContentDataShape[] => (
+  private transformLibraryContentData = (
+    libraryContentData: [] = []
+  ): Global.LibraryContentDataShape[] =>
     libraryContentData.map((item: LibraryItemResponseShape) => {
       const itemData = item.data[0];
       const itemLinks = item.links[0];
@@ -77,9 +77,30 @@ class NasaService {
         id: itemData.nasa_id,
         title: itemData.title,
         link: itemLinks.href
-      }
-    })
-  );
+      };
+    });
+
+  getAstronomyPictureData = async (): Promise<
+    Global.AstronomyPictureDataShape
+  > => {
+    const astronomyPictureDataUrl = `https://api.nasa.gov/planetary/apod?api_key=${this.apiKey}`;
+
+    let body = await this.smartFetch(astronomyPictureDataUrl);
+
+    return this.transformAstronomyPictureData(body);
+  };
+
+  private transformAstronomyPictureData = (
+    data: any = {}
+  ): Global.AstronomyPictureDataShape => {
+    const noDataMessage = 'No data found for this day';
+
+    return {
+      title: data.title || noDataMessage,
+      imageUrl: data.url || noDataMessage,
+      description: data.explanation || noDataMessage
+    }
+  };
 }
 
 export const nasaService = new NasaService();

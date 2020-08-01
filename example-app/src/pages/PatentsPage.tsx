@@ -8,8 +8,10 @@ import { ErrorPage } from './ErrorPage';
 
 export const PatentsPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { shouldPatentsUpdate, patentsData, error } =
-    useSelector<RootState, Reducers.PatentsReducerState>(state => state.patentsReducer);
+  const { shouldPatentsUpdate, patentsData, error } = useSelector<
+    RootState,
+    Reducers.PatentsReducerState
+  >(state => state.patentsReducer);
 
   useEffect(() => {
     if (shouldPatentsUpdate) {
@@ -17,13 +19,13 @@ export const PatentsPage: React.FC = () => {
     }
   }, []);
 
-  return error ? <ErrorPage optionalMessage={error}/> : (
+  return error ? (
+    <ErrorPage optionalMessage={error} />
+  ) : (
     <ul>
-      {
-        patentsData.map(({id, ...rest}: Global.PatentDataShape) => (
-          <PatentItem key={id} {...rest}/>
-        ))
-      }
+      {patentsData.map(({ id, ...rest }: Global.PatentDataShape) => (
+        <PatentItem key={id} {...rest} />
+      ))}
     </ul>
-  )
+  );
 };

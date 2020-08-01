@@ -9,6 +9,7 @@ import { HomePage } from '../../pages/HomePage';
 import { LoginPage } from '../../pages/LoginPage';
 import { PatentsPage } from '../../pages/PatentsPage';
 import { LibraryPage } from '../../pages/LibraryPage';
+import { AstronomyPicturePage } from '../../pages/AstronomyPicturePage';
 import { DashboardPage } from '../../pages/DashboardPage';
 import { theme } from '../../theme';
 import { Loader } from '../Loader/Loader';
@@ -34,6 +35,7 @@ export const App: React.FC = () => {
           <Route path={ routes.LOGIN } element={ <LoginPage/> }/>
           <Route path={ routes.PATENTS } element={ <PatentsPage/> }/>
           <Route path={ routes.LIBRARY } element={ <LibraryPage/> }/>
+          <Route path={ routes.ASTRONOMY_PICTURE } element={ <AstronomyPicturePage/> }/>
           <Route path={ routes.DASHBOARD } element={ <DashboardPage/> }/>
         </Routes>
         </Box>

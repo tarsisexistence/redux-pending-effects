@@ -3,11 +3,13 @@ import { insertPending } from 'redux-pending-effects';
 
 import { patentsReducer } from './patentsReducer';
 import { libraryReducer } from './libraryReducer';
+import { astronomyPictureReducer } from './astronomyPictureReducer';
 
 export const rootReducer = combineReducers(
   insertPending({
     patentsReducer,
-    libraryReducer
+    libraryReducer,
+    astronomyPictureReducer
   })
 );
 
