@@ -1,6 +1,4 @@
 declare namespace Actions {
-  import Global = WebAssembly.Global;
-
   enum PATENTS_ACTION_TYPES {
     GET = 'GET_PATENTS',
     PENDING = 'GET_PATENTS_PENDING',
