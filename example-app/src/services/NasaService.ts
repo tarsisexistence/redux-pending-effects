@@ -19,6 +19,12 @@ type LibraryItemResponseShape = {
   ];
 };
 
+type AstronomyPictureResponseShape = {
+  title: string,
+  url: string,
+  explanation: string
+}
+
 class NasaService {
   private apiKey: string = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
 
@@ -38,8 +44,9 @@ class NasaService {
 
   async getPatents(): Promise<Global.PatentDataShape[]> {
     const patentsUrl: string = `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${this.apiKey}`;
-
-    const body = await this.smartFetch<{ results: [] }>(patentsUrl);
+    const body = await this.smartFetch<
+      { results: [] }
+      >(patentsUrl);
 
     return this.transformPatentsData(body && body.results);
   }
@@ -58,10 +65,9 @@ class NasaService {
     searchValue: string
   ): Promise<Global.LibraryContentDataShape[]> {
     const libraryContentUrl: string = `https://images-api.nasa.gov/search?q=${searchValue}&page=1&media_type=image&year_start=1920&year_end=2020`;
-
-    const body = await this.smartFetch<{ collection: { items: [] } }>(
-      libraryContentUrl
-    );
+    const body = await this.smartFetch<
+      { collection: { items: [] } }
+      >(libraryContentUrl);
 
     return this.transformLibraryContentData(body && body.collection.items);
   }
@@ -81,26 +87,27 @@ class NasaService {
     });
 
   getAstronomyPictureData = async (): Promise<
-    Global.AstronomyPictureDataShape
+    Global.AstronomyPictureDataShape | Error
   > => {
     const astronomyPictureDataUrl = `https://api.nasa.gov/planetary/apod?api_key=${this.apiKey}`;
+    const body = await this.smartFetch<
+      AstronomyPictureResponseShape
+      >(astronomyPictureDataUrl);
 
-    let body = await this.smartFetch(astronomyPictureDataUrl);
+    if (!body) {
+      throw new Error('No data found for this day');
+    }
 
     return this.transformAstronomyPictureData(body);
   };
 
   private transformAstronomyPictureData = (
-    data: any = {}
-  ): Global.AstronomyPictureDataShape => {
-    const noDataMessage = 'No data found for this day';
-
-    return {
-      title: data.title || noDataMessage,
-      imageUrl: data.url || noDataMessage,
-      description: data.explanation || noDataMessage
-    }
-  };
+    data: AstronomyPictureResponseShape
+  ): Global.AstronomyPictureDataShape => ({
+    title: data.title,
+    imageUrl: data.url,
+    description: data.explanation
+  })
 }
 
 export const nasaService = new NasaService();

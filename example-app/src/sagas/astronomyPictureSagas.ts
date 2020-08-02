@@ -22,6 +22,6 @@ function* astronomyPictureWorker() {
 
     yield put(getAstronomyPictureDataLoaded(astronomyPictureData));
   } catch (e) {
-    yield put(getAstronomyPictureDataRejected(e.statusText));
+    yield put(getAstronomyPictureDataRejected(e.message || e.statusText));
   }
 }

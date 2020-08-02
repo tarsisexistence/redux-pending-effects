@@ -39,7 +39,7 @@ export const AstronomyPicturePage = () => {
           src={astronomyPictureData?.imageUrl}
         />
       </Box>
-      <Paragraph fill={true}>
+      <Paragraph textAlign='center' fill={true}>
         {astronomyPictureData?.description}
       </Paragraph>
     </Box>
