@@ -30,4 +30,25 @@ declare namespace Actions {
     | GetPatentsPending
     | GetPatentsFulFilled
     | GetPatentsRejected
+  
+  interface getAstronomyPicture{
+    type: string
+  }
+
+  interface getAstronomyPictureFulFilled{
+    type: string,
+    payload: Global.AstronomyPictureDataShape
+  }
+
+  interface getAstronomyPictureFulRejected{
+    type: string,
+    payload: {
+      errorMessage: string
+    }
+  }
+
+  type AstronomyPictureTypes =
+    | getAstronomyPicture
+    | getAstronomyPictureFulFilled
+    | getAstronomyPictureFulRejected
 }

@@ -30,6 +30,10 @@ const navLinkProps: NavLinkProps[] = [
     label: 'NASA Library'
   },
   {
+    to: routes.ASTRONOMY_PICTURE,
+    label: 'APOD'
+  },
+  {
     to: routes.DASHBOARD,
     label: 'Dashboard'
   }
