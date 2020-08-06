@@ -46,7 +46,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "redux-devtools-extension": "2.13.8",
-    "tslib": "2.0.0",
+    "tslib": "2.0.1",
     "typescript": "3.9.7",
     "yarn": "1.22.4"
   },
