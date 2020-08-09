@@ -68,8 +68,8 @@
     ]
   },
   "jest": {
-    "moduleNameMapper": {
-      "redux-pending-effects": "<rootDir>/../lib/src/publicApi.ts"
-    }
+    "transformIgnorePatterns": [
+      "/node_modules/(?!redux-pending-effects).js$"
+    ]
   }
 }
