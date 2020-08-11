@@ -1,4 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AnyAction } from 'redux';
+import { ThunkAction } from '@reduxjs/toolkit';
 
 import { nasaService } from '../services/NasaService';
 import {
@@ -7,8 +9,6 @@ import {
   astronomyPictureActionNames,
   marsRoverPhotosActionNames
 } from '../constants';
-import { AnyAction } from 'redux';
-import { ThunkAction } from '@reduxjs/toolkit';
 import { RootState } from '../reducers/rootReducer';
 
 export const getPatents = (): Actions.PatentsTypes => ({
