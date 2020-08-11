@@ -25,6 +25,11 @@ type AstronomyPictureResponseShape = {
   explanation: string
 }
 
+type MarsRoverPhotoResponseShape = {
+  id: number,
+  img_src: string
+}
+
 class NasaService {
   private apiKey: string = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
 
@@ -107,7 +112,27 @@ class NasaService {
     title: data.title,
     imageUrl: data.url,
     description: data.explanation
-  })
+  });
+
+  async getMarsRoverPhotos(): Promise<Global.MarsRoverPhotoDataShape[]> {
+    const marsRoverPhotosUrl =
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${this.apiKey}`;
+
+    const res = await this.smartFetch<
+      {photos: MarsRoverPhotoResponseShape[]}
+      >(marsRoverPhotosUrl);
+
+    return this.transformMarsRoverPhotosData(res && res.photos);
+  };
+
+  private transformMarsRoverPhotosData = (
+    data: MarsRoverPhotoResponseShape[] = []
+  ): Global.MarsRoverPhotoDataShape[] => (
+    data.map(item => ({
+      id: item.id,
+      imageUrl: item.img_src
+    }))
+  )
 }
 
 export const nasaService = new NasaService();

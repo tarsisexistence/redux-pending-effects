@@ -51,4 +51,23 @@ declare namespace Actions {
     | getAstronomyPicture
     | getAstronomyPictureFulFilled
     | getAstronomyPictureFulRejected
+  
+  interface MarsRoverPhotosPending {
+    type: string
+  }
+
+  interface MarsRoverPhotosFulFilled {
+    type: string,
+    payload: Global.MarsRoverPhotoDataShape[]
+  }
+
+  interface MarsRoverPhotosRejected {
+    type: string,
+    payload: string
+  }
+
+  type MarsRoverPhotosTypes =
+    | MarsRoverPhotosPending
+    | MarsRoverPhotosFulFilled
+    | MarsRoverPhotosRejected
 }

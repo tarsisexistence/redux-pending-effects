@@ -14,6 +14,7 @@ import { DashboardPage } from '../../pages/DashboardPage';
 import { theme } from '../../theme';
 import { Loader } from '../Loader/Loader';
 import { routes } from '../../constants';
+import { MarsRoverPhotosPage } from '../../pages/MarsRoverPhotosPage';
 
 export const App: React.FC = () => {
   const isPending = useSelector(selectIsPending);
@@ -36,6 +37,7 @@ export const App: React.FC = () => {
           <Route path={ routes.PATENTS } element={ <PatentsPage/> }/>
           <Route path={ routes.LIBRARY } element={ <LibraryPage/> }/>
           <Route path={ routes.ASTRONOMY_PICTURE } element={ <AstronomyPicturePage/> }/>
+          <Route path={ routes.MARS_ROVER_PHOTOS } element={ <MarsRoverPhotosPage/> }/>
           <Route path={ routes.DASHBOARD } element={ <DashboardPage/> }/>
         </Routes>
         </Box>
