@@ -23,7 +23,7 @@
     "react-html-parser": "2.0.2",
     "react-redux": "7.2.1",
     "react-router-dom": "6.0.0-beta.0",
-    "react-scripts": "3.4.2",
+    "react-scripts": "3.4.3",
     "redux": "4.0.5",
     "redux-pending-effects": "*",
     "redux-promise-middleware": "6.1.2",
