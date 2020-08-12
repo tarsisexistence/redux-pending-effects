@@ -14,7 +14,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "1.4.0",
     "@types/react-html-parser": "2.0.1",
-    "firebase": "7.17.1",
     "grommet": "2.14.0",
     "grommet-icons": "4.4.0",
     "history": "5.0.0",
