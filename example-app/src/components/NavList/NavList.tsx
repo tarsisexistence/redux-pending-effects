@@ -34,6 +34,10 @@ const navLinkProps: NavLinkProps[] = [
     label: 'APOD'
   },
   {
+    to: routes.MARS_ROVER_PHOTOS,
+    label: 'Mars Rover Photos'
+  },
+  {
     to: routes.DASHBOARD,
     label: 'Dashboard'
   }

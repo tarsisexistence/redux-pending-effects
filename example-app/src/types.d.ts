@@ -17,4 +17,9 @@ declare namespace Global {
     imageUrl: string,
     description: string
   }
+
+  type MarsRoverPhotoDataShape = {
+    id: number,
+    imageUrl: string
+  }
 }
