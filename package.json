@@ -12,7 +12,12 @@
     "lib"
   ],
   "scripts": {
-    "postinstall": "cd example-app && yarn install"
+    "postinstall": "yarn example:install && yarn lib:build",
+    "example:install": "cd example-app && yarn install",
+    "lib:build": "cd lib && yarn build",
+    "lib:start": "cd lib && yarn start",
+    "lib:lint": "cd lib && yarn lint",
+    "lib:test": "cd lib && yarn test"
   },
   "devDependencies": {
     "redux-pending-effects": "*",
