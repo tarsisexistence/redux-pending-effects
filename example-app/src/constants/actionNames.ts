@@ -1,3 +1,5 @@
+export const clearStoreActionName = 'CLEAR_STORE';
+
 export const patentsActionsNames = {
   GET: 'GET_PATENTS',
   PENDING: 'GET_PATENTS_PENDING',

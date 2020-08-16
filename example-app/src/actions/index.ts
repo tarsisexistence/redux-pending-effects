@@ -11,7 +11,7 @@ import {
 } from '../constants';
 import { RootState } from '../reducers/rootReducer';
 
-export const getPatents = (): Actions.PatentsTypes => ({
+export const getPatents = (): Actions.GetPatents => ({
   type: patentsActionsNames.GET,
   payload: nasaService.getPatents()
 });
