@@ -1,9 +1,16 @@
 import { selectIsPending } from 'redux-pending-effects';
+import SagaTester from 'redux-saga-tester';
 
 import { store } from '../store';
-import { getPatents, getLibraryContent } from '../actions';
-import { clearStoreActionName } from '../constants/actionNames';
+import {
+  getPatents,
+  getLibraryContent,
+  getAstronomyPictureData
+} from '../actions';
+import { astronomyPictureActionNames, clearStoreActionName } from '../constants/actionNames';
 import { nasaService } from '../services/NasaService';
+import { astronomyPictureWorker } from '../sagas/astronomyPictureSagas';
+import { rootReducerWrapper } from './rootReducer';
 
 describe('store testing on RPE selector', () => {
   afterEach(() => {
@@ -39,6 +46,21 @@ describe('store testing on RPE selector', () => {
   });
 
   it('should test selectIsPending changing on getAstronomyPictureData fetch', async () => {
+    const sagaTester = new SagaTester({
+      initialState: undefined,
+      reducers: rootReducerWrapper
+    });
 
+    expect(selectIsPending(store.getState())).toBe(false);
+
+    sagaTester.start(astronomyPictureWorker);
+
+    store.dispatch(getAstronomyPictureData);
+
+    expect(selectIsPending(store.getState())).toBe(true);
+
+    await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
+
+    expect(selectIsPending(store.getState())).toBe(false);
   });
 });
