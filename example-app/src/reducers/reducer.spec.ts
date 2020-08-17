@@ -10,57 +10,57 @@ import {
 import { astronomyPictureActionNames, clearStoreActionName } from '../constants/actionNames';
 import { nasaService } from '../services/NasaService';
 import { astronomyPictureWorker } from '../sagas/astronomyPictureSagas';
-import { rootReducerWrapper } from './rootReducer';
+import { rootReducer } from './rootReducer';
 
-describe('store testing on RPE selector', () => {
+describe('selector', () => {
   afterEach(() => {
     store.dispatch({
       type: clearStoreActionName
     });
   });
 
-  it('should test selectIsPending changing on getPatents fetch', async () => {
+  it('should have default negative pending state',() => {
+    expect(selectIsPending(store.getState())).toBe(false);
+  });
+
+  it('should trigger pending state on getPatents fetch started', async () => {
+    store.dispatch(getPatents());
+    expect(selectIsPending(store.getState())).toBe(true);
+  });
+
+  it('should complete pending state on getPatents fetch completed', async () => {
     const getPatentsAction: Actions.GetPatents = getPatents();
 
-    expect(selectIsPending(store.getState())).toBe(false);
-
     store.dispatch(getPatentsAction);
-
-    expect(selectIsPending(store.getState())).toBe(true);
-
     await getPatentsAction.payload;
-
     expect(selectIsPending(store.getState())).toBe(false);
   });
 
-  it('should test selectIsPending changing on getLibraryContent fetch', async () => {
-    expect(selectIsPending(store.getState())).toBe(false);
-
+  it('should trigger pending state on getLibraryContent fetch started', async () => {
     store.dispatch<any>(getLibraryContent('test'));
-
     expect(selectIsPending(store.getState())).toBe(true);
+  });
 
+  it('should complete pending state on getLibraryContent fetch completed', async () => {
+    store.dispatch<any>(getLibraryContent('test'));
     await nasaService.getLibraryContent('test');
-
     expect(selectIsPending(store.getState())).toBe(false);
   });
 
-  it('should test selectIsPending changing on getAstronomyPictureData fetch', async () => {
+  it('should trigger pending state on getAstronomyPictureData fetch started', async () => {
+    store.dispatch(getAstronomyPictureData);
+    expect(selectIsPending(store.getState())).toBe(true);
+  });
+
+  it('should complete pending state on getAstronomyPictureData fetch completed', async () => {
     const sagaTester = new SagaTester({
       initialState: undefined,
-      reducers: rootReducerWrapper
+      reducers: rootReducer
     });
 
-    expect(selectIsPending(store.getState())).toBe(false);
-
     sagaTester.start(astronomyPictureWorker);
-
     store.dispatch(getAstronomyPictureData);
-
-    expect(selectIsPending(store.getState())).toBe(true);
-
     await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
-
     expect(selectIsPending(store.getState())).toBe(false);
   });
 });

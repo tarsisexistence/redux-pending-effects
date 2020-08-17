@@ -7,7 +7,7 @@ import { astronomyPictureReducer } from './astronomyPictureReducer';
 import { marsRoverPhotosReducer } from './marsRoverPhotosReducer';
 import { clearStoreActionName } from '../constants/actionNames';
 
-const rootReducer = combineReducers(
+const appReducer = combineReducers(
   insertPending({
     patentsReducer,
     libraryReducer,
@@ -16,12 +16,12 @@ const rootReducer = combineReducers(
   })
 );
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof appReducer>;
 
-export const rootReducerWrapper = (state: RootState | undefined, action: AnyAction) => {
+export const rootReducer = (state: RootState | undefined, action: AnyAction) => {
   if (action.type === clearStoreActionName) {
     state = undefined;
   }
 
-  return rootReducer(state, action);
+  return appReducer(state, action);
 };
