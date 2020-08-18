@@ -7,7 +7,7 @@ import { middleware, sagaMiddleware } from '../store';
 import { getPatents, getLibraryContent, getAstronomyPictureData } from '../actions';
 import { astronomyPictureActionNames } from '../constants';
 import { astronomyPictureWorker } from '../sagas/astronomyPictureSagas';
-import { rootReducer, rootReducer as reducer } from './rootReducer';
+import { rootReducer as reducer } from './rootReducer';
 import { rootSaga } from '../sagas';
 
 describe('selector', () => {
@@ -21,7 +21,7 @@ describe('selector', () => {
     expect(selectIsPending(store.getState())).toBe(false);
   });
 
-  it('should trigger pending state after getPatents fetch started', async () => {
+  it('should trigger pending state after getPatents fetch started',() => {
     store.dispatch(getPatents());
     expect(selectIsPending(store.getState())).toBe(true);
   });
@@ -34,17 +34,17 @@ describe('selector', () => {
     expect(selectIsPending(store.getState())).toBe(false);
   });
 
-  it('should trigger pending state after getLibraryContent fetch started', async () => {
+  it('should trigger pending state after getLibraryContent fetch started', () => {
     store.dispatch<any>(getLibraryContent('test'));
     expect(selectIsPending(store.getState())).toBe(true);
-  });
+  })  ;
 
   it('should complete pending state after getLibraryContent fetch completed', async () => {
     await store.dispatch<any>(getLibraryContent('test'));
     expect(selectIsPending(store.getState())).toBe(false);
   });
 
-  it('should trigger pending state after getAstronomyPictureData fetch started', async () => {
+  it('should trigger pending state after getAstronomyPictureData fetch started', () => {
     sagaMiddleware.run(rootSaga);
     store.dispatch(getAstronomyPictureData);
     expect(selectIsPending(store.getState())).toBe(true);
@@ -53,7 +53,7 @@ describe('selector', () => {
   it('should complete pending state after getAstronomyPictureData fetch completed', async () => {
     const sagaTester = new SagaTester({
       initialState: undefined,
-      reducers: rootReducer
+      reducers: reducer
     });
 
     sagaTester.start(astronomyPictureWorker);
