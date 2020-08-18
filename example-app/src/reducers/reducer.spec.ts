@@ -1,37 +1,35 @@
 import { selectIsPending } from 'redux-pending-effects';
 import SagaTester from 'redux-saga-tester';
+import { configureStore } from '@reduxjs/toolkit';
 
-import { store } from '../store';
-import {
-  getPatents,
-  getLibraryContent,
-  getAstronomyPictureData
-} from '../actions';
-import { astronomyPictureActionNames, clearStoreActionName } from '../constants/actionNames';
+import { middleware, sagaMiddleware } from '../store';
+import { getPatents, getLibraryContent, getAstronomyPictureData } from '../actions';
+import { astronomyPictureActionNames } from '../constants';
 import { nasaService } from '../services/NasaService';
 import { astronomyPictureWorker } from '../sagas/astronomyPictureSagas';
-import { rootReducer } from './rootReducer';
+import { rootReducer, rootReducer as reducer } from './rootReducer';
+import { rootSaga } from '../sagas';
+
+const createStore = () => {
+  return configureStore({ reducer, middleware });
+};
 
 describe('selector', () => {
-  afterEach(() => {
-    store.dispatch({
-      type: clearStoreActionName
-    });
-  });
+  it('should have default negative pending state', () => {
+    const store = createStore();
 
-  it('should have default negative pending state',() => {
     expect(selectIsPending(store.getState())).toBe(false);
   });
 
-  it('should trigger pending state after   fetch started',async () => {
-    const getPatentsAction: Actions.GetPatents = getPatents();
+  it('should trigger pending state after getPatents fetch started', async () => {
+    const store = createStore();
 
-    store.dispatch(getPatentsAction);
+    store.dispatch(getPatents());
     expect(selectIsPending(store.getState())).toBe(true);
-    await getPatentsAction.payload;
   });
 
   it('should complete pending state after getPatents fetch completed', async () => {
+    const store = createStore();
     const getPatentsAction: Actions.GetPatents = getPatents();
 
     store.dispatch(getPatentsAction);
@@ -40,30 +38,30 @@ describe('selector', () => {
   });
 
   it('should trigger pending state after getLibraryContent fetch started', async () => {
+    const store = createStore();
+
     store.dispatch<any>(getLibraryContent('test'));
     expect(selectIsPending(store.getState())).toBe(true);
-    await nasaService.getLibraryContent('test');
   });
 
   it('should complete pending state after getLibraryContent fetch completed', async () => {
+    const store = createStore();
+
     store.dispatch<any>(getLibraryContent('test'));
     await nasaService.getLibraryContent('test');
     expect(selectIsPending(store.getState())).toBe(false);
   });
 
   it('should trigger pending state after getAstronomyPictureData fetch started', async () => {
-    const sagaTester = new SagaTester({
-      initialState: undefined,
-      reducers: rootReducer
-    });
+    const store = createStore();
 
-    sagaTester.start(astronomyPictureWorker);
+    sagaMiddleware.run(rootSaga);
     store.dispatch(getAstronomyPictureData);
     expect(selectIsPending(store.getState())).toBe(true);
-    await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
   });
 
   it('should complete pending state after getAstronomyPictureData fetch completed', async () => {
+    const store = createStore();
     const sagaTester = new SagaTester({
       initialState: undefined,
       reducers: rootReducer
@@ -76,6 +74,7 @@ describe('selector', () => {
   });
 
   it('should not complete pending state after one of fetches is completed', async () => {
+    const store = createStore();
     const getPatentsAction: Actions.GetPatents = getPatents();
 
     store.dispatch(getPatentsAction);
@@ -86,10 +85,11 @@ describe('selector', () => {
       getPatentsAction.payload
     ]);
 
-    expect(selectIsPending(store.getState())).toBe(true)
+    expect(selectIsPending(store.getState())).toBe(true);
   });
 
   it('should complete pending state after all fetches are completed', async () => {
+    const store = createStore();
     const getPatentsAction: Actions.GetPatents = getPatents();
 
     store.dispatch(getPatentsAction);
@@ -100,6 +100,6 @@ describe('selector', () => {
       getPatentsAction.payload
     ]);
 
-    expect(selectIsPending(store.getState())).toBe(false)
+    expect(selectIsPending(store.getState())).toBe(false);
   });
 });
