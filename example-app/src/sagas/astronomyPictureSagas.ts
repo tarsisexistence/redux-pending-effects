@@ -14,7 +14,7 @@ export function* astronomyPictureWatcher() {
   );
 }
 
-function* astronomyPictureWorker() {
+export function* astronomyPictureWorker() {
   try {
     const astronomyPictureData: Global.AstronomyPictureDataShape = yield call(
       nasaService.getAstronomyPictureData

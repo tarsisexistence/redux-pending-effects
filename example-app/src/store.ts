@@ -6,8 +6,8 @@ import { rootReducer as reducer } from './reducers/rootReducer';
 import { rootSaga } from './sagas';
 
 const defaultMiddlewares = getDefaultMiddleware();
-const sagaMiddleware = createSagaMiddleware();
-const middleware = [
+export const sagaMiddleware = createSagaMiddleware();
+export const middleware = [
   promiseMiddleware,
   toolkitMiddleware,
   sagaMiddleware,
