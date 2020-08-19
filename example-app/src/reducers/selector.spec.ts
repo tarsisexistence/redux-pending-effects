@@ -57,9 +57,14 @@ describe('selector', () => {
     });
 
     sagaTester.start(astronomyPictureWorker);
-    store.dispatch(getAstronomyPictureData);
-    await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
-    expect(selectIsPending(store.getState())).toBe(false);
+    sagaTester.dispatch(getAstronomyPictureData);
+
+    await Promise.race([
+      sagaTester.waitFor(astronomyPictureActionNames.FULFILLED),
+      sagaTester.waitFor(astronomyPictureActionNames.REJECTED)
+    ]);
+
+    expect(selectIsPending(sagaTester.getState())).toBe(false);
   });
 
   it('should not complete pending state after one of fetches is completed', async () => {
