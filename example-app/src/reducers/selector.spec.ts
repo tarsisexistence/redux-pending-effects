@@ -61,7 +61,7 @@ describe('selector', () => {
       middlewares: middleware
     });
 
-    sagaTester.start(astronomyPictureWorker);
+    sagaTester.start(rootSaga);
     sagaTester.dispatch(getAstronomyPictureData);
 
     await Promise.race([
@@ -106,7 +106,7 @@ describe('selector', () => {
       middlewares: middleware
     });
 
-    sagaTester.start(astronomyPictureWorker);
+    sagaTester.start(rootSaga);
     sagaTester.dispatch(getAstronomyPictureData);
     sagaTester.dispatch(getPatentsAction);
 
@@ -152,7 +152,7 @@ describe('selector', () => {
       getLibraryContent('test')
     );
 
-    sagaTester.start(astronomyPictureWorker);
+    sagaTester.start(rootSaga);
     sagaTester.dispatch(getAstronomyPictureData);
 
     await Promise.race([
@@ -174,7 +174,7 @@ describe('selector', () => {
       getLibraryContent('test')
     );
 
-    sagaTester.start(astronomyPictureWorker);
+    sagaTester.start(rootSaga);
     sagaTester.dispatch(getAstronomyPictureData);
 
     await Promise.all([
