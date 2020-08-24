@@ -9558,10 +9558,10 @@ redux-promise-middleware@6.1.2:
   resolved "https://registry.yarnpkg.com/redux-promise-middleware/-/redux-promise-middleware-6.1.2.tgz#1c14222686934be243cbb292e348ef7d5b20d6d2"
   integrity sha512-ZqZu/nnSzGgwTtNbGoGVontpk7LjTOv0kigtt3CcgXI9gpq+8WlfXTXRZD0WTD5yaohRq0q2nYmJXSTjwXs83Q==
 
-redux-saga-tester@1.0.864:
-  version "1.0.864"
-  resolved "https://registry.yarnpkg.com/redux-saga-tester/-/redux-saga-tester-1.0.864.tgz#3361206f62367f244dae7249f148f061eb2d0539"
-  integrity sha512-hxmS9dlJ9+6LRqpyQAw8WMynbwTsMUIzX+wG9zYbCdCi/hibtSTn0ynpmm2cTOsYDopFmEQ6kE/++nO3kQFfRQ==
+redux-saga-tester@1.0.865:
+  version "1.0.865"
+  resolved "https://registry.yarnpkg.com/redux-saga-tester/-/redux-saga-tester-1.0.865.tgz#630833cbb5079dab31c6d33e0d277e3be4dd2f64"
+  integrity sha512-IaFoCWx2NaVi3+s/vqjPu5uYlsrBVjk0cNzJ/W309b9dhJ2L3CZsAoRWaF6wq/EljcGmmvuVayFX1s86h5YMQw==
   dependencies:
     babel-runtime "^6.11.6"
 
