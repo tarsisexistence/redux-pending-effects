@@ -8,11 +8,12 @@ import { isPromise } from '../helpers/utils';
 import { patchEffect } from '../store/actions';
 import { nanoid } from '../helpers/nanoid.utils';
 
-export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
+export const pendingPromiseMiddleware = (arrOfIgnoredActions?: string[]) => ({ dispatch }: MiddlewareAPI) => (
   next: Dispatch
 ) => (action: AnyAction): AnyAction => {
   let promise;
   let data;
+  const shouldCurrentActionBeIgnored = arrOfIgnoredActions?.includes(action.type);
 
   if (action.payload) {
     const { payload } = action;
@@ -68,19 +69,28 @@ export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
   const handleReject = (reason: any) => {
     const rejectedAction = getAction(reason, true);
     dispatch(rejectedAction);
-    dispatch(patchEffect(effectId));
+
+    if (!shouldCurrentActionBeIgnored) {
+      dispatch(patchEffect(effectId));
+    }
 
     throw reason;
   };
   const handleFulfill = (value = null) => {
     const resolvedAction = getAction(value, false);
     dispatch(resolvedAction);
-    dispatch(patchEffect(effectId));
+
+    if (!shouldCurrentActionBeIgnored) {
+      dispatch(patchEffect(effectId));
+    }
 
     return { value, action: resolvedAction };
   };
 
-  dispatch(patchEffect(effectId));
+  if (!shouldCurrentActionBeIgnored) {
+    dispatch(patchEffect(effectId));
+  }
+
   next({
     type: `${type}_PENDING`,
     // Include payload (for optimistic updates) if it is defined.
