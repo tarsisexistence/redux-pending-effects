@@ -5,7 +5,9 @@ import createSagaMiddleware from '@redux-saga/core';
 import { rootReducer as reducer } from './reducers/rootReducer';
 import { rootSaga } from './sagas';
 
-const defaultMiddlewares = getDefaultMiddleware();
+const defaultMiddlewares = getDefaultMiddleware({
+  serializableCheck: false
+});
 export const sagaMiddleware = createSagaMiddleware();
 export const middleware = [
   promiseMiddleware,
