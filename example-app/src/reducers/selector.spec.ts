@@ -1,8 +1,7 @@
 import { Store } from 'redux';
 import { selectIsPending } from 'redux-pending-effects';
-import SagaTester from 'redux-saga-tester';
 import { configureStore } from '@reduxjs/toolkit';
-import fetchMock, { enableFetchMocks, MockParams } from 'jest-fetch-mock';
+import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
 
 import { middleware, sagaMiddleware } from '../store';
 import {
@@ -14,38 +13,13 @@ import { astronomyPictureActionNames } from '../constants';
 import { astronomyPictureWorker } from '../sagas/astronomyPictureSagas';
 import { rootReducer as reducer } from './rootReducer';
 import { rootSaga } from '../sagas';
-
-type MockResponseParams = [string, MockParams];
-
-const apiKey = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
-const patentsFetchMock: MockResponseParams = [
-  JSON.stringify({ results: [] }),
-  {
-    url: `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`
-  }
-];
-const libraryContentFetchMock: MockResponseParams = [
-  JSON.stringify({ collection: { items: [] } }),
-  {
-    url: 'https://images-api.nasa.gov/search?q=test&page=1&media_type=image&year_start=1920&year_end=2020'
-  }
-];
-const astronomyPictureFetchMock: MockResponseParams = [
-  JSON.stringify({ title: 'text', url: 'text', explanation: 'text' }),
-  {
-    url: `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`
-  }
-];
-const rejectedFetchMockParam: Error = {
-  name: '600',
-  message: 'Some error'
-};
-const createSagaTesterInstance = () =>
-  new SagaTester({
-    initialState: undefined,
-    reducers: reducer,
-    middlewares: middleware
-  });
+import {
+  patentsFetchMock,
+  libraryContentFetchMock,
+  astronomyPictureFetchMock,
+  rejectedFetchMockParam,
+  createSagaTesterInstance
+} from './testHelpers';
 
 describe('selector', () => {
   let store: Store;
@@ -61,166 +35,176 @@ describe('selector', () => {
     expect(selectIsPending(store.getState())).toBe(false);
   });
 
-  it('should trigger pending state after getPatents fetch started', () => {
-    store.dispatch(getPatents());
-    expect(selectIsPending(store.getState())).toBe(true);
+  describe('with saga', () => {
+    it('should trigger pending state when saga started', () => {
+      sagaMiddleware.run(rootSaga);
+      store.dispatch(getAstronomyPictureData);
+      expect(selectIsPending(store.getState())).toBe(true);
+    });
+
+    it('should complete pending state when saga completed with success', async () => {
+      const sagaTester = createSagaTesterInstance();
+
+      fetchMock.mockResponseOnce(...astronomyPictureFetchMock);
+
+      sagaTester.start(rootSaga);
+      sagaTester.dispatch(getAstronomyPictureData);
+      await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
+      expect(selectIsPending(sagaTester.getState())).toBe(false);
+    });
+
+    it('should complete pending state when saga completed with failure', async () => {
+      const sagaTester = createSagaTesterInstance();
+
+      fetchMock.mockRejectOnce(rejectedFetchMockParam);
+
+      sagaTester.start(rootSaga);
+      sagaTester.dispatch(getAstronomyPictureData);
+      await sagaTester.waitFor(astronomyPictureActionNames.REJECTED);
+      expect(selectIsPending(sagaTester.getState())).toBe(false);
+    });
   });
 
-  it('should complete pending state after getPatents fetch completed with success', async () => {
-    fetchMock.mockResponseOnce(...patentsFetchMock);
+  describe('with toolkit', () => {
+    it('should trigger pending state when toolkit started', () => {
+      store.dispatch<any>(getLibraryContent('test'));
+      expect(selectIsPending(store.getState())).toBe(true);
+    });
 
-    const getPatentsAction: Actions.GetPatents = getPatents();
+    it('should complete pending state when toolkit completed with success', async () => {
+      fetchMock.mockResponseOnce(...libraryContentFetchMock);
+      await store.dispatch<any>(getLibraryContent('test'));
+      expect(selectIsPending(store.getState())).toBe(false);
+    });
 
-    store.dispatch(getPatentsAction);
-    await getPatentsAction.payload;
-    expect(selectIsPending(store.getState())).toBe(false);
+    it('should complete pending state when toolkit completed with failure', async () => {
+      fetchMock.mockRejectOnce(rejectedFetchMockParam);
+      await store.dispatch<any>(getLibraryContent('test'));
+      expect(selectIsPending(store.getState())).toBe(false);
+    });
   });
 
-  it('should complete pending state after getPatents fetch completed with failure', async () => {
-    fetchMock.mockRejectOnce(rejectedFetchMockParam);
+  describe('with promise', () => {
+    it('should trigger pending state when promise started', () => {
+      store.dispatch(getPatents());
+      expect(selectIsPending(store.getState())).toBe(true);
+    });
 
-    const getPatentsAction: Actions.GetPatents = getPatents();
+    it('should complete pending state when promise completed with success', async () => {
+      fetchMock.mockResponseOnce(...patentsFetchMock);
 
-    try {
+      const getPatentsAction: Actions.GetPatents = getPatents();
+
       store.dispatch(getPatentsAction);
       await getPatentsAction.payload;
-    } catch (e) {
-
-    } finally {
       expect(selectIsPending(store.getState())).toBe(false);
-    }
+    });
+
+    it('should complete pending state when promise completed with failure', async () => {
+      fetchMock.mockRejectOnce(rejectedFetchMockParam);
+
+      const getPatentsAction: Actions.GetPatents = getPatents();
+
+      try {
+        store.dispatch(getPatentsAction);
+        await getPatentsAction.payload;
+      } catch (e) {
+      } finally {
+        expect(selectIsPending(store.getState())).toBe(false);
+      }
+    });
   });
 
-  it('should trigger pending state after getLibraryContent fetch started', () => {
-    store.dispatch<any>(getLibraryContent('test'));
-    expect(selectIsPending(store.getState())).toBe(true);
-  });
+  describe('with all', () => {
+    it('should not complete pending state when one of the fetches(sent by promise and toolkit) is completed', async () => {
+      fetchMock.mockResponseOnce(...patentsFetchMock);
 
-  it('should complete pending state after getLibraryContent fetch completed with success', async () => {
-    fetchMock.mockResponseOnce(...libraryContentFetchMock);
-    await store.dispatch<any>(getLibraryContent('test'));
-    expect(selectIsPending(store.getState())).toBe(false);
-  });
+      const getPatentsAction: Actions.GetPatents = getPatents();
 
-  it('should complete pending state after getLibraryContent fetch completed with failure', async () => {
-    fetchMock.mockRejectOnce(rejectedFetchMockParam);
-    await store.dispatch<any>(getLibraryContent('test'));
-    expect(selectIsPending(store.getState())).toBe(false);
-  });
+      store.dispatch(getPatentsAction);
+      store.dispatch<any>(getLibraryContent('test'));
+      await getPatentsAction.payload;
+      expect(selectIsPending(store.getState())).toBe(true);
+    });
 
-  it('should trigger pending state after getAstronomyPictureData fetch started', () => {
-    sagaMiddleware.run(rootSaga);
-    store.dispatch(getAstronomyPictureData);
-    expect(selectIsPending(store.getState())).toBe(true);
-  });
+    it('should complete pending state when all fetches(sent by promise and toolkit) are completed', async () => {
+      fetchMock.mockResponses(patentsFetchMock, libraryContentFetchMock);
 
-  it('should complete pending state after getAstronomyPictureData fetch completed with success', async () => {
-    const sagaTester = createSagaTesterInstance();
+      const getPatentsAction: Actions.GetPatents = getPatents();
 
-    fetchMock.mockResponseOnce(...astronomyPictureFetchMock);
+      store.dispatch(getPatentsAction);
 
-    sagaTester.start(rootSaga);
-    sagaTester.dispatch(getAstronomyPictureData);
-    await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
-    expect(selectIsPending(sagaTester.getState())).toBe(false);
-  });
+      await Promise.all([
+        store.dispatch<any>(getLibraryContent('test')),
+        getPatentsAction.payload
+      ]);
 
-  it('should complete pending state after getAstronomyPictureData fetch completed with failure', async () => {
-    const sagaTester = createSagaTesterInstance();
+      expect(selectIsPending(store.getState())).toBe(false);
+    });
 
-    fetchMock.mockRejectOnce(rejectedFetchMockParam);
+    it('should not complete pending state when one of the fetches(sent by promise and saga) is completed', async () => {
+      fetchMock.mockResponse(...patentsFetchMock);
 
-    sagaTester.start(rootSaga);
-    sagaTester.dispatch(getAstronomyPictureData);
-    await sagaTester.waitFor(astronomyPictureActionNames.REJECTED);
-    expect(selectIsPending(sagaTester.getState())).toBe(false);
-  });
+      const sagaTester = createSagaTesterInstance();
+      const getPatentsAction: Actions.GetPatents = getPatents();
 
-  it('should not complete pending state after one of fetches(getPatents or getLibraryContent) is completed', async () => {
-    fetchMock.mockResponseOnce(...patentsFetchMock);
+      sagaTester.start(rootSaga);
+      sagaTester.dispatch(getPatentsAction);
+      sagaTester.dispatch(getAstronomyPictureData);
+      await getPatentsAction.payload;
+      expect(selectIsPending(sagaTester.getState())).toBe(true);
+    });
 
-    const getPatentsAction: Actions.GetPatents = getPatents();
+    it('should complete pending state when all fetches(sent by promise and saga) are completed', async () => {
+      fetchMock.mockResponses(patentsFetchMock, astronomyPictureFetchMock);
 
-    store.dispatch(getPatentsAction);
-    store.dispatch<any>(getLibraryContent('test'));
-    await getPatentsAction.payload;
-    expect(selectIsPending(store.getState())).toBe(true);
-  });
+      const sagaTester = createSagaTesterInstance();
+      const getPatentsAction: Actions.GetPatents = getPatents();
 
-  it('should complete pending state after all fetches(getPatents and getLibraryContent) are completed', async () => {
-    fetchMock.mockResponses(patentsFetchMock, libraryContentFetchMock);
+      sagaTester.start(astronomyPictureWorker);
+      sagaTester.dispatch(getPatentsAction);
+      sagaTester.dispatch(getAstronomyPictureData);
 
-    const getPatentsAction: Actions.GetPatents = getPatents();
+      await Promise.all([
+        getPatentsAction.payload,
+        sagaTester.waitFor(astronomyPictureActionNames.FULFILLED)
+      ]);
 
-    store.dispatch(getPatentsAction);
+      expect(selectIsPending(sagaTester.getState())).toBe(false);
+    });
 
-    await Promise.all([
-      store.dispatch<any>(getLibraryContent('test')),
-      getPatentsAction.payload
-    ]);
+    it('should not complete pending state when one of the fetches(sent by toolkit and saga) is completed', async () => {
+      fetchMock.mockResponseOnce(...astronomyPictureFetchMock);
 
-    expect(selectIsPending(store.getState())).toBe(false);
-  });
+      const sagaTester = createSagaTesterInstance();
 
-  it('should not complete pending state after one of fetches(getPatents or getAstronomyPictureData) is completed', async () => {
-    fetchMock.mockResponse(...patentsFetchMock);
+      sagaTester.start(rootSaga);
+      sagaTester.dispatch(getAstronomyPictureData);
+      sagaTester.dispatch<any>(getLibraryContent('test'));
+      await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
+      expect(selectIsPending(sagaTester.getState())).toBe(true);
+    });
 
-    const sagaTester = createSagaTesterInstance();
-    const getPatentsAction: Actions.GetPatents = getPatents();
+    it('should complete pending state when all fetches(sent by toolkit and saga) are completed', async () => {
+      fetchMock.mockResponses(
+        libraryContentFetchMock,
+        astronomyPictureFetchMock
+      );
 
-    sagaTester.start(rootSaga);
-    sagaTester.dispatch(getPatentsAction);
-    sagaTester.dispatch(getAstronomyPictureData);
-    await getPatentsAction.payload;
-    expect(selectIsPending(sagaTester.getState())).toBe(true);
-  });
+      const sagaTester = createSagaTesterInstance();
+      const libraryContentPromise = sagaTester.dispatch<any>(
+        getLibraryContent('test')
+      );
 
-  it('should complete pending state after all fetches(getPatents and getAstronomyPictureData) are completed', async () => {
-    fetchMock.mockResponses(patentsFetchMock, astronomyPictureFetchMock);
+      sagaTester.start(rootSaga);
+      sagaTester.dispatch(getAstronomyPictureData);
 
-    const sagaTester = createSagaTesterInstance();
-    const getPatentsAction: Actions.GetPatents = getPatents();
+      await Promise.all([
+        libraryContentPromise,
+        sagaTester.waitFor(astronomyPictureActionNames.FULFILLED)
+      ]);
 
-    sagaTester.start(astronomyPictureWorker);
-    sagaTester.dispatch(getPatentsAction);
-    sagaTester.dispatch(getAstronomyPictureData);
-
-    await Promise.all([
-      getPatentsAction.payload,
-      sagaTester.waitFor(astronomyPictureActionNames.FULFILLED)
-    ]);
-
-    expect(selectIsPending(sagaTester.getState())).toBe(false);
-  });
-
-  it('should not complete pending state after one of fetches(getLibraryContent or getAstronomyPictureData) is completed', async () => {
-    fetchMock.mockResponseOnce(...astronomyPictureFetchMock);
-
-    const sagaTester = createSagaTesterInstance();
-
-    sagaTester.start(rootSaga);
-    sagaTester.dispatch(getAstronomyPictureData);
-    sagaTester.dispatch<any>(getLibraryContent('test'));
-    await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
-    expect(selectIsPending(sagaTester.getState())).toBe(true);
-  });
-
-  it('should complete pending state after all fetches(getLibraryContent and getAstronomyPictureData) are completed', async () => {
-    fetchMock.mockResponses(libraryContentFetchMock, astronomyPictureFetchMock);
-
-    const sagaTester = createSagaTesterInstance();
-    const libraryContentPromise = sagaTester.dispatch<any>(
-      getLibraryContent('test')
-    );
-
-    sagaTester.start(rootSaga);
-    sagaTester.dispatch(getAstronomyPictureData);
-
-    await Promise.all([
-      libraryContentPromise,
-      sagaTester.waitFor(astronomyPictureActionNames.FULFILLED)
-    ]);
-
-    expect(selectIsPending(sagaTester.getState())).toBe(false);
+      expect(selectIsPending(sagaTester.getState())).toBe(false);
+    });
   });
 });
