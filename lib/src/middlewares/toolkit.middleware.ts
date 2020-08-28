@@ -2,13 +2,13 @@ import { AnyAction, Dispatch, MiddlewareAPI } from 'redux';
 
 import { patchEffect } from '../store/actions';
 
-export const pendingToolkitMiddleware = (arrOfIgnoredActions?: string[]) => ({ dispatch }: MiddlewareAPI) => (
+export const pendingToolkitMiddleware = (ignoredActions: string[] = []) => ({ dispatch }: MiddlewareAPI) => (
   next: Dispatch
 ) => (action: AnyAction): AnyAction => {
   const requestId = action?.meta?.requestId;
-  const shouldCurrentActionBeIgnored = arrOfIgnoredActions?.includes(action.type);
+  const shouldIgnore = ignoredActions.includes(action.type);
 
-  if (requestId !== undefined && !shouldCurrentActionBeIgnored) {
+  if (requestId !== undefined && !shouldIgnore) {
     dispatch(patchEffect(requestId));
   }
 

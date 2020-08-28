@@ -8,12 +8,12 @@ import { isPromise } from '../helpers/utils';
 import { patchEffect } from '../store/actions';
 import { nanoid } from '../helpers/nanoid.utils';
 
-export const pendingPromiseMiddleware = (arrOfIgnoredActions?: string[]) => ({ dispatch }: MiddlewareAPI) => (
+export const pendingPromiseMiddleware = (ignoredActions: string[] = []) => ({ dispatch }: MiddlewareAPI) => (
   next: Dispatch
 ) => (action: AnyAction): AnyAction => {
   let promise;
   let data;
-  const shouldCurrentActionBeIgnored = arrOfIgnoredActions?.includes(action.type);
+  const shouldIgnore = ignoredActions.includes(action.type);
 
   if (action.payload) {
     const { payload } = action;
@@ -46,6 +46,13 @@ export const pendingPromiseMiddleware = (arrOfIgnoredActions?: string[]) => ({ d
 
   const { type, meta } = action;
   const effectId = nanoid();
+  const handlePatchEffect = () => {
+    if (shouldIgnore) {
+      return;
+    }
+
+    dispatch(patchEffect(effectId));
+  };
 
   const getAction = (newPayload: any, isRejected: boolean): AnyAction => {
     const nextAction: AnyAction = {
@@ -68,28 +75,20 @@ export const pendingPromiseMiddleware = (arrOfIgnoredActions?: string[]) => ({ d
   };
   const handleReject = (reason: any) => {
     const rejectedAction = getAction(reason, true);
+
     dispatch(rejectedAction);
-
-    if (!shouldCurrentActionBeIgnored) {
-      dispatch(patchEffect(effectId));
-    }
-
+    handlePatchEffect();
     throw reason;
   };
   const handleFulfill = (value = null) => {
     const resolvedAction = getAction(value, false);
     dispatch(resolvedAction);
-
-    if (!shouldCurrentActionBeIgnored) {
-      dispatch(patchEffect(effectId));
-    }
+    handlePatchEffect();
 
     return { value, action: resolvedAction };
   };
 
-  if (!shouldCurrentActionBeIgnored) {
-    dispatch(patchEffect(effectId));
-  }
+  handlePatchEffect();
 
   next({
     type: `${type}_PENDING`,
