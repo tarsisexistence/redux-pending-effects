@@ -4,14 +4,14 @@ import { ignoreActionTypesMiddleware } from './middlewares/ignoreActionTypes.mid
 import { pendingPromiseMiddleware } from './middlewares/promise.middleware';
 import { pendingToolkitMiddleware } from './middlewares/toolkit.middleware';
 
-const defaultFactoryOptions = {
+const defaultConfigureOptions = {
   promiseMiddleware: false,
   toolkitMiddleware: false,
   ignoredActionTypes: []
 };
 
-export const configure = (
-  options: RPE.FactoryOptions = defaultFactoryOptions
+export const createRpeMiddleware = (
+  options: RPE.ConfigureOptions = defaultConfigureOptions
 ): Middleware[] => {
   const { promiseMiddleware, toolkitMiddleware, ignoredActionTypes } = options;
   const middlewares = [];

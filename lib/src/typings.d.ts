@@ -15,7 +15,7 @@ declare namespace RPE {
     actionType: string;
   }
 
-  interface FactoryOptions {
+  interface ConfigureOptions {
     promiseMiddleware: boolean,
     toolkitMiddleware: boolean,
     ignoredActionTypes: string[]
