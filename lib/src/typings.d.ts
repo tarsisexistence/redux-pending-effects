@@ -1,8 +1,7 @@
 declare namespace RPE {
   interface State {
     effectsEntity: Record<string, boolean>;
-    ignoredActions: string[],
-    isIgnoredActionsSetUp: boolean
+    ignoredActionTypes: null | string[]
   }
 
   interface PayloadAction<T, P> {
@@ -12,12 +11,13 @@ declare namespace RPE {
 
   type PatchEffectPayload = {
     effectId: string;
+    effectType: string;
     actionType: string;
   }
 
   interface FactoryOptions {
     promiseMiddleware: boolean,
     toolkitMiddleware: boolean,
-    ignoredActions: string[]
+    ignoredActionTypes: string[]
   }
 }

@@ -2,48 +2,43 @@ import { Action, AnyAction, Reducer, ReducersMapObject } from 'redux';
 
 import {
   REDUX_PENDING_EFFECTS,
-  REDUX_PENDING_EFFECTS_IGNORED_ACTIONS,
+  REDUX_PENDING_EFFECTS_IGNORED_ACTION_TYPES,
   REDUX_PENDING_EFFECTS_PATCH_EFFECT
 } from '../helpers/const';
 
 type PatchEffectPayloadAction = RPE.PayloadAction<
   typeof REDUX_PENDING_EFFECTS_PATCH_EFFECT,
-  {
-    effectId: string;
-    actionType: string;
-  }
+  RPE.PatchEffectPayload
 >;
-type IgnoredActionsPayloadAction = RPE.PayloadAction<
-  typeof REDUX_PENDING_EFFECTS_IGNORED_ACTIONS,
+type IgnoredActionTypesPayloadAction = RPE.PayloadAction<
+  typeof REDUX_PENDING_EFFECTS_IGNORED_ACTION_TYPES,
   string[]
 >;
-type PayloadAction = PatchEffectPayloadAction | IgnoredActionsPayloadAction;
+type PayloadAction = PatchEffectPayloadAction | IgnoredActionTypesPayloadAction;
 
 const defaultState: RPE.State = {
   effectsEntity: {},
-  ignoredActions: [],
-  isIgnoredActionsSetUp: false
+  ignoredActionTypes: null
 };
 
 const pendingReducer: Reducer<RPE.State, PayloadAction> = (
   state = defaultState,
   action: PayloadAction
 ): RPE.State => {
-  if (action.type === REDUX_PENDING_EFFECTS_IGNORED_ACTIONS) {
+  if (action.type === REDUX_PENDING_EFFECTS_IGNORED_ACTION_TYPES) {
     return {
       ...state,
-      ignoredActions: (action as IgnoredActionsPayloadAction).payload,
-      isIgnoredActionsSetUp: true
+      ignoredActionTypes: (action as IgnoredActionTypesPayloadAction).payload
     };
   }
 
   if (action.type === REDUX_PENDING_EFFECTS_PATCH_EFFECT) {
-    const { effectsEntity, ignoredActions, isIgnoredActionsSetUp } = state;
+    const { effectsEntity, ignoredActionTypes } = state;
     const {
       payload: { effectId, actionType }
     } = action as PatchEffectPayloadAction;
 
-    if (isIgnoredActionsSetUp && ignoredActions.includes(actionType)) {
+    if (ignoredActionTypes !== null && ignoredActionTypes.includes(actionType)) {
       return state;
     }
 

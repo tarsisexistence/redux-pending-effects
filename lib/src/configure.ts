@@ -1,23 +1,23 @@
 import { Middleware } from 'redux';
 
-import { ignoreActionsMiddleware } from './middlewares/ignoreActions.middleware';
+import { ignoreActionTypesMiddleware } from './middlewares/ignoreActionTypes.middleware';
 import { pendingPromiseMiddleware } from './middlewares/promise.middleware';
 import { pendingToolkitMiddleware } from './middlewares/toolkit.middleware';
 
 const defaultFactoryOptions = {
   promiseMiddleware: false,
   toolkitMiddleware: false,
-  ignoredActions: []
+  ignoredActionTypes: []
 };
 
-export const rpeFactory = (
+export const configure = (
   options: RPE.FactoryOptions = defaultFactoryOptions
 ): Middleware[] => {
-  const { promiseMiddleware, toolkitMiddleware, ignoredActions } = options;
+  const { promiseMiddleware, toolkitMiddleware, ignoredActionTypes } = options;
   const middlewares = [];
 
-  if (ignoredActions?.length) {
-    middlewares.push(ignoreActionsMiddleware(ignoredActions));
+  if (ignoredActionTypes?.length) {
+    middlewares.push(ignoreActionTypesMiddleware(ignoredActionTypes));
   }
 
   if (promiseMiddleware) {

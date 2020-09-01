@@ -7,6 +7,7 @@ import { AnyAction, Dispatch, MiddlewareAPI } from 'redux';
 import { isPromise } from '../helpers/utils';
 import { patchEffect } from '../store/actions';
 import { nanoid } from '../helpers/nanoid.utils';
+import { effectTypes } from '../helpers/const';
 
 export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
   next: Dispatch
@@ -45,6 +46,8 @@ export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
 
   const { type: actionType, meta } = action;
   const effectId = nanoid();
+  const effectType = effectTypes.promise;
+  const patchEffectPayload = { effectId, effectType, actionType };
 
   const getAction = (newPayload: any, isRejected: boolean): AnyAction => {
     const nextAction: AnyAction = {
@@ -68,19 +71,19 @@ export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
   const handleReject = (reason: any) => {
     const rejectedAction = getAction(reason, true);
     dispatch(rejectedAction);
-    dispatch(patchEffect({ effectId, actionType }));
+    dispatch(patchEffect(patchEffectPayload));
 
     throw reason;
   };
   const handleFulfill = (value = null) => {
     const resolvedAction = getAction(value, false);
     dispatch(resolvedAction);
-    dispatch(patchEffect({ effectId, actionType }));
+    dispatch(patchEffect(patchEffectPayload));
 
     return { value, action: resolvedAction };
   };
 
-  dispatch(patchEffect({ effectId, actionType }));
+  dispatch(patchEffect(patchEffectPayload));
   next({
     type: `${actionType}_PENDING`,
     // Include payload (for optimistic updates) if it is defined.
