@@ -8,7 +8,7 @@ export const pendingToolkitMiddleware = ({ dispatch }: MiddlewareAPI) => (
   const requestId = action?.meta?.requestId;
 
   if (requestId !== undefined) {
-    dispatch(patchEffect(requestId));
+    dispatch(patchEffect({ effectId: requestId, actionType: action.type }));
   }
 
   return next(action);

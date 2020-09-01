@@ -43,12 +43,12 @@ export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
     return next(action);
   }
 
-  const { type, meta } = action;
+  const { type: actionType, meta } = action;
   const effectId = nanoid();
 
   const getAction = (newPayload: any, isRejected: boolean): AnyAction => {
     const nextAction: AnyAction = {
-      type: isRejected ? `${type}_REJECTED` : `${type}_FULFILLED`
+      type: isRejected ? `${actionType}_REJECTED` : `${actionType}_FULFILLED`
     };
 
     if (newPayload !== null && typeof newPayload !== 'undefined') {
@@ -68,21 +68,21 @@ export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
   const handleReject = (reason: any) => {
     const rejectedAction = getAction(reason, true);
     dispatch(rejectedAction);
-    dispatch(patchEffect(effectId));
+    dispatch(patchEffect({ effectId, actionType }));
 
     throw reason;
   };
   const handleFulfill = (value = null) => {
     const resolvedAction = getAction(value, false);
     dispatch(resolvedAction);
-    dispatch(patchEffect(effectId));
+    dispatch(patchEffect({ effectId, actionType }));
 
     return { value, action: resolvedAction };
   };
 
-  dispatch(patchEffect(effectId));
+  dispatch(patchEffect({ effectId, actionType }));
   next({
-    type: `${type}_PENDING`,
+    type: `${actionType}_PENDING`,
     // Include payload (for optimistic updates) if it is defined.
     ...(data !== undefined ? { payload: data } : {}),
     // Include meta data if it is defined.
