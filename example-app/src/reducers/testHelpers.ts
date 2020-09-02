@@ -14,25 +14,29 @@ import { Middleware } from 'redux';
 type MockResponseParams = [string, MockParams];
 
 const apiKey = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
-export const patentsUrl = `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`;
-export const libraryContentUrl = `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`;
-export const astronomyPictureUrl = `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`;
+
+export const urls = {
+  PATENTS: `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`,
+  LIBRARY_CONTENT: `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`,
+  ASTRONOMY_PICTURE: `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`
+};
+
 export const patentsFetchMock: MockResponseParams = [
   JSON.stringify({ results: [] }),
   {
-    url: patentsUrl
+    url: urls.PATENTS
   }
 ];
 export const libraryContentFetchMock: MockResponseParams = [
   JSON.stringify({ collection: { items: [] } }),
   {
-    url: libraryContentUrl
+    url: urls.LIBRARY_CONTENT
   }
 ];
 export const astronomyPictureFetchMock: MockResponseParams = [
   JSON.stringify({ title: 'text', url: 'text', explanation: 'text' }),
   {
-    url: astronomyPictureUrl
+    url: urls.ASTRONOMY_PICTURE
   }
 ];
 export const rejectedFetchMockParam: Error = {
