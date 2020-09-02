@@ -18,7 +18,11 @@ import {
   libraryContentFetchMock,
   astronomyPictureFetchMock,
   rejectedFetchMockParam,
-  createSagaTesterInstance
+  createSagaTesterInstance,
+  middlewaresWithPromiseActionsIgnored,
+  middlewaresWithToolkitActionsIgnored,
+  middlewaresWithSagaActionsIgnored,
+  patentsUrl
 } from './testHelpers';
 
 describe('selector', () => {
@@ -43,7 +47,7 @@ describe('selector', () => {
     });
 
     it('should complete pending state when saga completed with success', async () => {
-      const sagaTester = createSagaTesterInstance();
+      const sagaTester = createSagaTesterInstance(middleware);
 
       fetchMock.mockResponseOnce(...astronomyPictureFetchMock);
 
@@ -54,7 +58,7 @@ describe('selector', () => {
     });
 
     it('should complete pending state when saga completed with failure', async () => {
-      const sagaTester = createSagaTesterInstance();
+      const sagaTester = createSagaTesterInstance(middleware);
 
       fetchMock.mockRejectOnce(rejectedFetchMockParam);
 
@@ -62,6 +66,17 @@ describe('selector', () => {
       sagaTester.dispatch(getAstronomyPictureData);
       await sagaTester.waitFor(astronomyPictureActionNames.REJECTED);
       expect(selectIsPending(sagaTester.getState())).toBe(false);
+    });
+
+    it('should not trigger pending state when fetch is started for ignored action', () => {
+      const store: Store = configureStore({
+        reducer,
+        middleware: middlewaresWithSagaActionsIgnored
+      });
+
+      sagaMiddleware.run(rootSaga);
+      store.dispatch(getAstronomyPictureData);
+      expect(selectIsPending(store.getState())).toBe(false);
     });
   });
 
@@ -80,6 +95,16 @@ describe('selector', () => {
     it('should complete pending state when toolkit completed with failure', async () => {
       fetchMock.mockRejectOnce(rejectedFetchMockParam);
       await store.dispatch<any>(getLibraryContent('test'));
+      expect(selectIsPending(store.getState())).toBe(false);
+    });
+
+    it('should not trigger pending state when fetch is started for ignored action', () => {
+      const store: Store = configureStore({
+        reducer,
+        middleware: middlewaresWithToolkitActionsIgnored
+      });
+
+      store.dispatch<any>(getLibraryContent('test'));
       expect(selectIsPending(store.getState())).toBe(false);
     });
   });
@@ -113,6 +138,16 @@ describe('selector', () => {
         expect(selectIsPending(store.getState())).toBe(false);
       }
     });
+
+    it('should not trigger pending state when fetch is started for ignored action', () => {
+      const store: Store = configureStore({
+        reducer,
+        middleware: middlewaresWithPromiseActionsIgnored
+      });
+
+      store.dispatch(getPatents());
+      expect(selectIsPending(store.getState())).toBe(false);
+    });
   });
 
   describe('with all', () => {
@@ -145,7 +180,7 @@ describe('selector', () => {
     it('should not complete pending state when one of the fetches(sent by promise and saga) is completed', async () => {
       fetchMock.mockResponse(...patentsFetchMock);
 
-      const sagaTester = createSagaTesterInstance();
+      const sagaTester = createSagaTesterInstance(middleware);
       const getPatentsAction: Actions.GetPatents = getPatents();
 
       sagaTester.start(rootSaga);
@@ -158,7 +193,7 @@ describe('selector', () => {
     it('should complete pending state when all fetches(sent by promise and saga) are completed', async () => {
       fetchMock.mockResponses(patentsFetchMock, astronomyPictureFetchMock);
 
-      const sagaTester = createSagaTesterInstance();
+      const sagaTester = createSagaTesterInstance(middleware);
       const getPatentsAction: Actions.GetPatents = getPatents();
 
       sagaTester.start(astronomyPictureWorker);
@@ -176,7 +211,7 @@ describe('selector', () => {
     it('should not complete pending state when one of the fetches(sent by toolkit and saga) is completed', async () => {
       fetchMock.mockResponseOnce(...astronomyPictureFetchMock);
 
-      const sagaTester = createSagaTesterInstance();
+      const sagaTester = createSagaTesterInstance(middleware);
 
       sagaTester.start(rootSaga);
       sagaTester.dispatch(getAstronomyPictureData);
@@ -191,7 +226,7 @@ describe('selector', () => {
         astronomyPictureFetchMock
       );
 
-      const sagaTester = createSagaTesterInstance();
+      const sagaTester = createSagaTesterInstance(middleware);
       const libraryContentPromise = sagaTester.dispatch<any>(
         getLibraryContent('test')
       );
@@ -205,6 +240,51 @@ describe('selector', () => {
       ]);
 
       expect(selectIsPending(sagaTester.getState())).toBe(false);
+    });
+
+    describe(`should not complete pending state when fetch is completed for ignored action, but isn't completed for tracked action`, () => {
+      it('saga is ignored', async () => {
+        fetchMock.mockResponseOnce(...astronomyPictureFetchMock);
+
+        const sagaTester = createSagaTesterInstance(
+          middlewaresWithSagaActionsIgnored
+        );
+
+        sagaTester.start(rootSaga);
+        sagaTester.dispatch(getAstronomyPictureData);
+        sagaTester.dispatch<any>(getLibraryContent('test'));
+        await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
+        expect(selectIsPending(sagaTester.getState())).toBe(true);
+      });
+
+      it('toolkit is ignored', async () => {
+        fetchMock.mockResponseOnce(...libraryContentFetchMock);
+        fetchMock.dontMockIf(patentsUrl);
+
+        const store: Store = configureStore({
+          reducer,
+          middleware: middlewaresWithToolkitActionsIgnored
+        });
+
+        store.dispatch(getPatents());
+        await store.dispatch<any>(getLibraryContent('test'));
+        expect(selectIsPending(store.getState())).toBe(true);
+      });
+
+      it('promise is ignored', async () => {
+        fetchMock.mockResponseOnce(...patentsFetchMock);
+
+        const store: Store = configureStore({
+          reducer,
+          middleware: middlewaresWithPromiseActionsIgnored
+        });
+        const getPatentsAction: Actions.GetPatents = getPatents();
+
+        store.dispatch(getPatentsAction);
+        store.dispatch<any>(getLibraryContent('test'));
+        await getPatentsAction.payload;
+        expect(selectIsPending(store.getState())).toBe(true);
+      });
     });
   });
 });
