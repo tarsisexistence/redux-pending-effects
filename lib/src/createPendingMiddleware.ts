@@ -10,7 +10,7 @@ const defaultConfigureOptions = {
   ignoredActionTypes: []
 };
 
-export const createRpeMiddleware = (
+export const createPendingMiddleware = (
   options: RPE.ConfigureOptions = defaultConfigureOptions
 ): Middleware[] => {
   const { promiseMiddleware, toolkitMiddleware, ignoredActionTypes } = options;
