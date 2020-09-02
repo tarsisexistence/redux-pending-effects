@@ -4,7 +4,7 @@ export const REDUX_PENDING_EFFECTS_PATCH_EFFECT =
 export const REDUX_PENDING_EFFECTS_IGNORED_ACTION_TYPES =
   '@@REDUX_PENDING_EFFECTS/IGNORED_ACTION_TYPES';
 export const effectTypes = {
-  saga: 'saga',
-  promise: 'promise',
-  toolkit: 'toolkit'
+  saga: 'redux-saga',
+  promise: 'redux-pending-middleware',
+  toolkit: 'redux-toolkit'
 };

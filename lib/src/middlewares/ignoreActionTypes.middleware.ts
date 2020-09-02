@@ -4,7 +4,7 @@ import {
   REDUX_PENDING_EFFECTS_IGNORED_ACTION_TYPES
 } from '../helpers/const';
 
-export const ignoreActionTypesMiddleware = (ignoredActionTypes: string[]) => ({
+export const getIgnoreActionTypesMiddleware = (ignoredActionTypes: string[]) => ({
   getState,
   dispatch
 }: MiddlewareAPI) => (next: Dispatch) => (action: AnyAction): AnyAction => {

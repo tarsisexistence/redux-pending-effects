@@ -1,6 +1,6 @@
 import { Middleware } from 'redux';
 
-import { ignoreActionTypesMiddleware } from './middlewares/ignoreActionTypes.middleware';
+import { getIgnoreActionTypesMiddleware } from './middlewares/ignoreActionTypes.middleware';
 import { pendingPromiseMiddleware } from './middlewares/promise.middleware';
 import { pendingToolkitMiddleware } from './middlewares/toolkit.middleware';
 
@@ -17,7 +17,7 @@ export const createPendingMiddleware = (
   const middlewares = [];
 
   if (ignoredActionTypes?.length) {
-    middlewares.push(ignoreActionTypesMiddleware(ignoredActionTypes));
+    middlewares.push(getIgnoreActionTypesMiddleware(ignoredActionTypes));
   }
 
   if (promiseMiddleware) {
