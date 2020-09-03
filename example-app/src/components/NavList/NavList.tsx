@@ -18,10 +18,6 @@ const navLinkProps: NavLinkProps[] = [
     end: true
   },
   {
-    to: routes.LOGIN,
-    label: 'Login'
-  },
-  {
     to: routes.PATENTS,
     label: 'NASA Patents'
   },
@@ -36,10 +32,6 @@ const navLinkProps: NavLinkProps[] = [
   {
     to: routes.MARS_ROVER_PHOTOS,
     label: 'Mars Rover Photos'
-  },
-  {
-    to: routes.DASHBOARD,
-    label: 'Dashboard'
   }
 ];
 

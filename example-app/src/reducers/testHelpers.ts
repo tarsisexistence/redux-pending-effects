@@ -52,27 +52,24 @@ export const createSagaTesterInstance = (middleware: Middleware[]) =>
 
 const middlewares = [sagaMiddleware, ...defaultMiddlewares];
 
-export const middlewaresWithPromiseActionsIgnored = [
-  ...createPendingMiddleware({
+const getPendingMiddlewaresWithIgnoredActionTypes = (
+  actionNames: object
+): Middleware[] =>
+  createPendingMiddleware({
     promiseMiddleware: true,
     toolkitMiddleware: true,
-    ignoredActionTypes: Object.values(patentsActionsNames)
-  }),
+    ignoredActionTypes: Object.values(actionNames)
+  });
+
+export const middlewaresWithPromiseActionsIgnored = [
+  ...getPendingMiddlewaresWithIgnoredActionTypes(patentsActionsNames),
   ...middlewares
 ];
 export const middlewaresWithToolkitActionsIgnored = [
-  ...createPendingMiddleware({
-    promiseMiddleware: true,
-    toolkitMiddleware: true,
-    ignoredActionTypes: Object.values(libraryActionNames)
-  }),
+  ...getPendingMiddlewaresWithIgnoredActionTypes(libraryActionNames),
   ...middlewares
 ];
 export const middlewaresWithSagaActionsIgnored = [
-  ...createPendingMiddleware({
-    promiseMiddleware: true,
-    toolkitMiddleware: true,
-    ignoredActionTypes: Object.values(astronomyPictureActionNames)
-  }),
+  ...getPendingMiddlewaresWithIgnoredActionTypes(astronomyPictureActionNames),
   ...middlewares
 ];
