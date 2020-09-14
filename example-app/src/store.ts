@@ -1,5 +1,8 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { createPendingMiddleware } from 'redux-pending-effects';
+import {
+  createPendingMiddleware,
+  pendingSagaMiddleware
+} from 'redux-pending-effects';
 import createSagaMiddleware from '@redux-saga/core';
 
 import { rootReducer as reducer } from './reducers/rootReducer';
@@ -9,7 +12,10 @@ const rpeMiddlewares = createPendingMiddleware({
   promiseMiddleware: true,
   toolkitMiddleware: true
 });
-export const sagaMiddleware = createSagaMiddleware();
+export const sagaMiddlewareOptions = {
+  effectMiddlewares: [pendingSagaMiddleware]
+};
+export const sagaMiddleware = createSagaMiddleware(sagaMiddlewareOptions);
 export const defaultMiddlewares = getDefaultMiddleware({
   serializableCheck: false
 });

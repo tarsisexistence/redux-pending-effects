@@ -3,7 +3,11 @@ import { MockParams } from 'jest-fetch-mock';
 import { createPendingMiddleware } from 'redux-pending-effects';
 
 import { rootReducer as reducer } from './rootReducer';
-import { defaultMiddlewares, sagaMiddleware } from '../store';
+import {
+  defaultMiddlewares,
+  sagaMiddleware,
+  sagaMiddlewareOptions
+} from '../store';
 import {
   patentsActionsNames,
   libraryActionNames,
@@ -47,7 +51,8 @@ export const createSagaTesterInstance = (middleware: Middleware[]) =>
   new SagaTester({
     initialState: undefined,
     reducers: reducer,
-    middlewares: middleware
+    middlewares: middleware,
+    options: sagaMiddlewareOptions
   });
 
 const middlewares = [sagaMiddleware, ...defaultMiddlewares];
