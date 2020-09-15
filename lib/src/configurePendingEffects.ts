@@ -13,35 +13,30 @@ const defaultConfigureOptions = {
   ignoredActionTypes: []
 };
 
-type ConfigureOutput = RPE.ConfigureOutput<Middleware, EffectMiddleware>;
-
 export const configurePendingEffects = (
   configureOptions: RPE.ConfigureOptions = defaultConfigureOptions
-): ConfigureOutput => {
+): RPE.ConfigureOutput<Middleware, EffectMiddleware> => {
   const { promise, toolkit, saga, ignoredActionTypes } = configureOptions;
-  const configureOutput: ConfigureOutput = {
-    middlewares: []
+  const middlewares = [];
+  const sagaOptions: { effectMiddlewares: EffectMiddleware[] } = {
+    effectMiddlewares: []
   };
 
   if (ignoredActionTypes?.length) {
-    configureOutput.middlewares.push(
-      getIgnoreActionTypesMiddleware(ignoredActionTypes)
-    );
+    middlewares.push(getIgnoreActionTypesMiddleware(ignoredActionTypes));
   }
 
   if (promise) {
-    configureOutput.middlewares.push(pendingPromiseMiddleware);
+    middlewares.push(pendingPromiseMiddleware);
   }
 
   if (toolkit) {
-    configureOutput.middlewares.push(pendingToolkitMiddleware);
+    middlewares.push(pendingToolkitMiddleware);
   }
 
   if (saga) {
-    configureOutput.sagaOptions = {
-      effectMiddlewares: [pendingSagaMiddleware]
-    };
+    sagaOptions.effectMiddlewares.push(pendingSagaMiddleware);
   }
 
-  return configureOutput;
+  return { middlewares, sagaOptions };
 };

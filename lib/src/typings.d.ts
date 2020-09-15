@@ -24,7 +24,7 @@ declare namespace RPE {
 
   interface ConfigureOutput<T, K> {
     middlewares: T[],
-    sagaOptions?: {
+    sagaOptions: {
       effectMiddlewares: K[]
     }
   }
