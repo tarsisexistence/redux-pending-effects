@@ -1,20 +1,21 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { createPendingMiddleware } from 'redux-pending-effects';
+import { configurePendingEffects } from 'redux-pending-effects';
 import createSagaMiddleware from '@redux-saga/core';
 
 import { rootReducer as reducer } from './reducers/rootReducer';
 import { rootSaga } from './sagas';
 
-const rpeMiddlewares = createPendingMiddleware({
-  promiseMiddleware: true,
-  toolkitMiddleware: true
+export const { middlewares, sagaOptions } = configurePendingEffects({
+  promise: true,
+  toolkit: true,
+  saga: true
 });
-export const sagaMiddleware = createSagaMiddleware();
+export const sagaMiddleware = createSagaMiddleware(sagaOptions);
 export const defaultMiddlewares = getDefaultMiddleware({
   serializableCheck: false
 });
 export const middleware = [
-  ...rpeMiddlewares,
+  ...middlewares,
   sagaMiddleware,
   ...defaultMiddlewares
 ];

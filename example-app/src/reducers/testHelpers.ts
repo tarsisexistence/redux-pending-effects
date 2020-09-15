@@ -1,9 +1,9 @@
 import SagaTester from 'redux-saga-tester';
 import { MockParams } from 'jest-fetch-mock';
-import { createPendingMiddleware } from 'redux-pending-effects';
+import { configurePendingEffects } from 'redux-pending-effects';
 
 import { rootReducer as reducer } from './rootReducer';
-import { defaultMiddlewares, sagaMiddleware } from '../store';
+import { defaultMiddlewares, sagaMiddleware, sagaOptions } from '../store';
 import {
   patentsActionsNames,
   libraryActionNames,
@@ -47,19 +47,23 @@ export const createSagaTesterInstance = (middleware: Middleware[]) =>
   new SagaTester({
     initialState: undefined,
     reducers: reducer,
-    middlewares: middleware
+    middlewares: middleware,
+    options: sagaOptions
   });
 
 const middlewares = [sagaMiddleware, ...defaultMiddlewares];
 
 const getPendingMiddlewaresWithIgnoredActionTypes = (
   actionNames: object
-): Middleware[] =>
-  createPendingMiddleware({
-    promiseMiddleware: true,
-    toolkitMiddleware: true,
+): Middleware[] => {
+  const { middlewares } = configurePendingEffects({
+    promise: true,
+    toolkit: true,
     ignoredActionTypes: Object.values(actionNames)
   });
+
+  return middlewares;
+};
 
 export const middlewaresWithPromiseActionsIgnored = [
   ...getPendingMiddlewaresWithIgnoredActionTypes(patentsActionsNames),

@@ -16,8 +16,16 @@ declare namespace RPE {
   }
 
   interface ConfigureOptions {
-    promiseMiddleware: boolean,
-    toolkitMiddleware: boolean,
+    promise: boolean,
+    toolkit: boolean,
+    saga: boolean,
     ignoredActionTypes: string[]
+  }
+
+  interface ConfigureOutput<T, K> {
+    middlewares: T[],
+    sagaOptions: {
+      effectMiddlewares: K[]
+    }
   }
 }

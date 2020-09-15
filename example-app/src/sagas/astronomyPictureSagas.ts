@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from '@redux-saga/core/effects';
 import { astronomyPictureActionNames } from '../constants';
-import { trackWorker } from 'redux-pending-effects';
 import { nasaService } from '../services/NasaService';
 import {
   getAstronomyPictureDataLoaded,
@@ -10,7 +9,7 @@ import {
 export function* astronomyPictureWatcher() {
   yield takeEvery(
     astronomyPictureActionNames.GET,
-    trackWorker(astronomyPictureWorker)
+    astronomyPictureWorker
   );
 }
 
