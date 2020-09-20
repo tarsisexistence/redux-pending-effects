@@ -72,8 +72,8 @@ The package provides a single entry point for set up via `configurePendingEffect
 
 `configurePendingEffects` accepts a single configuration object parameter, with the following options:
 
-- `promise: boolean` (default `false`) - enable/disable tracking of asynchronous effects that you pass as promise to the payload. 
-Yes, if option enabled, you can pass promise to the payload, that is the way `redux-promise-middleware` does.
+- `promise: boolean` (default `false`) - enable/disable tracking of asynchronous effects that you pass a promise to the payload. 
+Yes, if the option enabled, you can pass promise to the payload, that is the way `redux-promise-middleware` does.
 For details, you can go to read the documentation of [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) 
 about how this works.
 - `toolkit: boolean` (default `false`) - enable/disable tracking of asynchronous effects produced by [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
