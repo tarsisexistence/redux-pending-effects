@@ -33,6 +33,8 @@ Well, `redux-pending-effects` does this from scratch:
 - independent of a particular asynchronous processing solution. Can be used simultaneously with `redux-saga` and `redux-toolkit`
 - replaces `redux-thunk` in the matters of side effects (not actions chaining) and `redux-promise-middleware` (essentially uses it out of the box)
 
+<br/>
+
 ## Quickstart
 
 ### Installation
@@ -40,6 +42,8 @@ Well, `redux-pending-effects` does this from scratch:
 ```shell script
 npm install redux-pending-effects
 ```
+
+<br/>
 
 ### Extend reducers
 
@@ -60,26 +64,33 @@ export const rootReducer = combineReducers(
 );
 ```
 
+<br/>
+
 ### Configuration
 
-### `configurePendingEffects(options)`
+The package provides a single entry point for set up via `configurePendingEffects`
 
-Creates an object with two properties:  
-1) `middlewares` -  array of required redux middlewares.
-2) `sagaOptions` - options for `createSagaMiddleware` from saga package.
+`configurePendingEffects` accepts a single configuration object parameter, with the following options:
 
-- #### options: Object - a list of options, all of them are optional:
-    - `promise: boolean` - enable/disable tracking of asynchronous effects which you pass as promise to the payload. 
-    Yes, if option is enabled, you can pass promise to the payload, that is the way redux-promise-middleware does.
-    For details, you can go to read the documentation of [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) 
-    about how this works.
-    - `toolkit: boolean` - enable/disable tracking of asynchronous effects produced by [redux-toolkit](https://github.com/reduxjs/redux-toolkit).
-    - `saga: boolean` - enable/disable tracking of asynchronous effects produced by [redux-saga](https://github.com/redux-saga/redux-saga).
-    - `ignoredActionTypes: string[]` - list of action types, tracking of which will be ignored.
+- `promise: boolean` (default `false`) - enable/disable tracking of asynchronous effects that you pass as promise to the payload. 
+Yes, if option enabled, you can pass promise to the payload, that is the way `redux-promise-middleware` does.
+For details, you can go to read the documentation of [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) 
+about how this works.
+- `toolkit: boolean` (default `false`) - enable/disable tracking of asynchronous effects produced by [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
+- `saga: boolean` (default `false`) - enable/disable tracking of asynchronous effects produced by [redux-saga](https://github.com/redux-saga/redux-saga)
+- `ignoredActionTypes: string[]` (default `[]`) - list of action types to not track (do not react on actions with these types)
     
+
+`configurePendingEffects` returns an object with two properties:
+
+1) `middlewares` -  an array of defined redux middlewares
+2) `sagaOptions` - options for `createSagaMiddleware` in case you intend to use `redux-saga`
+
+<br/>
+
 ### Example
 
-Below we will provide an example with all options enabled.
+Let's show an example with all options enabled.
 
 ```javascript
 import { configurePendingEffects } from 'redux-pending-effects';
@@ -96,10 +107,11 @@ const { middlewares, sagaOptions } = configurePendingEffects({
   ignoredActionTypes: ['IGNORED_ACTION_1', 'IGNORED_ACTION_2']
 });
 const sagaMiddleware = createSagaMiddleware(sagaOptions);
+const toolkitMiddlewares = getDefaultMiddleware();
 const middleware = [
   ...middlewares,
+  ...toolkitMiddlewares,
   sagaMiddleware,
-  ...getDefaultMiddleware()
 ];
 
 export const store = configureStore({ reducer, middleware });
