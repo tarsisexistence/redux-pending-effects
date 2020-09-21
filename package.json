@@ -38,7 +38,7 @@
     "lint-staged": "10.4.0",
     "prettier": "2.1.2",
     "yarn": "1.22.5",
-    "webpack": "4.42.0",
+    "webpack": "4.44.2",
     "monoreact": "0.24.0"
   },
   "browserslist": {
