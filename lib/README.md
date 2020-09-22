@@ -51,13 +51,13 @@ npm install redux-pending-effects
 
 ```javascript
 import { combineReducers } from 'redux';
-import { insertPending } from 'redux-pending-effects';
+import { includePendingReducer } from 'redux-pending-effects';
 
 import { planetReducer as planet } from './planetReducer';
 import { universeReducer as universe } from './universeReducer';
 
 export const rootReducer = combineReducers(
-  insertPending({
+  includePendingReducer({
     planet,
     universe
   })
