@@ -56,12 +56,12 @@ import { includePendingReducer } from 'redux-pending-effects';
 import { planetReducer as planet } from './planetReducer';
 import { universeReducer as universe } from './universeReducer';
 
-export const rootReducer = combineReducers(
-  includePendingReducer({
+const appReducers = {
     planet,
     universe
-  })
-);
+};
+const reducersWithPending = includePendingReducer(appReducers);
+export const rootReducer = combineReducers(reducersWithPending);
 ```
 
 <br/>
