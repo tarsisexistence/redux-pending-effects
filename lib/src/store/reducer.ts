@@ -57,7 +57,7 @@ const pendingReducer: Reducer<RPE.State, PayloadAction> = (
   return state;
 };
 
-export function insertPending<S, A extends Action = AnyAction>(
+export function includePendingReducer<S, A extends Action = AnyAction>(
   reducers: ReducersMapObject<S, A>
 ): ReducersMapObject<S, A> {
   (reducers as any)[REDUX_PENDING_EFFECTS] = pendingReducer;
