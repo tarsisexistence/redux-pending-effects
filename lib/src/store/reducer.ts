@@ -45,7 +45,7 @@ const pendingReducer: Reducer<RPE.State, PayloadAction> = (
     let updatedEffectsEntity;
 
     if (effectsEntity[effectId] === undefined) {
-      updatedEffectsEntity = { ...effectsEntity, [effectId]: true };
+      updatedEffectsEntity = { ...effectsEntity, [effectId]: actionType };
     } else {
       const { [effectId]: oldEffectId, ...restEffectsId } = effectsEntity;
       updatedEffectsEntity = restEffectsId;

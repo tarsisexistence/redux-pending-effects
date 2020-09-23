@@ -1,6 +1,6 @@
 declare namespace RPE {
   interface State {
-    effectsEntity: Record<string, boolean>;
+    effectsEntity: Record<string, string>;
     ignoredActionTypes: null | string[]
   }
 
