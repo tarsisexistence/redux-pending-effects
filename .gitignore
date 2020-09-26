@@ -2,6 +2,7 @@
 **/node_modules/
 **/.docz
 **/dist
+**/build
 **/.cache
 
 # reporters
@@ -44,10 +45,6 @@ Thumbs.db
 
 # testing
 /coverage
-
-# production
-/build
-**/dist/**
 
 # misc
 .DS_Store
