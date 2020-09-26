@@ -18,26 +18,34 @@ export const App: React.FC = () => {
   const isPending = useSelector(selectIsPending);
 
   return (
-    <Grommet theme={ theme }>
-      <Header/>
-      {
-        isPending ? <Loader/> : <Box
+    <Grommet theme={theme}>
+      <Header />
+      {isPending ? (
+        <Loader />
+      ) : (
+        <Box
           as='section'
           margin={{
-            "top": "30px",
-            "bottom": "15px",
-            "horizontal": "30px"
+            top: '30px',
+            bottom: '15px',
+            horizontal: '30px'
           }}
         >
-        <Routes>
-          <Route path={ routes.HOME } element={ <HomePage/> }/>
-          <Route path={ routes.PATENTS } element={ <PatentsPage/> }/>
-          <Route path={ routes.LIBRARY } element={ <LibraryPage/> }/>
-          <Route path={ routes.ASTRONOMY_PICTURE } element={ <AstronomyPicturePage/> }/>
-          <Route path={ routes.MARS_ROVER_PHOTOS } element={ <MarsRoverPhotosPage/> }/>
-        </Routes>
+          <Routes>
+            <Route element={<HomePage />} path={routes.HOME} />
+            <Route element={<PatentsPage />} path={routes.PATENTS} />
+            <Route element={<LibraryPage />} path={routes.LIBRARY} />
+            <Route
+              element={<AstronomyPicturePage />}
+              path={routes.ASTRONOMY_PICTURE}
+            />
+            <Route
+              element={<MarsRoverPhotosPage />}
+              path={routes.MARS_ROVER_PHOTOS}
+            />
+          </Routes>
         </Box>
-      }
+      )}
     </Grommet>
   );
 };

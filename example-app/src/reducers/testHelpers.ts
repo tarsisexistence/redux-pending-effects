@@ -1,6 +1,7 @@
 import SagaTester from 'redux-saga-tester';
 import { MockParams } from 'jest-fetch-mock';
 import { configurePendingEffects } from 'redux-pending-effects';
+import { Middleware } from 'redux';
 
 import { rootReducer as reducer } from './rootReducer';
 import { defaultMiddlewares, sagaMiddleware, sagaOptions } from '../store';
@@ -9,7 +10,6 @@ import {
   libraryActionNames,
   astronomyPictureActionNames
 } from '../constants';
-import { Middleware } from 'redux';
 
 type MockResponseParams = [string, MockParams];
 

@@ -20,18 +20,18 @@ type LibraryItemResponseShape = {
 };
 
 type AstronomyPictureResponseShape = {
-  title: string,
-  url: string,
-  explanation: string
-}
+  title: string;
+  url: string;
+  explanation: string;
+};
 
 type MarsRoverPhotoResponseShape = {
-  id: number,
-  img_src: string
-}
+  id: number;
+  img_src: string;
+};
 
 class NasaService {
-  private apiKey: string = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
+  private apiKey = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
 
   async smartFetch<T>(url: string, options?: object): Promise<T | undefined> {
     const response = await fetch(url, options);
@@ -48,10 +48,8 @@ class NasaService {
   }
 
   async getPatents(): Promise<Global.PatentDataShape[]> {
-    const patentsUrl: string = `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${this.apiKey}`;
-    const body = await this.smartFetch<
-      { results: [] }
-      >(patentsUrl);
+    const patentsUrl = `https://api.nasa.gov/techtransfer/patent/?engine&api_key=${this.apiKey}`;
+    const body = await this.smartFetch<{ results: [] }>(patentsUrl);
 
     return this.transformPatentsData(body && body.results);
   }
@@ -69,10 +67,10 @@ class NasaService {
   async getLibraryContent(
     searchValue: string
   ): Promise<Global.LibraryContentDataShape[]> {
-    const libraryContentUrl: string = `https://images-api.nasa.gov/search?q=${searchValue}&page=1&media_type=image&year_start=1920&year_end=2020`;
-    const body = await this.smartFetch<
-      { collection: { items: [] } }
-      >(libraryContentUrl);
+    const libraryContentUrl = `https://images-api.nasa.gov/search?q=${searchValue}&page=1&media_type=image&year_start=1920&year_end=2020`;
+    const body = await this.smartFetch<{ collection: { items: [] } }>(
+      libraryContentUrl
+    );
 
     return this.transformLibraryContentData(body && body.collection.items);
   }
@@ -95,9 +93,9 @@ class NasaService {
     Global.AstronomyPictureDataShape | Error
   > => {
     const astronomyPictureDataUrl = `https://api.nasa.gov/planetary/apod?api_key=${this.apiKey}`;
-    const body = await this.smartFetch<
-      AstronomyPictureResponseShape
-      >(astronomyPictureDataUrl);
+    const body = await this.smartFetch<AstronomyPictureResponseShape>(
+      astronomyPictureDataUrl
+    );
 
     if (!body) {
       throw new Error('No data found for this day');
@@ -115,24 +113,22 @@ class NasaService {
   });
 
   async getMarsRoverPhotos(): Promise<Global.MarsRoverPhotoDataShape[]> {
-    const marsRoverPhotosUrl =
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${this.apiKey}`;
+    const marsRoverPhotosUrl = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${this.apiKey}`;
 
-    const res = await this.smartFetch<
-      {photos: MarsRoverPhotoResponseShape[]}
-      >(marsRoverPhotosUrl);
+    const res = await this.smartFetch<{
+      photos: MarsRoverPhotoResponseShape[];
+    }>(marsRoverPhotosUrl);
 
     return this.transformMarsRoverPhotosData(res && res.photos);
-  };
+  }
 
   private transformMarsRoverPhotosData = (
     data: MarsRoverPhotoResponseShape[] = []
-  ): Global.MarsRoverPhotoDataShape[] => (
+  ): Global.MarsRoverPhotoDataShape[] =>
     data.map(item => ({
       id: item.id,
       imageUrl: item.img_src
-    }))
-  )
+    }));
 }
 
 export const nasaService = new NasaService();

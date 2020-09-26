@@ -17,7 +17,7 @@ export const PatentsPage: React.FC = () => {
     if (shouldPatentsUpdate) {
       dispatch(getPatents());
     }
-  }, []);
+  }, [dispatch, shouldPatentsUpdate]);
 
   return error ? (
     <ErrorPage optionalMessage={error} />

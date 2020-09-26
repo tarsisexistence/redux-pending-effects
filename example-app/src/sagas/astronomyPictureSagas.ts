@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from '@redux-saga/core/effects';
+
 import { astronomyPictureActionNames } from '../constants';
 import { nasaService } from '../services/NasaService';
 import {
@@ -7,10 +8,7 @@ import {
 } from '../actions';
 
 export function* astronomyPictureWatcher() {
-  yield takeEvery(
-    astronomyPictureActionNames.GET,
-    astronomyPictureWorker
-  );
+  yield takeEvery(astronomyPictureActionNames.GET, astronomyPictureWorker);
 }
 
 export function* astronomyPictureWorker() {

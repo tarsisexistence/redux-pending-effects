@@ -2,11 +2,13 @@ import React from 'react';
 import { Box, Paragraph } from 'grommet';
 
 type LibrarySearchingContentType = {
-  content: Global.LibraryContentDataShape[]
-}
+  content: Global.LibraryContentDataShape[];
+};
 
-export const LibrarySearchingContent: React.FC<LibrarySearchingContentType> = ({ content }) => (
-  content.length ?
+export const LibrarySearchingContent: React.FC<LibrarySearchingContentType> = ({
+  content
+}) =>
+  content.length ? (
     <Box as='ul' flex={true} direction='row' wrap={true} justify='around' pad='none'>
       {
         content.map(({id, title, link}: Global.LibraryContentDataShape) => (
@@ -22,6 +24,9 @@ export const LibrarySearchingContent: React.FC<LibrarySearchingContentType> = ({
                }}/>
         ))
       }
-    </Box> :
-    <Paragraph fill={true} textAlign='center'>No matching found</Paragraph>
-);
+    </Box>
+  ) :
+    <Paragraph fill={true} textAlign='center'>
+      No matching found
+    </Paragraph>
+  );

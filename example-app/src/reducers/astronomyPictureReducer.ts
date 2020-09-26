@@ -1,4 +1,5 @@
 import { AnyAction } from 'redux';
+
 import { astronomyPictureActionNames } from '../constants';
 
 const defaultState: Reducers.AstronomyPictureReducerState = {

@@ -12,16 +12,15 @@ export const AstronomyPicturePage = () => {
     astronomyPictureData,
     error,
     shouldAstronomyPictureDataUpdate
-  } = useSelector<
-    RootState,
-    Reducers.AstronomyPictureReducerState
-  >(state => state.astronomyPictureReducer);
+  } = useSelector<RootState, Reducers.AstronomyPictureReducerState>(
+    state => state.astronomyPictureReducer
+  );
 
   useEffect(() => {
     if (shouldAstronomyPictureDataUpdate) {
-      dispatch(getAstronomyPictureData)
+      dispatch(getAstronomyPictureData);
     }
-  }, []);
+  }, [dispatch, shouldAstronomyPictureDataUpdate]);
 
   return error ? (
     <ErrorPage optionalMessage={error} />
@@ -30,16 +29,11 @@ export const AstronomyPicturePage = () => {
       <Heading level='2' textAlign='center'>
         Astronomy Picture of the Day
       </Heading>
-      <Heading level='3'>
-        {astronomyPictureData?.title}
-      </Heading>
+      <Heading level='3'>{astronomyPictureData?.title}</Heading>
       <Box height='medium' width='large'>
-        <Image
-          fit='cover'
-          src={astronomyPictureData?.imageUrl}
-        />
+        <Image fit='cover' src={astronomyPictureData?.imageUrl} />
       </Box>
-      <Paragraph textAlign='center' fill={true}>
+      <Paragraph fill={true} textAlign='center'>
         {astronomyPictureData?.description}
       </Paragraph>
     </Box>

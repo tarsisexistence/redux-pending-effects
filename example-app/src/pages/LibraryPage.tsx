@@ -17,40 +17,43 @@ export const LibraryPage: React.FC = () => {
     Reducers.LibraryReducerState
   >(state => state.libraryReducer);
 
-  const handleEnterOnInput = useCallback(value => {
-    if (!value) {
-      setIsValid(false);
+  const handleEnterOnInput = useCallback(
+    value => {
+      if (!value) {
+        setIsValid(false);
 
-      return;
-    }
+        return;
+      }
 
-    dispatch(getLibraryContent(value));
-    setIsValid(true);
-  }, []);
+      dispatch(getLibraryContent(value));
+      setIsValid(true);
+    },
+    [dispatch]
+  );
 
   return (
-    <>
+    <React.Fragment>
       <Box
+        align='center'
+        background={{ color: 'dark-2', opacity: 'strong' }}
         border={{
           color: `${isValid ? 'dark-2' : 'status-error'}`,
           size: 'xsmall'
         }}
-        round='large'
-        background={{ color: 'dark-2', opacity: 'strong' }}
         direction='row'
-        align='center'
-        pad={{ horizontal: 'small', vertical: 'xsmall' }}
         margin={{
           right: '20px'
         }}
+        pad={{ horizontal: 'small', vertical: 'xsmall' }}
+        round='large'
       >
         <Search color='brand' />
         <Keyboard onEnter={() => handleEnterOnInput(value)}>
           <TextInput
+            placeholder='Search for ... (e.g. "Mars")'
+            plain={true}
             value={value}
             onChange={event => setValue(event.target.value)}
-            plain
-            placeholder='Search for ... (e.g. "Mars")'
           />
         </Keyboard>
       </Box>
@@ -59,6 +62,6 @@ export const LibraryPage: React.FC = () => {
       ) : (
         <LibrarySearchingContent content={libraryData} />
       )}
-    </>
+    </React.Fragment>
   );
 };

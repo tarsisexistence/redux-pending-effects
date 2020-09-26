@@ -1,5 +1,5 @@
 export const routes = {
-  HOME : '/',
+  HOME: '/',
   PATENTS: 'nasa_patents',
   LIBRARY: 'nasa_library',
   ASTRONOMY_PICTURE: 'apod',

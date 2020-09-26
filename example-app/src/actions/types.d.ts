@@ -7,67 +7,67 @@ declare namespace Actions {
   }
 
   interface GetPatents {
-    type: ReturnType<typeof PATENTS_ACTION_TYPES.GET>,
-    payload: Promise<Global.PatentDataShape[] | { statusText: string }>
+    type: ReturnType<typeof PATENTS_ACTION_TYPES.GET>;
+    payload: Promise<Global.PatentDataShape[] | { statusText: string }>;
   }
 
   interface GetPatentsPending {
-    type:  ReturnType<typeof PATENTS_ACTION_TYPES.PENDING>,
+    type: ReturnType<typeof PATENTS_ACTION_TYPES.PENDING>;
   }
 
   interface GetPatentsFulFilled {
-    type:  ReturnType<typeof PATENTS_ACTION_TYPES.FULFILLED>,
-    payload: Global.PatentDataShape[]
+    type: ReturnType<typeof PATENTS_ACTION_TYPES.FULFILLED>;
+    payload: Global.PatentDataShape[];
   }
 
   interface GetPatentsRejected {
-    type:  ReturnType<typeof PATENTS_ACTION_TYPES.REJECTED>,
-    payload: { statusText: string }
+    type: ReturnType<typeof PATENTS_ACTION_TYPES.REJECTED>;
+    payload: { statusText: string };
   }
 
   type PatentsTypes =
     | GetPatents
     | GetPatentsPending
     | GetPatentsFulFilled
-    | GetPatentsRejected
-  
-  interface getAstronomyPicture{
-    type: string
+    | GetPatentsRejected;
+
+  interface getAstronomyPicture {
+    type: string;
   }
 
-  interface getAstronomyPictureFulFilled{
-    type: string,
-    payload: Global.AstronomyPictureDataShape
+  interface getAstronomyPictureFulFilled {
+    type: string;
+    payload: Global.AstronomyPictureDataShape;
   }
 
-  interface getAstronomyPictureFulRejected{
-    type: string,
+  interface getAstronomyPictureFulRejected {
+    type: string;
     payload: {
-      errorMessage: string
-    }
+      errorMessage: string;
+    };
   }
 
   type AstronomyPictureTypes =
     | getAstronomyPicture
     | getAstronomyPictureFulFilled
-    | getAstronomyPictureFulRejected
-  
+    | getAstronomyPictureFulRejected;
+
   interface MarsRoverPhotosPending {
-    type: string
+    type: string;
   }
 
   interface MarsRoverPhotosFulFilled {
-    type: string,
-    payload: Global.MarsRoverPhotoDataShape[]
+    type: string;
+    payload: Global.MarsRoverPhotoDataShape[];
   }
 
   interface MarsRoverPhotosRejected {
-    type: string,
-    payload: string
+    type: string;
+    payload: string;
   }
 
   type MarsRoverPhotosTypes =
     | MarsRoverPhotosPending
     | MarsRoverPhotosFulFilled
-    | MarsRoverPhotosRejected
+    | MarsRoverPhotosRejected;
 }

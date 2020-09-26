@@ -1,6 +1,5 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, ThunkAction } from '@reduxjs/toolkit';
 import { AnyAction } from 'redux';
-import { ThunkAction } from '@reduxjs/toolkit';
 
 import { nasaService } from '../services/NasaService';
 import {

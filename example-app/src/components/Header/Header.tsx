@@ -8,32 +8,25 @@ import { routes } from '../../constants';
 
 export const Header: React.FC = () => (
   <Box
-    tag='header'
     background='accent-4'
-    pad='small'
     elevation='xsmall'
+    pad='small'
     responsive={true}
+    tag='header'
   >
-    <Box
-      tag='nav'
-      justify='between'
-      direction='row'
-      align='center'
-    >
-      <Heading level={1} size='28px' margin='none'>
+    <Box align='center' direction='row' justify='between' tag='nav'>
+      <Heading level={1} margin='none' size='28px'>
         <Link to={routes.HOME}>
-          <Anchor as='strong' label='Redux Pending Effects' color='neutral-1'/>
+          <Anchor as='strong' color='neutral-1' label='Redux Pending Effects' />
         </Link>
       </Heading>
       <CustomMenu
         dropProps={{
           elevation: 'none',
-          align: { right: "right", top: "top" }
+          align: { right: 'right', top: 'top' }
         }}
-        items={[
-          { label: <NavList/> }
-        ]}
         iconColorOnHover='neutral-1'
+        items={[{ label: <NavList /> }]}
       />
     </Box>
   </Box>

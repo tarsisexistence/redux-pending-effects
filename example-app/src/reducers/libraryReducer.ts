@@ -7,21 +7,19 @@ const defaultState: Reducers.LibraryReducerState = {
   error: null
 };
 
-export const libraryReducer = createReducer(defaultState,
-  {
-    [libraryActionNames.FULFILLED]: (
-      state,
-      { payload }: { payload: Global.LibraryContentDataShape[] }
-    ) => ({
-      libraryData: payload,
-      error: null
-    }),
-    [libraryActionNames.REJECTED]: (
-      state,
-      { error }: { error: { message: string } }
-    ) => ({
-      libraryData: [],
-      error: error.message
-    })
-  }
-);
+export const libraryReducer = createReducer(defaultState, {
+  [libraryActionNames.FULFILLED]: (
+    state,
+    { payload }: { payload: Global.LibraryContentDataShape[] }
+  ) => ({
+    libraryData: payload,
+    error: null
+  }),
+  [libraryActionNames.REJECTED]: (
+    state,
+    { error }: { error: { message: string } }
+  ) => ({
+    libraryData: [],
+    error: error.message
+  })
+});

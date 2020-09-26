@@ -22,7 +22,9 @@ export const patentsReducer = (
     case patentsActionsNames.REJECTED:
       return {
         patentsData: [],
-        error: `Error: ${(action as Actions.GetPatentsRejected).payload.statusText}`,
+        error: `Error: ${
+          (action as Actions.GetPatentsRejected).payload.statusText
+        }`,
         shouldPatentsUpdate: false
       };
     default:

@@ -6,10 +6,10 @@ import styles from './NavList.module.scss';
 import { routes } from '../../constants';
 
 type NavLinkProps = {
-  to: string,
-  label: string,
-  end?: boolean
-}
+  to: string;
+  label: string;
+  end?: boolean;
+};
 
 const navLinkProps: NavLinkProps[] = [
   {
@@ -36,20 +36,13 @@ const navLinkProps: NavLinkProps[] = [
 ];
 
 export const NavList: React.FC = () => (
-  <Box
-    tag='ul'
-    pad='small'
-    justify='between'
-    direction='column'
-  >
-    {
-      navLinkProps.map(({label, ...rest}) => (
-        <li key={label}>
-          <NavLink {...rest} activeClassName={styles.navListItemActiveLink}>
-            <Anchor as='span' label={label} size='xlarge'/>
-          </NavLink>
-        </li>
-      ))
-    }
+  <Box direction='column' justify='between' pad='small' tag='ul'>
+    {navLinkProps.map(({ label, ...rest }) => (
+      <li key={label}>
+        <NavLink {...rest} activeClassName={styles.navListItemActiveLink}>
+          <Anchor as='span' label={label} size='xlarge' />
+        </NavLink>
+      </li>
+    ))}
   </Box>
 );

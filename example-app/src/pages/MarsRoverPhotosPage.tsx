@@ -18,34 +18,36 @@ export const MarsRoverPhotosPage = () => {
 
   useEffect(() => {
     if (shouldPhotosDataUpdate) {
-      dispatch(getMarsRoverPhotos(nasaService))
+      dispatch(getMarsRoverPhotos(nasaService));
     }
-  }, []);
+  }, [dispatch, shouldPhotosDataUpdate]);
 
   if (loading) {
-    return <Loader/>
+    return <Loader />;
   }
 
-  return error ? <ErrorPage optionalMessage={error}/> : (
+  return error ? (
+    <ErrorPage optionalMessage={error} />
+  ) : (
     <Box
       as='ul'
-      flex={true}
       direction='row'
-      wrap={true}
+      flex={true}
       justify='around'
       pad='none'
+      wrap={true}
     >
       {photosData.map(({ id, imageUrl }: Global.MarsRoverPhotoDataShape) => (
         <Box
           key={id}
           as='li'
-          margin='medium'
-          width='300px'
-          height='200px'
           background={{
             image: `url('${imageUrl}')`,
             size: '100% 100%'
           }}
+          height='200px'
+          margin='medium'
+          width='300px'
         />
       ))}
     </Box>
