@@ -77,3 +77,5 @@ export const middlewaresWithSagaActionsIgnored = [
   ...getPendingMiddlewaresWithIgnoredActionTypes(astronomyPictureActionNames),
   ...middlewares
 ];
+
+export const REDUX_PENDING_EFFECTS = '@@REDUX_PENDING_EFFECTS';

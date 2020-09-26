@@ -9,7 +9,11 @@ import {
   getLibraryContent,
   getAstronomyPictureData
 } from '../actions';
-import { astronomyPictureActionNames } from '../constants';
+import {
+  astronomyPictureActionNames,
+  libraryActionNames,
+  patentsActionsNames
+} from '../constants';
 import { astronomyPictureWorker } from '../sagas/astronomyPictureSagas';
 import { rootReducer as reducer } from './rootReducer';
 import { rootSaga } from '../sagas';
@@ -22,7 +26,8 @@ import {
   middlewaresWithPromiseActionsIgnored,
   middlewaresWithToolkitActionsIgnored,
   middlewaresWithSagaActionsIgnored,
-  urls
+  urls,
+  REDUX_PENDING_EFFECTS
 } from './testHelpers';
 
 describe('selector', () => {
@@ -44,6 +49,17 @@ describe('selector', () => {
       sagaMiddleware.run(rootSaga);
       store.dispatch(getAstronomyPictureData);
       expect(selectIsPending(store.getState())).toBe(true);
+    });
+
+    test('should save correct name of action, that triggered pending effect', () => {
+      sagaMiddleware.run(rootSaga);
+      store.dispatch(getAstronomyPictureData);
+
+      const pendingState = store.getState()[REDUX_PENDING_EFFECTS];
+      const isTriggeredActionTypeIsPresent = Object.values(
+        pendingState.effectsEntity
+      ).includes(astronomyPictureActionNames.GET);
+      expect(isTriggeredActionTypeIsPresent).toBe(true);
     });
 
     test('should complete pending state when saga completed with success', async () => {
@@ -86,6 +102,16 @@ describe('selector', () => {
       expect(selectIsPending(store.getState())).toBe(true);
     });
 
+    test('should save correct name of action, that triggered pending effect', () => {
+      store.dispatch<any>(getLibraryContent('test'));
+
+      const pendingState = store.getState()[REDUX_PENDING_EFFECTS];
+      const isTriggeredActionTypeIsPresent = Object.values(
+        pendingState.effectsEntity
+      ).includes(libraryActionNames.PENDING);
+      expect(isTriggeredActionTypeIsPresent).toBe(true);
+    });
+
     test('should complete pending state when toolkit completed with success', async () => {
       fetchMock.mockResponseOnce(...libraryContentFetchMock);
       await store.dispatch<any>(getLibraryContent('test'));
@@ -113,6 +139,16 @@ describe('selector', () => {
     test('should trigger pending state when promise started', () => {
       store.dispatch(getPatents());
       expect(selectIsPending(store.getState())).toBe(true);
+    });
+
+    test('should save correct name of action, that triggered pending effect', () => {
+      store.dispatch(getPatents());
+
+      const pendingState = store.getState()[REDUX_PENDING_EFFECTS];
+      const isTriggeredActionTypeIsPresent = Object.values(
+        pendingState.effectsEntity
+      ).includes(patentsActionsNames.GET);
+      expect(isTriggeredActionTypeIsPresent).toBe(true);
     });
 
     test('should complete pending state when promise completed with success', async () => {
