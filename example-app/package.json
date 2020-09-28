@@ -54,7 +54,7 @@
     "redux-mock-store": "1.5.4",
     "tslib": "2.0.1",
     "typescript": "3.9.7",
-    "yarn": "1.22.5"
+    "yarn": "1.22.10"
   },
   "browserslist": {
     "production": [
