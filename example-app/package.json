@@ -47,7 +47,7 @@
     "eslint-plugin-compat": "3.8.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-sonarjs": "0.5.0",
-    "majestic": "1.7.0",
+    "majestic": "1.8.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "redux-devtools-extension": "2.13.8",
