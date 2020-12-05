@@ -9,23 +9,30 @@ export const LibrarySearchingContent: React.FC<LibrarySearchingContentType> = ({
   content
 }) =>
   content.length ? (
-    <Box as='ul' flex={true} direction='row' wrap={true} justify='around' pad='none'>
-      {
-        content.map(({id, title, link}: Global.LibraryContentDataShape) => (
-          <Box key={id}
-               title={title}
-               as='li'
-               margin='medium'
-               width='300px'
-               height='200px'
-               background={{
-                 'image': `url('${link}')`,
-                 'size': '100% 100%',
-               }}/>
-        ))
-      }
+    <Box
+      as='ul'
+      direction='row'
+      flex={true}
+      justify='around'
+      pad='none'
+      wrap={true}
+    >
+      {content.map(({ id, title, link }: Global.LibraryContentDataShape) => (
+        <Box
+          key={id}
+          as='li'
+          background={{
+            image: `url('${link}')`,
+            size: '100% 100%'
+          }}
+          height='200px'
+          margin='medium'
+          title={title}
+          width='300px'
+        />
+      ))}
     </Box>
-  ) :
+  ) : (
     <Paragraph fill={true} textAlign='center'>
       No matching found
     </Paragraph>
