@@ -1,7 +1,7 @@
 declare namespace RPE {
   interface State {
     effectsEntity: Record<string, string>;
-    ignoredActionTypes: null | string[]
+    ignoredActionTypes: null | string[];
   }
 
   interface PayloadAction<T, P> {
@@ -13,19 +13,19 @@ declare namespace RPE {
     effectId: string;
     effectType: string;
     actionType: string;
-  }
+  };
 
   interface ConfigureOptions {
-    promise: boolean,
-    toolkit: boolean,
-    saga: boolean,
-    ignoredActionTypes: string[]
+    promise: boolean;
+    toolkit: boolean;
+    saga: boolean;
+    ignoredActionTypes: string[];
   }
 
   interface ConfigureOutput<T, K> {
-    middlewares: T[],
+    middlewares: T[];
     sagaOptions: {
-      effectMiddlewares: K[]
-    }
+      effectMiddlewares: K[];
+    };
   }
 }

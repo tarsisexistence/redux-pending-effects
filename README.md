@@ -57,8 +57,8 @@ import { planetReducer as planet } from './planetReducer';
 import { universeReducer as universe } from './universeReducer';
 
 const appReducers = {
-    planet,
-    universe
+  planet,
+  universe
 };
 const reducersWithPending = includePendingReducer(appReducers);
 export const rootReducer = combineReducers(reducersWithPending);
@@ -72,19 +72,18 @@ The package provides a single entry point for set up via `configurePendingEffect
 
 `configurePendingEffects` accepts a single configuration object parameter, with the following options:
 
-- `promise: boolean` (default `false`) - enable/disable tracking of asynchronous effects that you pass a promise to the payload. 
-Yes, if the option enabled, you can pass promise to the payload, that is the way `redux-promise-middleware` does.
-For details, you can go to read the documentation of [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) 
-about how this works.
+- `promise: boolean` (default `false`) - enable/disable tracking of asynchronous effects that you pass a promise to the payload.
+  Yes, if the option enabled, you can pass promise to the payload, that is the way `redux-promise-middleware` does.
+  For details, you can go to read the documentation of [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
+  about how this works.
 - `toolkit: boolean` (default `false`) - enable/disable tracking of asynchronous effects produced by [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
 - `saga: boolean` (default `false`) - enable/disable tracking of asynchronous effects produced by [redux-saga](https://github.com/redux-saga/redux-saga)
 - `ignoredActionTypes: string[]` (default `[]`) - list of action types to not track (do not react on actions with these types)
-    
 
 `configurePendingEffects` returns an object with two properties:
 
-1) `middlewares` -  an array of defined redux middlewares
-2) `sagaOptions` - options for `createSagaMiddleware` in case you intend to use `redux-saga`
+1. `middlewares` - an array of defined redux middlewares
+2. `sagaOptions` - options for `createSagaMiddleware` in case you intend to use `redux-saga`
 
 <br/>
 
@@ -108,11 +107,7 @@ const { middlewares, sagaOptions } = configurePendingEffects({
 });
 const sagaMiddleware = createSagaMiddleware(sagaOptions);
 const toolkitMiddlewares = getDefaultMiddleware();
-const middleware = [
-  ...middlewares,
-  ...toolkitMiddlewares,
-  sagaMiddleware,
-];
+const middleware = [...middlewares, ...toolkitMiddlewares, sagaMiddleware];
 
 export const store = configureStore({ reducer, middleware });
 
@@ -144,7 +139,7 @@ export const App = () => {
 
 ### Notes
 
-At the moment, this library completely replaces `redux-promise-middleware`. 
+At the moment, this library completely replaces `redux-promise-middleware`.
 In the plans, through the collaboration, expand the API of `redux-promise-middleware` to reuse their internal API.
 
 Also, right now this package can't track actions, created with `redux-thunk`.

@@ -38,7 +38,10 @@ const pendingReducer: Reducer<RPE.State, PayloadAction> = (
       payload: { effectId, actionType }
     } = action as PatchEffectPayloadAction;
 
-    if (ignoredActionTypes !== null && ignoredActionTypes.includes(actionType)) {
+    if (
+      ignoredActionTypes !== null &&
+      ignoredActionTypes.includes(actionType)
+    ) {
       return state;
     }
 
