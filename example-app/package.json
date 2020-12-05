@@ -19,7 +19,7 @@
     "grommet-icons": "4.5.0",
     "history": "5.0.0",
     "jest-fetch-mock": "3.0.3",
-    "node-sass": "4.14.1",
+    "node-sass": "5.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-html-parser": "2.0.2",
