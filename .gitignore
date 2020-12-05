@@ -4,6 +4,7 @@
 **/dist
 **/build
 **/.cache
+**/.eslintcache
 
 # reporters
 /report

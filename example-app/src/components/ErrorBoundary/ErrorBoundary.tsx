@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { ErrorPage } from '../../pages/ErrorPage';
 
-export class ErrorBoundary extends Component<{}, { hasError: boolean }> {
+export class ErrorBoundary extends React.Component<
+  Record<string, unknown>,
+  { hasError: boolean }
+> {
   state = {
     hasError: false
   };

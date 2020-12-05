@@ -33,7 +33,10 @@ type MarsRoverPhotoResponseShape = {
 class NasaService {
   private apiKey = 'WmyhwhhQBZJIvTdIQ6KeYZUNenQY7Fazyd2nauB5';
 
-  async smartFetch<T>(url: string, options?: object): Promise<T | undefined> {
+  async smartFetch<T>(
+    url: string,
+    options?: Record<string, unknown>
+  ): Promise<T | undefined> {
     const response = await fetch(url, options);
 
     if (response.status >= 400) {
