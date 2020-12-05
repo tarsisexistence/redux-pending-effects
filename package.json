@@ -37,7 +37,7 @@
     "husky": "4.3.0",
     "lint-staged": "10.4.0",
     "prettier": "2.1.2",
-    "yarn": "1.22.5",
+    "yarn": "1.22.10",
     "webpack": "4.42.0",
     "monoreact": "0.24.0"
   },
