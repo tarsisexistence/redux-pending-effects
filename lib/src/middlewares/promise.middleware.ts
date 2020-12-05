@@ -72,8 +72,6 @@ export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
     const rejectedAction = getAction(reason, true);
     dispatch(rejectedAction);
     dispatch(patchEffect(patchEffectPayload));
-
-    throw reason;
   };
   const handleFulfill = (value = null) => {
     const resolvedAction = getAction(value, false);
