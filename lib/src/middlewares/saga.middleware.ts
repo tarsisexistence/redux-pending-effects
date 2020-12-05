@@ -6,9 +6,9 @@ import { patchEffect } from '../store/actions';
 import { nanoid } from '../helpers/nanoid.utils';
 import { effectTypes } from '../helpers/const';
 
-const trackWorker = <T = any>(
+const trackWorker = (
   worker: (action: AnyAction) => any
-): ((action: AnyAction) => Generator<any>) =>
+): ((action: AnyAction) => Generator) =>
   function* wrapper(action: AnyAction) {
     const effectId = nanoid();
     const { type: actionType } = action;
