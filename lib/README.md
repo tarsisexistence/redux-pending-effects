@@ -7,7 +7,7 @@ List of supported libraries that process redux effects:
 
 - [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
 - [redux-saga](https://github.com/redux-saga/redux-saga)
-- [redux-thunk](https://github.com/reduxjs/redux-thunk) / [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
+- [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)
 
 It's worth mention that `redux-pending-effects` allows you to code simultaneously with all libraries above.
 
@@ -15,7 +15,7 @@ It's worth mention that `redux-pending-effects` allows you to code simultaneousl
 
 ## Problem it solves
 
-Have you ever been in a situation where you need to add a global loader/spinner to any side effect that your application is processing? Perhaps you are using Redux and some third-party library for asynchronous processing, for example, redux-saga / redux-thunk / promise middleware? Great, then it should be interesting to you.
+Have you ever been in a situation where you need to add a global loader/spinner to any side effect that your application is processing? Perhaps you are using Redux and some third-party library for asynchronous processing, for example, redux-saga / promise middleware? Great, then it should be interesting to you.
 
 Why not handle the pending state manually for each action?
 
@@ -141,8 +141,6 @@ export const App = () => {
 
 At the moment, this library completely replaces `redux-promise-middleware`.
 In the plans, through the collaboration, expand the API of `redux-promise-middleware` to reuse their internal API.
-
-Also, right now this package can't track actions, created with `redux-thunk`.
 
 <br/>
 
