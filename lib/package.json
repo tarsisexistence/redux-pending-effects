@@ -1,7 +1,7 @@
 {
   "name": "redux-pending-effects",
   "description": "🦋 A redux toolkit that tracks your asynchronous redux actions (effects) and informs about the pending state using the selector function",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "license": "MIT",
   "author": {
