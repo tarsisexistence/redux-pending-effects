@@ -26,7 +26,7 @@
     "react-redux": "7.2.3",
     "react-router-dom": "6.0.0-beta.0",
     "react-scripts": "4.0.3",
-    "redux": "4.0.5",
+    "redux": "4.1.0",
     "redux-pending-effects": "*",
     "redux-promise-middleware": "6.1.2",
     "redux-saga": "1.1.3",
