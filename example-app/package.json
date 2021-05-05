@@ -45,7 +45,7 @@
     "eslint-config-prettier": "7.2.0",
     "eslint-config-react-app": "6.0.0",
     "eslint-plugin-compat": "3.9.0",
-    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-sonarjs": "0.7.0",
     "majestic": "1.8.0",
     "redux-devtools-extension": "2.13.9",
