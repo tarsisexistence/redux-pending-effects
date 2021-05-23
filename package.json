@@ -15,7 +15,7 @@
     "build": "cd lib && yarn build",
     "start": "cd lib && yarn start",
     "lint": "cd lib && yarn lint",
-    "test": "cd lib && yarn test",
+    "test": "cd example-app && yarn test",
     "postinstall": "yarn example:install && yarn build",
     "example:install": "cd example-app && yarn install"
   },

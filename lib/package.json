@@ -21,7 +21,7 @@
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
-    "redux": "^4.0.5"
+    "redux": "^4.1.0"
   },
   "optionalDependencies": {
     "redux-saga": "^1.1.3"
