@@ -19,5 +19,5 @@ jobs:
       - name: 'Install npm dependencies'
         run: yarn install
 
-      - name: 'Test CLI'
+      - name: 'Test'
         run: yarn test --ci
