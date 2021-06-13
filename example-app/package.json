@@ -15,7 +15,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "1.6.0",
     "@types/jest": "26.0.23",
-    "grommet": "2.17.2",
+    "grommet": "2.17.3",
     "grommet-icons": "4.5.0",
     "history": "5.0.0",
     "jest-fetch-mock": "3.0.3",
