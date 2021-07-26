@@ -39,7 +39,7 @@
     "prettier": "2.3.2",
     "redux-pending-effects": "*",
     "webpack": "4.44.2",
-    "yarn": "1.22.10"
+    "yarn": "1.22.11"
   },
   "browserslist": {
     "production": [
