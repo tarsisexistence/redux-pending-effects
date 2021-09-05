@@ -59,16 +59,16 @@ export const getMarsRoverPhotosRejected = (
   payload: error
 });
 
-export const getMarsRoverPhotos = (
-  nasaService: any
-): ThunkAction<void, RootState, unknown, AnyAction> => async dispatch => {
-  dispatch(getMarsRoverPhotosPending());
+export const getMarsRoverPhotos =
+  (nasaService: any): ThunkAction<void, RootState, unknown, AnyAction> =>
+  async dispatch => {
+    dispatch(getMarsRoverPhotosPending());
 
-  try {
-    const res = await nasaService.getMarsRoverPhotos();
+    try {
+      const res = await nasaService.getMarsRoverPhotos();
 
-    dispatch(getMarsRoverPhotosFulFilled(res));
-  } catch (e) {
-    dispatch(getMarsRoverPhotosRejected(e.message || e.statusText));
-  }
-};
+      dispatch(getMarsRoverPhotosFulFilled(res));
+    } catch (e) {
+      dispatch(getMarsRoverPhotosRejected(e.message || e.statusText));
+    }
+  };

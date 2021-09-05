@@ -8,13 +8,10 @@ import { getAstronomyPictureData } from '../actions';
 
 export const AstronomyPicturePage = () => {
   const dispatch = useDispatch();
-  const {
-    astronomyPictureData,
-    error,
-    shouldAstronomyPictureDataUpdate
-  } = useSelector<RootState, Reducers.AstronomyPictureReducerState>(
-    state => state.astronomyPictureReducer
-  );
+  const { astronomyPictureData, error, shouldAstronomyPictureDataUpdate } =
+    useSelector<RootState, Reducers.AstronomyPictureReducerState>(
+      state => state.astronomyPictureReducer
+    );
 
   useEffect(() => {
     if (shouldAstronomyPictureDataUpdate) {
