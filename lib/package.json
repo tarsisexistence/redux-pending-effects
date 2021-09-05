@@ -7,7 +7,7 @@
   "author": {
     "email": "tarsis.maksym@gmail.com",
     "name": "Maksym Tarsis",
-    "url": "https://github.com/retarsis"
+    "url": "https://github.com/untaggable"
   },
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.js",
