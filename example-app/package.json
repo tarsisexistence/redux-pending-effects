@@ -13,7 +13,7 @@
     "lint": "monoreact lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "1.6.1",
+    "@reduxjs/toolkit": "1.6.2",
     "@types/jest": "26.0.24",
     "grommet": "2.17.4",
     "grommet-icons": "4.6.2",
