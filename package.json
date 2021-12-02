@@ -36,7 +36,7 @@
     "husky": "4.3.8",
     "lint-staged": "11.2.6",
     "monoreact": "0.28.1",
-    "prettier": "2.4.1",
+    "prettier": "2.5.0",
     "redux-pending-effects": "*",
     "webpack": "4.44.2",
     "yarn": "1.22.17"
