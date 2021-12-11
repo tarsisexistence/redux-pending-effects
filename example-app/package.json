@@ -16,7 +16,7 @@
     "@reduxjs/toolkit": "1.6.2",
     "@types/jest": "26.0.24",
     "grommet": "2.19.1",
-    "grommet-icons": "4.6.2",
+    "grommet-icons": "4.7.0",
     "history": "5.0.3",
     "jest-fetch-mock": "3.0.3",
     "node-sass": "7.0.0",
