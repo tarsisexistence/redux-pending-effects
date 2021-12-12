@@ -35,14 +35,22 @@ const navLinkProps: NavLinkProps[] = [
   }
 ];
 
-export const NavList: React.FC = () => (
-  <Box direction='column' justify='between' pad='small' tag='ul'>
-    {navLinkProps.map(({ label, ...rest }) => (
-      <li key={label}>
-        <NavLink {...rest} activeClassName={styles.navListItemActiveLink}>
-          <Anchor as='span' label={label} size='xlarge' />
-        </NavLink>
-      </li>
-    ))}
-  </Box>
-);
+export const NavList: React.FC = () => {
+  const handleNavLinkClassName: (props: { isActive: boolean }) => string =
+    React.useCallback(
+      ({ isActive }) => (isActive ? styles.navListItemActiveLink : ''),
+      []
+    );
+
+  return (
+    <Box direction='column' justify='between' pad='small' tag='ul'>
+      {navLinkProps.map(({ label, ...rest }) => (
+        <li key={label}>
+          <NavLink {...rest} className={handleNavLinkClassName}>
+            <Anchor as='span' label={label} size='xlarge' />
+          </NavLink>
+        </li>
+      ))}
+    </Box>
+  );
+};
