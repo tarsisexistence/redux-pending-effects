@@ -7152,7 +7152,7 @@ mkdirp@^0.5.1, mkdirp@^0.5.3:
   dependencies:
     minimist "^1.2.5"
 
-monoreact@^0.29.0:
+monoreact@0.29.0:
   version "0.29.0"
   resolved "https://registry.yarnpkg.com/monoreact/-/monoreact-0.29.0.tgz#6e4d641504d1c50118382cd759fc57ea4d4f6abb"
   integrity sha512-hIctxD+FOG1aQDUuacGh6nfv21MuY/G87okpraGKmoCdUdslSjJODrAQa/v9xHPgx8e6qfIFvYJ5Fnchh3DGAw==
