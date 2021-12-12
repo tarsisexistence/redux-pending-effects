@@ -68,7 +68,11 @@ export const getMarsRoverPhotos =
       const res = await nasaService.getMarsRoverPhotos();
 
       dispatch(getMarsRoverPhotosFulFilled(res));
-    } catch (e) {
-      dispatch(getMarsRoverPhotosRejected(e.message || e.statusText));
+    } catch (error) {
+      dispatch(
+        getMarsRoverPhotosRejected(
+          (error as Error).message || (error as Response).statusText
+        )
+      );
     }
   };
