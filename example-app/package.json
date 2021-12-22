@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.7.0",
-    "@types/jest": "26.0.24",
+    "@types/jest": "27.0.3",
     "grommet": "2.19.1",
     "grommet-icons": "4.7.0",
     "history": "5.1.0",
