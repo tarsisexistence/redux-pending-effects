@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { content, planet, ring, coverRing, spots } from './Loader.module.scss';
+import styles from './Loader.module.scss';
 
 export const Loader = () => {
   const [spinnerInnerMarkup] = useState(
@@ -8,11 +8,11 @@ export const Loader = () => {
   );
 
   return (
-    <div className={content}>
-      <div className={planet}>
-        <div className={ring} />
-        <div className={coverRing} />
-        <div className={spots}>{spinnerInnerMarkup}</div>
+    <div className={styles.content}>
+      <div className={styles.planet}>
+        <div className={styles.ring} />
+        <div className={styles.coverRing} />
+        <div className={styles.spots}>{spinnerInnerMarkup}</div>
       </div>
       <p>loading</p>
     </div>

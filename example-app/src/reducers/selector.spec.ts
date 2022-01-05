@@ -251,7 +251,7 @@ describe('selector', () => {
 
       sagaTester.start(rootSaga);
       sagaTester.dispatch(getAstronomyPictureData);
-      sagaTester.dispatch<any>(getLibraryContent('test'));
+      sagaTester.dispatch(getLibraryContent('test'));
       await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
       expect(selectIsPending(sagaTester.getState())).toBe(true);
     });
@@ -263,13 +263,14 @@ describe('selector', () => {
       );
 
       const sagaTester = createSagaTesterInstance(middleware);
-      const libraryContentPromise = sagaTester.dispatch<any>(
+      const libraryContentPromise = sagaTester.dispatch(
         getLibraryContent('test')
       );
 
       sagaTester.start(rootSaga);
       sagaTester.dispatch(getAstronomyPictureData);
 
+      // eslint-disable-next-line compat/compat
       await Promise.all([
         libraryContentPromise,
         sagaTester.waitFor(astronomyPictureActionNames.FULFILLED)
@@ -288,7 +289,7 @@ describe('selector', () => {
 
         sagaTester.start(rootSaga);
         sagaTester.dispatch(getAstronomyPictureData);
-        sagaTester.dispatch<any>(getLibraryContent('test'));
+        sagaTester.dispatch(getLibraryContent('test'));
         await sagaTester.waitFor(astronomyPictureActionNames.FULFILLED);
         expect(selectIsPending(sagaTester.getState())).toBe(true);
       });
