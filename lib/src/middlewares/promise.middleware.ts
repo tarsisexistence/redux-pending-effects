@@ -9,86 +9,87 @@ import { patchEffect } from '../store/actions';
 import { nanoid } from '../helpers/nanoid.utils';
 import { effectTypes } from '../helpers/const';
 
-export const pendingPromiseMiddleware = ({ dispatch }: MiddlewareAPI) => (
-  next: Dispatch
-) => (action: AnyAction): AnyAction => {
-  let promise;
-  let data;
+export const pendingPromiseMiddleware =
+  ({ dispatch }: MiddlewareAPI) =>
+  (next: Dispatch) =>
+  (action: AnyAction): AnyAction => {
+    let promise;
+    let data;
 
-  if (action.payload) {
-    const { payload } = action;
+    if (action.payload) {
+      const { payload } = action;
 
-    if (isPromise(payload)) {
-      promise = payload;
-    } else if (isPromise(payload.promise)) {
-      promise = payload.promise;
-      data = payload.data;
-      // when the promise returned by async function
-    } else if (
-      typeof payload === 'function' ||
-      typeof payload.promise === 'function'
-    ) {
-      promise = payload.promise ? payload.promise() : payload();
-      data = payload.promise ? payload.data : undefined;
+      if (isPromise(payload)) {
+        promise = payload;
+      } else if (isPromise(payload.promise)) {
+        promise = payload.promise;
+        data = payload.data;
+        // when the promise returned by async function
+      } else if (
+        typeof payload === 'function' ||
+        typeof payload.promise === 'function'
+      ) {
+        promise = payload.promise ? payload.promise() : payload();
+        data = payload.promise ? payload.data : undefined;
 
-      if (!isPromise(promise)) {
-        return next({
-          ...action,
-          payload: promise
-        });
+        if (!isPromise(promise)) {
+          return next({
+            ...action,
+            payload: promise
+          });
+        }
+      } else {
+        return next(action);
       }
     } else {
       return next(action);
     }
-  } else {
-    return next(action);
-  }
 
-  const { type: actionType, meta } = action;
-  const effectId = nanoid();
-  const effectType = effectTypes.promise;
-  const patchEffectPayload = { effectId, effectType, actionType };
+    const { type: actionType, meta } = action;
+    const effectId = nanoid();
+    const effectType = effectTypes.promise;
+    const patchEffectPayload = { effectId, effectType, actionType };
 
-  const getAction = (newPayload: any, isRejected: boolean): AnyAction => {
-    const nextAction: AnyAction = {
-      type: isRejected ? `${actionType}_REJECTED` : `${actionType}_FULFILLED`
+    const getAction = (newPayload: any, isRejected: boolean): AnyAction => {
+      const nextAction: AnyAction = {
+        type: isRejected ? `${actionType}_REJECTED` : `${actionType}_FULFILLED`
+      };
+
+      if (newPayload !== null && typeof newPayload !== 'undefined') {
+        nextAction.payload = newPayload;
+      }
+
+      if (meta !== undefined) {
+        nextAction.meta = meta;
+      }
+
+      if (isRejected) {
+        nextAction.error = true;
+      }
+
+      return nextAction;
+    };
+    const handleReject = (reason: any) => {
+      const rejectedAction = getAction(reason, true);
+      dispatch(rejectedAction);
+      dispatch(patchEffect(patchEffectPayload));
+    };
+    const handleFulfill = (value = null) => {
+      const resolvedAction = getAction(value, false);
+      dispatch(resolvedAction);
+      dispatch(patchEffect(patchEffectPayload));
+
+      return { value, action: resolvedAction };
     };
 
-    if (newPayload !== null && typeof newPayload !== 'undefined') {
-      nextAction.payload = newPayload;
-    }
-
-    if (meta !== undefined) {
-      nextAction.meta = meta;
-    }
-
-    if (isRejected) {
-      nextAction.error = true;
-    }
-
-    return nextAction;
-  };
-  const handleReject = (reason: any) => {
-    const rejectedAction = getAction(reason, true);
-    dispatch(rejectedAction);
     dispatch(patchEffect(patchEffectPayload));
+    next({
+      type: `${actionType}_PENDING`,
+      // Include payload (for optimistic updates) if it is defined.
+      ...(data !== undefined ? { payload: data } : {}),
+      // Include meta data if it is defined.
+      ...(meta !== undefined ? { meta } : {})
+    });
+
+    return promise.then(handleFulfill, handleReject);
   };
-  const handleFulfill = (value = null) => {
-    const resolvedAction = getAction(value, false);
-    dispatch(resolvedAction);
-    dispatch(patchEffect(patchEffectPayload));
-
-    return { value, action: resolvedAction };
-  };
-
-  dispatch(patchEffect(patchEffectPayload));
-  next({
-    type: `${actionType}_PENDING`,
-    // Include payload (for optimistic updates) if it is defined.
-    ...(data !== undefined ? { payload: data } : {}),
-    // Include meta data if it is defined.
-    ...(meta !== undefined ? { meta } : {})
-  });
-
-  return promise.then(handleFulfill, handleReject);
-};
