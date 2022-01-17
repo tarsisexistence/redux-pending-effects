@@ -35,7 +35,7 @@
     "eslint-plugin-sonarjs": "0.11.0",
     "husky": "4.3.8",
     "lint-staged": "12.1.5",
-    "monoreact": "0.33.1",
+    "monoreact": "0.33.2",
     "prettier": "2.5.1",
     "redux-pending-effects": "*",
     "webpack": "5.65.0",
