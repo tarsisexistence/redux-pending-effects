@@ -38,7 +38,7 @@
     "monoreact": "0.33.2",
     "prettier": "2.5.1",
     "redux-pending-effects": "*",
-    "webpack": "5.65.0",
+    "webpack": "5.72.1",
     "yarn": "1.22.17"
   },
   "browserslist": {
