@@ -6,8 +6,8 @@
   "license": "MIT",
   "author": {
     "email": "tarsis.maksym@gmail.com",
-    "name": "Maksym Tarsis",
-    "url": "https://github.com/untaggable"
+    "name": "Max Tarsis",
+    "url": "https://github.com/tarsinzer"
   },
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.js",
