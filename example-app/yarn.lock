@@ -2513,6 +2513,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/domhandler@^2.4.3":
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/@types/domhandler/-/domhandler-2.4.5.tgz#600961de950e090bcd8a6eb324c354466e25eaa0"
+  integrity sha512-lANhC2grmFG1gBac/8sDAKdIXx+TzAdkJIAjEOSMA+qW3297ybACEbacJnG15aNYfrzDO6fdcoouokqAKsy6aQ==
+
 "@types/domutils@*":
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/@types/domutils/-/domutils-1.7.4.tgz#bb5f1807673e295782614b0a383b4dc1ecd2af97"
@@ -2593,11 +2598,12 @@
   resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-6.1.0.tgz#4fc33a00c1d0c16987b1a20cf92d20614c55ac35"
   integrity sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==
 
-"@types/htmlparser2@*":
-  version "3.10.3"
-  resolved "https://registry.yarnpkg.com/@types/htmlparser2/-/htmlparser2-3.10.3.tgz#9ee664e1620cbac4c9c724ed0373a2b832dbdece"
-  integrity sha512-XA74aD+acytofnZic9n83Rxy/IZ259299bYPx5SEyx7uymPi79lRyKDkhJlsuCaPHB7rEoTEhRN4Vm2G5WmHHg==
+"@types/htmlparser2@^3.9.0":
+  version "3.10.7"
+  resolved "https://registry.yarnpkg.com/@types/htmlparser2/-/htmlparser2-3.10.7.tgz#861a7609bdc9468ce55751fe6f737abfbd584f73"
+  integrity sha512-ycBs4PNr9rY9XFFp4WkP+M1UcO49ahn0+9b24cmIY6KWy0w35rW0G8+JTTe9Rp6Wnyqn5SEHZrhCBMa0TIOxBw==
   dependencies:
+    "@types/domhandler" "^2.4.3"
     "@types/domutils" "*"
     "@types/node" "*"
     domhandler "^2.4.0"
@@ -2708,12 +2714,12 @@
   dependencies:
     "@types/react" "^17"
 
-"@types/react-html-parser@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react-html-parser/-/react-html-parser-2.0.2.tgz#9b7e1b99657967e614aebf3f87d78a3fd0a1602c"
-  integrity sha512-avS2QzBMCUTGO2+gi3rWG6WreuU8zhf4b5CbS11itYlvLbwt5wmxBqQN4/f2z/JR/6Kvdt8ohAxhztb8XQHdPQ==
+"@types/react-html-parser@2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@types/react-html-parser/-/react-html-parser-2.0.7.tgz#a6c63a418fc3068042280ebdc86f7bc14fed60d8"
+  integrity sha512-1OeS8GG+sVYlLlhMIT/smA7L2AAAxJCHtUxu66UjIuE68m8eB+XM71Kpzn49b5BRb6MRm/UrmzGUNBP1oTY7QA==
   dependencies:
-    "@types/htmlparser2" "*"
+    "@types/htmlparser2" "^3.9.0"
     "@types/react" "*"
 
 "@types/react-redux@7.1.24":
